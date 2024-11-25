@@ -629,7 +629,7 @@ int main()
 #pragma endregion Gestion Entree
 #pragma region Gestion IA
         // FireWorm
-        if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit) {
+        if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit && fireWorm.getAlive() == true) {
             int action = rand() % 2;
             switch (action) {
             case 0:
@@ -653,7 +653,7 @@ int main()
         }
 
         // EvilWizard
-        if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit) {
+        if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && evilWizard.getAlive() == true) {
             int action = rand() % 3;
             switch (action) {
             case 0:
@@ -685,7 +685,7 @@ int main()
         }
 
         // Boss
-        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit) {
+        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && boss.getAlive() == true) {
             int action = rand() % 5;
             switch (action) {
             case 0:
@@ -725,6 +725,7 @@ int main()
             default:
                 break;
             }
+            if (boss.getAlive() == false) gameCount++;
         }
 #pragma endregion Gestion IA
 #pragma region atelier dessin
@@ -737,10 +738,10 @@ int main()
 
 #pragma region animation qui marche la ptn de ta soeur
 
-        if (!Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit) {
+        if (!Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
             window.draw(perso_sprite);
         }///////////////////////////////////
-        else if (Char_S.isAttacking) {
+        else if (Char_S.isAttacking && wizard.getAlive() == true) {
             c_anim_Attack.x++;
             if (c_anim_Attack.x * 256 >= perso_texture_Attack.getSize().x)
                 c_anim_Attack.x = 0;
@@ -752,7 +753,7 @@ int main()
             window.draw(perso_sprite_Attack);
             Sleep(25);
         }///////////////////////////////////
-        else if (Char_S.isHealing) {
+        else if (Char_S.isHealing && wizard.getAlive() == true) {
             c_anim_Heal.x++;
             if (c_anim_Heal.x * 256 >= perso_texture_Heal.getSize().x)
                 c_anim_Heal.x = 0;
@@ -764,7 +765,7 @@ int main()
             window.draw(perso_sprite_Heal);
             Sleep(25);
         }///////////////////////////////////
-        else if (Char_S.isHit && !Char_S.isAttacking && !Char_S.isHealing) {
+        else if (Char_S.isHit && !Char_S.isAttacking && !Char_S.isHealing && wizard.getAlive() == true) {
             c_anim_Hit.x++;
             if (c_anim_Hit.x * 256 >= perso_texture_Hit.getSize().x)
                 c_anim_Hit.x = 0;
@@ -779,11 +780,11 @@ int main()
 
         ////////// Worm ///////////
 
-        if (!Worm_S.isHit && !Worm_S.isAttacking) {
+        if (!Worm_S.isHit && !Worm_S.isAttacking && fireWorm.getAlive() == true) {
             window.draw(fireWorm_sprite);
         }///////////////////////////////////
 
-        else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit) {
+        else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit && fireWorm.getAlive() == true) {
             f_anim_Attack.x++;
             if (f_anim_Attack.x * 180 >= fireWorm_texture_Attack.getSize().x)
                 f_anim_Attack.x = 0;
@@ -795,7 +796,7 @@ int main()
             window.draw(fireWorm_sprite_Attack);
         }///////////////////////////////////
 
-        else if (Worm_S.isHit && !Char_S.isHealing) {
+        else if (Worm_S.isHit && !Char_S.isHealing && fireWorm.getAlive() == true) {
 
             f_anim_Hit.x++;
             if (f_anim_Hit.x * 180 >= fireWorm_texture_Hit.getSize().x)
@@ -812,10 +813,10 @@ int main()
 
         ////////// Evil Wizard ///////////
 
-        if (!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit) {
+        if (!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && evilWizard.getAlive() == true) {
             window.draw(evilWizard_sprite);
         }
-        else if (Evil_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing) { //&& wormisHit/atk etc pour vraiment mettre de l'ordre dans la boucle
+        else if (Evil_S.isAttacking && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && evilWizard.getAlive() == true) { //&& wormisHit/atk etc pour vraiment mettre de l'ordre dans la boucle
             e_anim_Attack.x++;
             if (e_anim_Attack.x * 450 == evilWizard_texture_Attack.getSize().x)
                 e_anim_Attack.x = 0;
@@ -826,7 +827,7 @@ int main()
             }
             window.draw(evilWizard_sprite_Attack);
         }
-        else if (Evil_S.isHealing && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit) {
+        else if (Evil_S.isHealing && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && evilWizard.getAlive() == true) {
             e_anim_Heal.x++;
             if (e_anim_Heal.x * 450 == evilWizard_texture_Heal.getSize().x)
                 e_anim_Heal.x = 0;
@@ -837,7 +838,7 @@ int main()
             }
             window.draw(evilWizard_sprite_Heal);
         }
-        else if (Evil_S.isHit && !Char_S.isHealing && !Char_S.isHit) {
+        else if (Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && evilWizard.getAlive() == true) {
             e_anim_Hit.x++;
             if (e_anim_Hit.x * 450 == evilWizard_texture_Hit.getSize().x)
                 e_anim_Hit.x = 0;
@@ -851,10 +852,10 @@ int main()
 
         ////////// Boss ///////////
 
-        if (!Boss_S.isAttacking && !Boss_S.isHit && !Boss_S.isAttacking2) {
+        if (!Boss_S.isAttacking && !Boss_S.isHit && !Boss_S.isAttacking2 && boss.getAlive() == true) {
             window.draw(boss_sprite);
         }
-        else if (Boss_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing) {
+        else if (Boss_S.isAttacking && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && boss.getAlive() == true) {
             b_anim_Attack.x++;
             if (b_anim_Attack.x * 800 == boss_texture_Attack.getSize().x)
                 b_anim_Attack.x = 0;
@@ -865,7 +866,7 @@ int main()
             }
             window.draw(boss_sprite_Attack);
         }
-        else if (Boss_S.isHit && !Char_S.isHealing && !Char_S.isHit) {
+        else if (Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && boss.getAlive() == true) {
             b_anim_Hit.x++;
             if (b_anim_Hit.x * 800 == boss_texture_Hit.getSize().x)
                 b_anim_Hit.x = 0;
@@ -876,7 +877,7 @@ int main()
             }
             window.draw(boss_sprite_Hit);
         }
-        else if (Boss_S.isAttacking2 && !Boss_S.isAttacking && !Char_S.isHealing && !Char_S.isHit) {
+        else if (Boss_S.isAttacking2 && !Boss_S.isAttacking && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && boss.getAlive() == true) {
             b_anim_Attack2.x++;
             if (b_anim_Attack2.x * 800 == boss_texture_Attack2.getSize().x)
                 b_anim_Attack2.x = 0;
@@ -891,7 +892,7 @@ int main()
 
         Sleep(100);
 
-        if (gameCount == 1 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit) {
+        if (gameCount == 1 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
             window.draw(menuBackground);
             window.draw(menuAtk);
             window.draw(textAtk);
@@ -902,7 +903,7 @@ int main()
             Sleep(50);
         }
 
-        if (Char_S.AttackMode && gameCount == 1) {
+        if (Char_S.AttackMode && gameCount == 1 && wizard.getAlive() == true) {
             window.draw(menuWhoAtk);
             window.draw(menuWorm);
             window.draw(textMenuWorm);
