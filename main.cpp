@@ -430,7 +430,7 @@ int main()
         }
 
         if (gameCount >= 5) {
-            gameCount = 12;
+            gameCount = 1;
         }
         if (!infoBoxB) {
             infoBox.setFillColor(sf::Color::Transparent);
