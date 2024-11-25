@@ -19,34 +19,42 @@ struct CharacterStruct {
     bool AttackMode = false;
     bool isHealing = false;
     bool isHit = false;
+    bool isDead = false;
     int countAnimAtk = 0;
     int countAnimHeal = 0;
     int countAnimHit = 0;
+    int countAnimDeath = 0;
 }; CharacterStruct Char_S;
 
 struct FireWormStruct {
     bool isAttacking = false;
     bool isHit = false;
+    bool isDead = false;
     int countAnimHit = 0;
     int countAnimAtk = 0;
+    int countAnimDeath = 0;
 }; FireWormStruct Worm_S;
 
 struct EvilWizardStruct {
     bool isAttacking = false;
     bool isHealing = false;
     bool isHit = false;
+    bool isDead = false;
     int countAnimAtk = 0;
     int countAnimHeal = 0;
     int countAnimHit = 0;
+    int countAnimDeath = 0;
 }; EvilWizardStruct Evil_S;
 
 struct BossStruct {
     bool isAttacking = false;
     bool isAttacking2 = false;
     bool isHit = false;
+    bool isDead = false;
     int countAnimAtk = 0;
     int countAnimAtk2 = 0;
     int countAnimHit = 0;
+    int countAnimDeath = 0;
 }; BossStruct Boss_S;
 #pragma endregion Struct
 
@@ -121,7 +129,16 @@ int main()
 
     perso_sprite_Hit.setTexture(perso_texture_Hit);
     perso_sprite_Hit.setPosition(225, 625);
+    //
+    sf::Texture perso_texture_Death;
+    sf::Sprite perso_sprite_Death;
+    if (!perso_texture_Death.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\free-wizard-sprite-sheets-pixel-art\\Wanderer Magican\\DeadV2.png")) {
+        return -1;
+    }
+    perso_texture_Death.setSmooth(true);
 
+    perso_sprite_Death.setTexture(perso_texture_Death);
+    perso_sprite_Death.setPosition(225, 625);
     ////////////////////////////////
 
     ////////// Ennemis //////////
@@ -156,6 +173,16 @@ int main()
 
     fireWorm_sprite_Hit.setTexture(fireWorm_texture_Hit);
     fireWorm_sprite_Hit.setPosition(925, 650);
+    //
+    sf::Texture fireWorm_texture_Death;
+    sf::Sprite fireWorm_sprite_Death;
+    if (!fireWorm_texture_Death.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Fire Worm\\Fire Worm\\Sprites\\Worm\\DeathV2.png")) {
+        return -1;
+    }
+    fireWorm_texture_Death.setSmooth(true);
+
+    fireWorm_sprite_Death.setTexture(fireWorm_texture_Death);
+    fireWorm_sprite_Death.setPosition(925, 650);
 
     // Sorcier de feu méchant //
     sf::Texture evilWizard_texture;
@@ -195,8 +222,18 @@ int main()
     }
     evilWizard_texture_Hit.setSmooth(true);
 
-    evilWizard_sprite_Hit.setTexture(evilWizard_texture_Heal);
+    evilWizard_sprite_Hit.setTexture(evilWizard_texture_Hit);
     evilWizard_sprite_Hit.setPosition(1125, 444);
+    //
+    sf::Texture evilWizard_texture_Death;
+    sf::Sprite evilWizard_sprite_Death;
+    if (!evilWizard_texture_Death.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Evil Wizard\\Evil Wizard\\Sprites\\DeathV2.png")) {
+        return -1;
+    }
+    evilWizard_texture_Death.setSmooth(true);
+
+    evilWizard_sprite_Death.setTexture(evilWizard_texture_Death);
+    evilWizard_sprite_Death.setPosition(1125, 444);
 
     // LE BOSS DE SES MORTS //
     sf::Texture boss_texture;
@@ -238,6 +275,16 @@ int main()
 
     boss_sprite_Hit.setTexture(boss_texture_Hit);
     boss_sprite_Hit.setPosition(1400, 333);
+    //
+    sf::Texture boss_texture_Death;
+    sf::Sprite boss_sprite_Death;
+    if (!boss_texture_Death.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\EVil Wizard 2\\EVil Wizard 2\\Sprites\\DeathV2.png")) {
+        return -1;
+    }
+    boss_texture_Death.setSmooth(true);
+
+    boss_sprite_Death.setTexture(boss_texture_Death);
+    boss_sprite_Death.setPosition(1400, 333);
 
     ////////////////////////////////
 
@@ -246,22 +293,24 @@ int main()
     sf::Vector2i c_anim_Attack(1, 0);
     sf::Vector2i c_anim_Heal(1, 0);
     sf::Vector2i c_anim_Hit(1, 0);
+    sf::Vector2i c_anim_Death(1, 0);
 
     sf::Vector2i f_anim(1, 0);
     sf::Vector2i f_anim_Attack(1, 0);
     sf::Vector2i f_anim_Hit(1, 0);
+    sf::Vector2i f_anim_Death(1, 0);
 
     sf::Vector2i e_anim(1, 0);
     sf::Vector2i e_anim_Attack(1, 0);
     sf::Vector2i e_anim_Hit(1, 0);
     sf::Vector2i e_anim_Heal(1, 0);
+    sf::Vector2i e_anim_Death(1, 0);
 
     sf::Vector2i b_anim(1, 0);
     sf::Vector2i b_anim_Attack(1, 0);
     sf::Vector2i b_anim_Attack2(1, 0);
     sf::Vector2i b_anim_Hit(1, 0);
-
-
+    sf::Vector2i b_anim_Death(1, 0);
     ////////////////////////////////
 #pragma endregion Gestion_images
 #pragma region Menu
@@ -628,7 +677,6 @@ int main()
             // Keyboard
         // Sélection des membres du menu
         // if on fais les fleches haut et bas alors on fait pop un rectangle autour du menu atk ou autre
-        // ensuite on dira que si on appui sur entrée et que le rectangle est sur les bonnes coordonnées alors lets gow
         // COmpteur qui va de 1 a 3 avec a chaque fois -- dans le down et ++ dans le up ils ont pas le droit de dépasser 3 ou 1
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && countMenu <= 3)
@@ -653,8 +701,8 @@ int main()
                 c_anim_Attack.x = 0;
                 Char_S.isAttacking = true;
                 Char_S.AttackMode = false;
-                wizard.attack(fireWorm);
                 Worm_S.isHit = true;
+                wizard.attack(fireWorm);
                 //Création du rectangle de ce qui se passe
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au fireWorm !");
@@ -715,7 +763,7 @@ int main()
         // FireWorm
         if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit) {
             if (fireWorm.getAlive() == false) {
-                gameCount = 3;
+                gameCount++;
                 Worm_S.isAttacking = false;
                 Worm_S.isHit = false;
                 Char_S.isAttacking = false;
@@ -886,6 +934,18 @@ int main()
             window.draw(perso_sprite_Hit);
             Sleep(25);
         }///////////////////////////////////
+        else if (wizard.getAlive() == false && !Worm_S.isAttacking && !Evil_S.isAttacking && !Boss_S.isAttacking) {
+            c_anim_Death.x++;
+            if (c_anim_Death.x * 256 >= perso_texture_Death.getSize().x)
+                c_anim_Death.x = 0;
+            perso_sprite_Death.setTextureRect(sf::IntRect(c_anim_Death.x * 256, 0, 256, 256));
+            Char_S.countAnimDeath++;
+            if (Char_S.countAnimDeath == 4) {
+                Char_S.isDead = false;
+            }
+            window.draw(perso_sprite_Death);
+            Sleep(25);
+        }///////////////////////////////////
 
         ////////// Worm ///////////
 
@@ -916,6 +976,17 @@ int main()
                 Worm_S.isHit = false;
             }
             window.draw(fireWorm_sprite_Hit);
+        }///////////////////////////////////
+        else if (fireWorm.getAlive() == false && !Char_S.isAttacking) {
+            f_anim_Death.x++;
+            if (f_anim_Death.x * 180 >= fireWorm_texture_Death.getSize().x)
+                f_anim_Death.x = 0;
+            fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x * 180, 0, 180, 180));
+            Worm_S.countAnimDeath++;
+            if (Worm_S.countAnimDeath == 8) {
+                Worm_S.isDead = false;
+            }
+            window.draw(fireWorm_sprite_Death);
         }///////////////////////////////////
 
 
@@ -958,6 +1029,17 @@ int main()
             }
             window.draw(evilWizard_sprite_Hit);
         }
+        else if(evilWizard.getAlive() == false && !Char_S.isAttacking) {
+            e_anim_Death.x++;
+            if (e_anim_Death.x * 450 == evilWizard_texture_Death.getSize().x)
+                e_anim_Death.x = 0;
+            evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x * 450, 0, 450, 450));
+            Evil_S.countAnimDeath++;
+            if (Evil_S.countAnimDeath == 5) {
+                Evil_S.isDead = false;
+            }
+            window.draw(evilWizard_sprite_Hit);
+        }
 
         ////////// Boss ///////////
 
@@ -994,6 +1076,17 @@ int main()
             Boss_S.countAnimAtk2++;
             if (Boss_S.countAnimAtk2 == 9) {
                 Boss_S.isAttacking2 = false;
+            }
+            window.draw(boss_sprite_Attack2);
+        }
+        else if(boss.getAlive() == false && !Char_S.isAttacking) {
+            b_anim_Death.x++;
+            if (b_anim_Death.x * 800 == boss_texture_Death.getSize().x)
+                b_anim_Death.x = 0;
+            boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x * 800, 0, 800, 800));
+            Boss_S.countAnimDeath++;
+            if (Boss_S.countAnimDeath == 7) {
+                Boss_S.isDead = false;
             }
             window.draw(boss_sprite_Attack2);
         }
