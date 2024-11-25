@@ -362,7 +362,7 @@ int main()
 
 #pragma region UI des ennemies 
     sf::Text UI_Character;
-    UI_Character.setPosition(317, 700);
+    UI_Character.setPosition(317, 690);
     UI_Character.setFont(font);
     UI_Character.setString("YOU");
     UI_Character.setCharacterSize(20);
@@ -370,6 +370,16 @@ int main()
     UI_Character.setOutlineColor(sf::Color::Black);
     UI_Character.setOutlineThickness(3.5f);
     UI_Character.setStyle(sf::Text::Bold);
+
+    sf::Text UI_Character_PV;
+    UI_Character_PV.setPosition(312, 720);
+    UI_Character_PV.setFont(font);
+    UI_Character_PV.setString("100 PV");
+    UI_Character_PV.setCharacterSize(20);
+    UI_Character_PV.setFillColor(sf::Color::Green);
+    UI_Character_PV.setOutlineColor(sf::Color::Black);
+    UI_Character_PV.setOutlineThickness(3.5f);
+    UI_Character_PV.setStyle(sf::Text::Bold);
 
     sf::Text UI_Worm;
     UI_Worm.setPosition(940, 650);
@@ -917,6 +927,7 @@ int main()
 
         if (wizard.getAlive() == true) {
             window.draw(UI_Character);
+            window.draw(UI_Character_PV);
         }
         if (fireWorm.getAlive() == true) {
             window.draw(UI_Worm);

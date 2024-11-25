@@ -111,7 +111,7 @@ class Wizard : public Character {
 public :
 	Wizard() : Character("William l'intervenant", 225, 625, 500) {}
 	void attack(Entities& target) override {
-		int damage = 10;
+		int damage = 30;
 		target.losePV(damage);
 		cout << c_name << " lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
 	}
