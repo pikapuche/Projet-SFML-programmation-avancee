@@ -11,10 +11,11 @@ protected :
 	int e_damage;
 	int e_CoordX, e_CoordY;
 	int e_health;
+	bool isAlive = false;
 
 
 public :
-	Entities() : e_health(), e_damage(), e_CoordX(), e_CoordY() {}
+	Entities(bool A) : e_health(), e_damage(), e_CoordX(), e_CoordY(), isAlive(A) {}
 
 	void printInfos() {
 		cout << "Degats : " << e_damage << "Coordonnees : " << e_CoordX << ", " << e_CoordY << endl << endl;
@@ -25,6 +26,7 @@ public :
 	void losePV(int damage) {
 		e_health -= damage;
 		if (e_health <= 0) e_health = 0;
+		if (e_health == 0) isAlive = false;
 	}
 
 	virtual int getHealth() {
@@ -39,8 +41,8 @@ public :
 	virtual string getName() {
 		return e_name;
 	}
-	virtual bool isAlive() const {
-		return e_health > 0;
+	virtual bool getAlive() {
+		return isAlive;
 	}
 };
 
@@ -52,7 +54,7 @@ protected :
 
 
 public : 
-	Character (string n, int CX, int CY, int h) : c_name(n), c_CoordX(CX), c_CoordY(CY), c_health(h), Entities() {}
+	Character (string n, int CX, int CY, int h) : c_name(n), c_CoordX(CX), c_CoordY(CY), c_health(h), Entities(true) {}
 
 	void attack(Entities& target) override {}
 
@@ -68,8 +70,8 @@ public :
 	string getName() override {
 		return c_name;
 	}
-	bool isAlive() const override{
-		return c_health > 0;
+	bool getAlive() override {
+		return isAlive;
 	}
 };
 
@@ -80,7 +82,7 @@ protected :
 	int E_health;
 
 public : 
-	Enemies(string n, int CX, int CY, int h) : E_name(n), E_CoordX(CX), E_CoordY(CY), E_health(h), Entities() {}
+	Enemies(string n, int CX, int CY, int h) : E_name(n), E_CoordX(CX), E_CoordY(CY), E_health(h), Entities(true) {}
 
 	void attack(Entities& target) override {}
 
@@ -96,8 +98,8 @@ public :
 	string getName() override {
 		return E_name;
 	}
-	bool isAlive() const override {
-		return E_health > 0;
+	bool getAlive() override {
+		return isAlive;
 	}
 };
 

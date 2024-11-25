@@ -446,7 +446,7 @@ int main()
 #pragma region animation
         //ici, on va rajouter 256px a notre image pour la faire changer et donc s'animer ;)
         // Character
-        if (!Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit) {
+        if (!Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
             Char_S.countAnimAtk = 0;
             Char_S.countAnimHeal = 0;
             Char_S.countAnimHit = 0;
@@ -458,7 +458,7 @@ int main()
         }
         //////////////////////////////////////////////////////////////////////////////////////
         // Worm
-        if (!Worm_S.isHit && !Worm_S.isAttacking) {
+        if (!Worm_S.isHit && !Worm_S.isAttacking && fireWorm.getAlive() == true) {
             Worm_S.countAnimAtk = 0;
             Worm_S.countAnimHit = 0;
             f_anim.x++;
@@ -469,7 +469,7 @@ int main()
 
         //////////////////////////////////////////////////////////////////////////////////////
         // EvilWizard
-        if (!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit) {
+        if (!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && evilWizard.getAlive() == true) {
             Evil_S.countAnimAtk = 0;
             Evil_S.countAnimHeal = 0;
             Evil_S.countAnimHit = 0;
@@ -482,7 +482,7 @@ int main()
 
         //////////////////////////////////////////////////////////////////////////////////////
         // Boss
-        if(!Boss_S.isAttacking && !Boss_S.isAttacking2 && !Boss_S.isHit)
+        if(!Boss_S.isAttacking && !Boss_S.isAttacking2 && !Boss_S.isHit && boss.getAlive() == true)
         b_anim.x++;
         if (b_anim.x * 800 == boss_texture.getSize().x)
             b_anim.x = 0;
