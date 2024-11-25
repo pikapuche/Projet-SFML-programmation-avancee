@@ -648,7 +648,7 @@ int main()
                 Char_S.isHit = false;
             }
             // menu d'atk
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode)
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && fireWorm.getAlive() == true)
             {
                 c_anim_Attack.x = 0;
                 Char_S.isAttacking = true;
@@ -660,7 +660,11 @@ int main()
                 textInfoBox.setString("Vous infligez une attaque au fireWorm !");
                 gameCount++;
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2 && Char_S.AttackMode)
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && fireWorm.getAlive() == false) {
+                infoBoxB = true;
+                textInfoBox.setString("FireWorm est mort t'es bouché mec !");
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2 && Char_S.AttackMode && evilWizard.getAlive() == true)
             {
                 Char_S.isAttacking = true;
                 Char_S.AttackMode = false;
@@ -670,7 +674,11 @@ int main()
                 textInfoBox.setString("Vous infligez une attaque au Evil Wizard !");
                 gameCount++;
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 3 && Char_S.AttackMode)
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && evilWizard.getAlive() == false) {
+                infoBoxB = true;
+                textInfoBox.setString("EvilWizard est mort t'es bouché mec !");
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 3 && Char_S.AttackMode && boss.getAlive() == true)
             {
                 Char_S.isAttacking = true;
                 Char_S.AttackMode = false;
@@ -679,6 +687,10 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au ??? !");
                 gameCount++;
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && boss.getAlive() == false) {
+                infoBoxB = true;
+                textInfoBox.setString("??? est mort t'es bouché mec !");
             }
             // Choix Soin
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2)
@@ -702,7 +714,14 @@ int main()
 #pragma region Gestion IA
         // FireWorm
         if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit) {
-            if (fireWorm.getAlive() == false) gameCount++;
+            if (fireWorm.getAlive() == false) {
+                gameCount = 3;
+                Worm_S.isAttacking = false;
+                Worm_S.isHit = false;
+                Char_S.isAttacking = false;
+                Char_S.isHealing = false;
+                Char_S.isHit = false;
+            }
             int action = rand() % 2;
             switch (action) {
             case 0:
@@ -726,8 +745,16 @@ int main()
         }
 
         // EvilWizard
-        if ((gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit) && (!Worm_S.isHit && !Worm_S.isAttacking || fireWorm.getAlive() == false)) {
-            if (evilWizard.getAlive() == false) gameCount++;
+        if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking) {
+            if (evilWizard.getAlive() == false) {
+                gameCount++;
+                Evil_S.isAttacking = false;
+                Evil_S.isHealing = false;
+                Evil_S.isHit = false;
+                Char_S.isAttacking = false;
+                Char_S.isHealing = false;
+                Char_S.isHit = false;
+            }
             int action = rand() % 3;
             switch (action) {
             case 0:
@@ -759,8 +786,16 @@ int main()
         }
 
         // Boss
-        if ((gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit) && ((!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit) || (evilWizard.getAlive() == false)) && ((!Worm_S.isHit && !Worm_S.isAttacking) || (fireWorm.getAlive() == false))) {
-            if (boss.getAlive() == false) gameCount++;
+        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking) {
+            if (boss.getAlive() == false) {
+                gameCount++;
+                Boss_S.isAttacking = false;
+                Boss_S.isAttacking2 = false;
+                Boss_S.isHit = false;
+                Char_S.isAttacking = false;
+                Char_S.isHealing = false;
+                Char_S.isHit = false;
+            }
             int action = rand() % 5;
             switch (action) {
             case 0:
