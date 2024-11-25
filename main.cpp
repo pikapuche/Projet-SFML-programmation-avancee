@@ -361,9 +361,8 @@ int main()
     textSkip.setStyle(sf::Text::Bold);
 
 #pragma region UI des ennemies 
-
     sf::Text UI_Character;
-    UI_Character.setPosition(305, 690);
+    UI_Character.setPosition(317, 700);
     UI_Character.setFont(font);
     UI_Character.setString("YOU");
     UI_Character.setCharacterSize(20);
@@ -373,7 +372,7 @@ int main()
     UI_Character.setStyle(sf::Text::Bold);
 
     sf::Text UI_Worm;
-    UI_Worm.setPosition(920, 630);
+    UI_Worm.setPosition(940, 650);
     UI_Worm.setFont(font);
     UI_Worm.setString("FIRE WORM");
     UI_Worm.setCharacterSize(20);
@@ -383,7 +382,7 @@ int main()
     UI_Worm.setStyle(sf::Text::Bold);
 
     sf::Text UI_Evil;
-    UI_Evil.setPosition(1250, 530);
+    UI_Evil.setPosition(1280, 540);
     UI_Evil.setFont(font);
     UI_Evil.setString("EVIL WIZARD");
     UI_Evil.setCharacterSize(20);
@@ -629,7 +628,7 @@ int main()
 #pragma endregion Gestion Entree
 #pragma region Gestion IA
         // FireWorm
-        if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit && fireWorm.getAlive() == true) {
+        if ((gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit) && (!Worm_S.isHit && fireWorm.getAlive() == true)) {
             int action = rand() % 2;
             switch (action) {
             case 0:
@@ -653,7 +652,7 @@ int main()
         }
 
         // EvilWizard
-        if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && evilWizard.getAlive() == true) {
+        if ((gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && evilWizard.getAlive() == true) && ((!Worm_S.isHit && !Worm_S.isAttacking) || (fireWorm.getAlive() == false))) {
             int action = rand() % 3;
             switch (action) {
             case 0:
@@ -685,7 +684,7 @@ int main()
         }
 
         // Boss
-        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && boss.getAlive() == true) {
+        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && boss.getAlive() == true && ((!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit) || (evilWizard.getAlive() == false)) && ((!Worm_S.isHit && !Worm_S.isAttacking) || (fireWorm.getAlive() == false))) {
             int action = rand() % 5;
             switch (action) {
             case 0:
@@ -916,10 +915,18 @@ int main()
         window.draw(infoBox);
         window.draw(textInfoBox);
 
-        window.draw(UI_Character);
-        window.draw(UI_Worm);
-        window.draw(UI_Evil);
-        window.draw(UI_Boss);
+        if (wizard.getAlive() == true) {
+            window.draw(UI_Character);
+        }
+        if (fireWorm.getAlive() == true) {
+            window.draw(UI_Worm);
+        }
+        if (evilWizard.getAlive() == true) {
+            window.draw(UI_Evil);
+        }
+        if (boss.getAlive() == true) {
+            window.draw(UI_Boss);
+        }
         // Afficher le contenu
         window.display();
     }
