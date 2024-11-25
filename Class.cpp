@@ -23,12 +23,14 @@ public :
 
 	virtual void attack(Entities& target) = 0;
 
-	void losePV(int damage) {
+	virtual int losePV(int damage) {
 		e_health -= damage;
-		if (e_health <= 0) e_health = 0;
-		if (e_health == 0) e_isAlive = false;
+		if (e_health <= 0) {
+			e_health = 0;
+			e_isAlive = false;
+		}
+		return e_health;
 	}
-
 	virtual int getHealth() {
 		return e_health;
 	}
@@ -60,6 +62,14 @@ public :
 
 	void attack(Entities& target) override {}
 
+	int losePV(int damage) override {
+		c_health -= damage;
+		if (c_health <= 0) {
+			c_health = 0;
+			c_isAlive = false;
+		}
+		return c_health;
+	}
 	int getHealth() override {
 		return c_health;
 	}
@@ -90,6 +100,14 @@ public :
 
 	void attack(Entities& target) override {}
 
+	int losePV(int damage) override {
+		E_health -= damage;
+		if (E_health <= 0) {
+			E_health = 0;
+			E_isAlive = false;
+		}
+		return E_health;
+	}
 	int getHealth() override {
 		return E_health;
 	}
@@ -113,6 +131,7 @@ public :
 	void attack(Entities& target) override {
 		int damage = 30;
 		target.losePV(damage);
+		cout << target.getHealth() << " PV" << endl << endl;
 		cout << c_name << " lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
 	}
 }; 
@@ -123,6 +142,7 @@ public:
 	void attack(Entities& target) override {
 		int damage = 8;
 		target.losePV(damage);
+		cout << target.getHealth() << " PV" << endl << endl;
 		cout << E_name << " lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
 	}
 
@@ -134,6 +154,7 @@ public:
 	void attack(Entities& target) override {
 		int damage = 12;
 		target.losePV(damage);
+		cout << target.getHealth() << " PV" << endl << endl;
 		cout << E_name << "lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
 	}
 }; 
@@ -144,6 +165,7 @@ public:
 	void attack(Entities& target) override {
 		int damage = 20;
 		target.losePV(damage);
+		cout << target.getHealth() << " PV" << endl << endl;
 		cout << E_name << "lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
 	}
 };

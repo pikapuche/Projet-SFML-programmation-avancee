@@ -5,6 +5,7 @@
 #include <thread>
 #include <chrono>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -372,17 +373,25 @@ int main()
     UI_Character.setStyle(sf::Text::Bold);
 
     sf::Text UI_Character_PV;
-    UI_Character_PV.setPosition(312, 720);
+    UI_Character_PV.setPosition(305, 720);
     UI_Character_PV.setFont(font);
-    UI_Character_PV.setString("100 PV");
     UI_Character_PV.setCharacterSize(20);
     UI_Character_PV.setFillColor(sf::Color::Green);
     UI_Character_PV.setOutlineColor(sf::Color::Black);
     UI_Character_PV.setOutlineThickness(3.5f);
     UI_Character_PV.setStyle(sf::Text::Bold);
+    sf::Text UI_Character_PV2;
+    UI_Character_PV2.setPosition(351, 720);
+    UI_Character_PV2.setFont(font);
+    UI_Character_PV2.setString(" PV");
+    UI_Character_PV2.setCharacterSize(20);
+    UI_Character_PV2.setFillColor(sf::Color::Green);
+    UI_Character_PV2.setOutlineColor(sf::Color::Black);
+    UI_Character_PV2.setOutlineThickness(3.5f);
+    UI_Character_PV2.setStyle(sf::Text::Bold);
 
     sf::Text UI_Worm;
-    UI_Worm.setPosition(940, 650);
+    UI_Worm.setPosition(940, 620);
     UI_Worm.setFont(font);
     UI_Worm.setString("FIRE WORM");
     UI_Worm.setCharacterSize(20);
@@ -391,8 +400,26 @@ int main()
     UI_Worm.setOutlineThickness(3.5f);
     UI_Worm.setStyle(sf::Text::Bold);
 
+    sf::Text UI_Worm_PV;
+    UI_Worm_PV.setPosition(970, 650);
+    UI_Worm_PV.setFont(font);
+    UI_Worm_PV.setCharacterSize(20);
+    UI_Worm_PV.setFillColor(sf::Color::Green);
+    UI_Worm_PV.setOutlineColor(sf::Color::Black);
+    UI_Worm_PV.setOutlineThickness(3.5f);
+    UI_Worm_PV.setStyle(sf::Text::Bold);
+    sf::Text UI_Worm_PV2;
+    UI_Worm_PV2.setPosition(1005, 650);
+    UI_Worm_PV2.setFont(font);
+    UI_Worm_PV2.setString(" PV");
+    UI_Worm_PV2.setCharacterSize(20);
+    UI_Worm_PV2.setFillColor(sf::Color::Green);
+    UI_Worm_PV2.setOutlineColor(sf::Color::Black);
+    UI_Worm_PV2.setOutlineThickness(3.5f);
+    UI_Worm_PV2.setStyle(sf::Text::Bold);
+
     sf::Text UI_Evil;
-    UI_Evil.setPosition(1280, 540);
+    UI_Evil.setPosition(1280, 520);
     UI_Evil.setFont(font);
     UI_Evil.setString("EVIL WIZARD");
     UI_Evil.setCharacterSize(20);
@@ -400,6 +427,24 @@ int main()
     UI_Evil.setOutlineColor(sf::Color::Black);
     UI_Evil.setOutlineThickness(3.5f);
     UI_Evil.setStyle(sf::Text::Bold);
+
+    sf::Text UI_Evil_PV;
+    UI_Evil_PV.setPosition(1310, 550);
+    UI_Evil_PV.setFont(font);;
+    UI_Evil_PV.setCharacterSize(20);
+    UI_Evil_PV.setFillColor(sf::Color::Green);
+    UI_Evil_PV.setOutlineColor(sf::Color::Black);
+    UI_Evil_PV.setOutlineThickness(3.5f);
+    UI_Evil_PV.setStyle(sf::Text::Bold);
+    sf::Text UI_Evil_PV2;
+    UI_Evil_PV2.setPosition(1356, 550);
+    UI_Evil_PV2.setFont(font);
+    UI_Evil_PV2.setString(" PV");
+    UI_Evil_PV2.setCharacterSize(20);
+    UI_Evil_PV2.setFillColor(sf::Color::Green);
+    UI_Evil_PV2.setOutlineColor(sf::Color::Black);
+    UI_Evil_PV2.setOutlineThickness(3.5f);
+    UI_Evil_PV2.setStyle(sf::Text::Bold);
 
     sf::Text UI_Boss;
     UI_Boss.setPosition(1780, 620);
@@ -410,6 +455,24 @@ int main()
     UI_Boss.setOutlineColor(sf::Color::Black);
     UI_Boss.setOutlineThickness(3.5f);
     UI_Boss.setStyle(sf::Text::Bold);
+
+    sf::Text UI_Boss_PV;
+    UI_Boss_PV.setPosition(1750, 650);
+    UI_Boss_PV.setFont(font);
+    UI_Boss_PV.setCharacterSize(20);
+    UI_Boss_PV.setFillColor(sf::Color::Green);
+    UI_Boss_PV.setOutlineColor(sf::Color::Black);
+    UI_Boss_PV.setOutlineThickness(3.5f);
+    UI_Boss_PV.setStyle(sf::Text::Bold);
+    sf::Text UI_Boss_PV2;
+    UI_Boss_PV2.setPosition(1796, 650);
+    UI_Boss_PV2.setFont(font);
+    UI_Boss_PV2.setString(" PV");
+    UI_Boss_PV2.setCharacterSize(20);
+    UI_Boss_PV2.setFillColor(sf::Color::Green);
+    UI_Boss_PV2.setOutlineColor(sf::Color::Black);
+    UI_Boss_PV2.setOutlineThickness(3.5f);
+    UI_Boss_PV2.setStyle(sf::Text::Bold);
 #pragma endregion UI des ennemies
 
     sf::RectangleShape infoBox(sf::Vector2f(700.f, 180.f));
@@ -638,7 +701,8 @@ int main()
 #pragma endregion Gestion Entree
 #pragma region Gestion IA
         // FireWorm
-        if ((gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit) && (!Worm_S.isHit && fireWorm.getAlive() == true)) {
+        if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit) {
+            if (fireWorm.getAlive() == false) gameCount++;
             int action = rand() % 2;
             switch (action) {
             case 0:
@@ -662,7 +726,8 @@ int main()
         }
 
         // EvilWizard
-        if ((gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && evilWizard.getAlive() == true) && ((!Worm_S.isHit && !Worm_S.isAttacking) || (fireWorm.getAlive() == false))) {
+        if ((gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit) && (!Worm_S.isHit && !Worm_S.isAttacking || fireWorm.getAlive() == false)) {
+            if (evilWizard.getAlive() == false) gameCount++;
             int action = rand() % 3;
             switch (action) {
             case 0:
@@ -694,7 +759,8 @@ int main()
         }
 
         // Boss
-        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && boss.getAlive() == true && ((!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit) || (evilWizard.getAlive() == false)) && ((!Worm_S.isHit && !Worm_S.isAttacking) || (fireWorm.getAlive() == false))) {
+        if ((gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit) && ((!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit) || (evilWizard.getAlive() == false)) && ((!Worm_S.isHit && !Worm_S.isAttacking) || (fireWorm.getAlive() == false))) {
+            if (boss.getAlive() == false) gameCount++;
             int action = rand() % 5;
             switch (action) {
             case 0:
@@ -734,7 +800,6 @@ int main()
             default:
                 break;
             }
-            if (boss.getAlive() == false) gameCount++;
         }
 #pragma endregion Gestion IA
 #pragma region atelier dessin
@@ -928,15 +993,30 @@ int main()
         if (wizard.getAlive() == true) {
             window.draw(UI_Character);
             window.draw(UI_Character_PV);
+            window.draw(UI_Character_PV2);
+            string Vie_Char(to_string(wizard.getHealth()));
+            UI_Character_PV.setString(Vie_Char);
         }
         if (fireWorm.getAlive() == true) {
             window.draw(UI_Worm);
+            window.draw(UI_Worm_PV);
+            window.draw(UI_Worm_PV2);
+            string Vie_Worm(to_string(fireWorm.getHealth()));
+            UI_Worm_PV.setString(Vie_Worm);
         }
         if (evilWizard.getAlive() == true) {
             window.draw(UI_Evil);
+            window.draw(UI_Evil_PV);
+            window.draw(UI_Evil_PV2);
+            string Vie_Evil(to_string(evilWizard.getHealth()));
+            UI_Evil_PV.setString(Vie_Evil);
         }
         if (boss.getAlive() == true) {
             window.draw(UI_Boss);
+            window.draw(UI_Boss_PV);
+            window.draw(UI_Boss_PV2);
+            string Vie_Boss(to_string(boss.getHealth()));
+            UI_Boss_PV.setString(Vie_Boss);
         }
         // Afficher le contenu
         window.display();
