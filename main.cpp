@@ -1010,9 +1010,9 @@ int main()
         }
         else if (Evil_S.isAttacking && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && evilWizard.getAlive() == true) { //&& wormisHit/atk etc pour vraiment mettre de l'ordre dans la boucle
             e_anim_Attack.x++;
-            if (e_anim_Attack.x / 450 == evilWizard_texture_Attack.getSize().x)
+            if (e_anim_Attack.x * 450 == evilWizard_texture_Attack.getSize().x)
                 e_anim_Attack.x = 0;
-            evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x / 450, 0, 450, 450));
+            evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x * 450, 0, 450, 450));
             Evil_S.countAnimAtk++;
             if (Evil_S.countAnimAtk == 9) {
                 Evil_S.isAttacking = false;
@@ -1089,7 +1089,7 @@ int main()
             b_anim_Attack2.x++;
             if (b_anim_Attack2.x * 800 == boss_texture_Attack2.getSize().x)
                 b_anim_Attack2.x = 0;
-            boss_sprite_Attack.setTextureRect(sf::IntRect(b_anim_Attack2.x * 800, 0, 800, 800));
+            boss_sprite_Attack2.setTextureRect(sf::IntRect(b_anim_Attack2.x * 800, 0, 800, 800));
             Boss_S.countAnimAtk2++;
             if (Boss_S.countAnimAtk2 == 8) {
                 Boss_S.isAttacking2 = false;
