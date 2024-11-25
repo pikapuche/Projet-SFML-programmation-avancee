@@ -12,6 +12,7 @@ using namespace std;
 int countMenu = 0;
 int gameCount = 1;
 bool infoBoxB = false;
+int testCount = 0;
 
 #pragma region Struct
 struct CharacterStruct {
@@ -699,8 +700,8 @@ int main()
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && fireWorm.getAlive() == true)
             {
                 c_anim_Attack.x = 0;
-                Char_S.isAttacking = true;
                 Char_S.AttackMode = false;
+                Char_S.isAttacking = true;
                 Worm_S.isHit = true;
                 wizard.attack(fireWorm);
                 //Création du rectangle de ce qui se passe
@@ -761,15 +762,15 @@ int main()
 #pragma endregion Gestion Entree
 #pragma region Gestion IA
         // FireWorm
-        if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit) {
+        if (gameCount == 2 && fireWorm.getAlive() == false) {
             if (fireWorm.getAlive() == false) {
                 gameCount++;
                 Worm_S.isAttacking = false;
                 Worm_S.isHit = false;
-                Char_S.isAttacking = false;
-                Char_S.isHealing = false;
-                Char_S.isHit = false;
+                gameCount++;
             }
+        }
+        if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit && fireWorm.getAlive() == true) {
             int action = rand() % 2;
             switch (action) {
             case 0:
@@ -793,16 +794,13 @@ int main()
         }
 
         // EvilWizard
-        if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking) {
-            if (evilWizard.getAlive() == false) {
-                gameCount++;
-                Evil_S.isAttacking = false;
-                Evil_S.isHealing = false;
-                Evil_S.isHit = false;
-                Char_S.isAttacking = false;
-                Char_S.isHealing = false;
-                Char_S.isHit = false;
-            }
+        if (gameCount == 3 && evilWizard.getAlive() == false) {
+            Evil_S.isAttacking = false;
+            Evil_S.isHealing = false;
+            Evil_S.isHit = false;
+            gameCount++;
+        }
+        if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && evilWizard.getAlive() == true) {
             int action = rand() % 3;
             switch (action) {
             case 0:
@@ -834,16 +832,13 @@ int main()
         }
 
         // Boss
-        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking) {
-            if (boss.getAlive() == false) {
-                gameCount++;
-                Boss_S.isAttacking = false;
-                Boss_S.isAttacking2 = false;
-                Boss_S.isHit = false;
-                Char_S.isAttacking = false;
-                Char_S.isHealing = false;
-                Char_S.isHit = false;
-            }
+        if (gameCount == 4 && boss.getAlive() == false) {
+            Boss_S.isAttacking = false;
+            Boss_S.isAttacking2 = false;
+            Boss_S.isHit = false;
+            gameCount++;
+        }
+        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && boss.getAlive() == true) {
             int action = rand() % 5;
             switch (action) {
             case 0:
@@ -977,7 +972,9 @@ int main()
             }
             window.draw(fireWorm_sprite_Hit);
         }///////////////////////////////////
-        else if (fireWorm.getAlive() == false && !Char_S.isAttacking) {
+
+        else if (testCount == 0) {
+            if (fireWorm.getAlive() == false && !Char_S.isAttacking) {
             f_anim_Death.x++;
             if (f_anim_Death.x * 180 >= fireWorm_texture_Death.getSize().x)
                 f_anim_Death.x = 0;
@@ -985,11 +982,12 @@ int main()
             Worm_S.countAnimDeath++;
             if (Worm_S.countAnimDeath == 8) {
                 Worm_S.isDead = false;
+                testCount++;
+                gameCount++;
             }
             window.draw(fireWorm_sprite_Death);
         }///////////////////////////////////
-
-
+    }
 
         ////////// Evil Wizard ///////////
 
@@ -998,9 +996,9 @@ int main()
         }
         else if (Evil_S.isAttacking && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && evilWizard.getAlive() == true) { //&& wormisHit/atk etc pour vraiment mettre de l'ordre dans la boucle
             e_anim_Attack.x++;
-            if (e_anim_Attack.x * 450 == evilWizard_texture_Attack.getSize().x)
+            if (e_anim_Attack.x / 450 == evilWizard_texture_Attack.getSize().x)
                 e_anim_Attack.x = 0;
-            evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x * 450, 0, 450, 450));
+            evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x / 450, 0, 450, 450));
             Evil_S.countAnimAtk++;
             if (Evil_S.countAnimAtk == 9) {
                 Evil_S.isAttacking = false;
