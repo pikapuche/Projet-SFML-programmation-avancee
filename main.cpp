@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <windows.h>
 #include "Class.cpp"
@@ -317,6 +318,9 @@ int main()
     sf::Vector2i b_anim_Death(1, 0);
     ////////////////////////////////
 #pragma endregion Gestion_images
+    sf::SoundBuffer fightMusic;
+    if (!fightMusic.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\V2 120bpm.wav"))
+        return -1;
 #pragma region Menu
 // Mini menu 
     sf::RectangleShape menuBackground(sf::Vector2f(420.0f, 226.f));
@@ -546,6 +550,12 @@ int main()
 
 #pragma endregion Menu
 
+    sf::Sound sound;
+    sound.setBuffer(fightMusic);
+    sound.setLoop(true);
+    sound.play();
+   
+
     // Boucle principale
     while (window.isOpen()) {
         sf::Event event;
@@ -588,10 +598,10 @@ int main()
             Worm_S.countAnimAtk = 0;
             Worm_S.countAnimHit = 0;
             Worm_S.countAnimDeath = 0;
-            f_anim.x++;
-            if (f_anim.x * 180 >= fireWorm_texture.getSize().x)
+            f_anim.x--;
+            if (f_anim.x * (-180) <= fireWorm_texture.getSize().x <= 0)
                 f_anim.x = 0;
-            fireWorm_sprite.setTextureRect(sf::IntRect(f_anim.x * 180, 0, 180, 180));
+            fireWorm_sprite.setTextureRect(sf::IntRect(f_anim.x * (-180), 0, 180, 180));
         }
 
         //////////////////////////////////////////////////////////////////////////////////////
@@ -721,6 +731,7 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au fireWorm !");
                 gameCount++;
+                countMenu = 0;
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && fireWorm.getAlive() == false) {
                 infoBoxB = true;
@@ -735,6 +746,7 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au Evil Wizard !");
                 gameCount++;
+                countMenu = 0;
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && evilWizard.getAlive() == false) {
                 infoBoxB = true;
@@ -749,6 +761,7 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au ??? !");
                 gameCount++;
+                countMenu = 0;
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && boss.getAlive() == false) {
                 infoBoxB = true;
@@ -763,6 +776,7 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous vous soignez de 15 PV");
                 gameCount++;
+                countMenu = 0;
             }
             // Choix passe ton tour
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 3)
@@ -770,6 +784,7 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous passez un tour");
                 gameCount++;
+                countMenu = 0;
             }
         }
 #pragma endregion Gestion Entree
@@ -964,9 +979,9 @@ int main()
 
             else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit && fireWorm.getAlive() == true) {
                 f_anim_Attack.x++;
-                if (f_anim_Attack.x * 180 >= fireWorm_texture_Attack.getSize().x)
+                if (f_anim_Attack.x / 180 >= fireWorm_texture_Attack.getSize().x)
                     f_anim_Attack.x = 0;
-                fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x * 180, 0, 180, 180));
+                fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x / 1620, 0, 180, 180));
                 Worm_S.countAnimAtk++;
                 if (Worm_S.countAnimAtk == 10) {
                     Worm_S.isAttacking = false;
