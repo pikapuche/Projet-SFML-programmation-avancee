@@ -164,7 +164,7 @@ class FireWorm : public Enemies {
 public:
 	FireWorm() : Enemies("Fire Worm, THE ELDEN LORD", 925, 650, 75) {}
 	void attack(Entities& target) override {
-		int damage = 8;
+		int damage = 5;
 		target.losePV(damage);
 		cout << target.getHealth() << " PV" << endl << endl;
 		cout << E_name << " lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
@@ -176,7 +176,7 @@ class EvilWizard : public Enemies {
 public:
 	EvilWizard() : Enemies("Omariu, THE LITTLE SHIT", 1125, 755, 150) {}
 	void attack(Entities& target) override {
-		int damage = 12;
+		int damage = 8;
 		target.losePV(damage);
 		cout << target.getHealth() << " PV" << endl << endl;
 		cout << E_name << "lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
@@ -187,7 +187,7 @@ class Boss : public Enemies {
 public:
 	Boss() : Enemies("???", 1400, 625, 425) {}
 	void attack(Entities& target) override {
-		int damage = 20;
+		int damage = 15;
 		target.losePV(damage);
 		cout << target.getHealth() << " PV" << endl << endl;
 		cout << E_name << "lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
