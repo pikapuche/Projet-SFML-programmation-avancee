@@ -1042,6 +1042,7 @@ int main()
             if (Char_S.countAnimAtk == 7) {
                 Char_S.isAttacking = false;
             }
+            // faut vraiment mettre un timeur pour permettre de faire les tours moins rapidement;
             window.draw(perso_sprite_Attack);
             Sleep(25);
         }///////////////////////////////////
