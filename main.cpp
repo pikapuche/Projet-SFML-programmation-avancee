@@ -13,6 +13,7 @@ using namespace std;
 int countMenu = 0;
 int gameCount = 1;
 bool infoBoxB = false;
+int quiSoigner = 0;
 
 #pragma region Struct
 struct CharacterStruct {
@@ -21,6 +22,7 @@ struct CharacterStruct {
     bool isHealing = false;
     bool isHit = false;
     bool isDead = false;
+    bool printBody = false;
     int countAnimAtk = 0;
     int countAnimHeal = 0;
     int countAnimHit = 0;
@@ -32,6 +34,7 @@ struct FireWormStruct {
     bool isAttacking = false;
     bool isHit = false;
     bool isDead = false;
+    bool printBody = false;
     int countAnimHit = 0;
     int countAnimAtk = 0;
     int countAnimDeath = 0;
@@ -43,6 +46,7 @@ struct EvilWizardStruct {
     bool isHealing = false;
     bool isHit = false;
     bool isDead = false;
+    bool printBody = false;
     int countAnimAtk = 0;
     int countAnimHeal = 0;
     int countAnimHit = 0;
@@ -55,6 +59,7 @@ struct BossStruct {
     bool isAttacking2 = false;
     bool isHit = false;
     bool isDead = false;
+    bool printBody = false;
     int countAnimAtk = 0;
     int countAnimAtk2 = 0;
     int countAnimHit = 0;
@@ -766,15 +771,22 @@ int main()
                 textInfoBox.setString("??? est mort t'es bouché mec !");
             }
             // Choix Soin
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2)
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2 && wizard.getHealth() < 500)
             {
                 c_anim_Heal.x = 0;
                 c_anim.x = 0;
                 Char_S.isHealing = true;
+                wizard.heal();
                 infoBoxB = true;
-                textInfoBox.setString("Vous vous soignez de 15 PV");
+                textInfoBox.setString("Vous vous soignez de 30 PV");
                 gameCount++;
                 countMenu = 0;
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2 && wizard.getHealth() >= 500)
+            {
+                infoBoxB = true;
+                textInfoBox.setString("T'es full Vie mec");
+                wizard.setHealth(500);
             }
             // Choix passe ton tour
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 3)
@@ -796,26 +808,14 @@ int main()
             }
         }
         if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit && fireWorm.getAlive() == true) {
-            int action = rand() % 2;
-            switch (action) {
-            case 0:
-                Worm_S.isHit = false;
-                Worm_S.isAttacking = true;
-                fireWorm.attack(wizard);
-                Char_S.isHit = true;
-                infoBoxB = true;
-                textInfoBox.setString("FireWorm vous inflige 8 points de degats !");
-                gameCount++;
-                break;
+            Worm_S.isHit = false;
+            Worm_S.isAttacking = true;
+            fireWorm.attack(wizard);
+            Char_S.isHit = true;
+            infoBoxB = true;
+            textInfoBox.setString("FireWorm vous inflige 8 points de degats !");
+            gameCount++;
 
-            case 1:
-                cout << fireWorm.getName() << " regarde les mouches voler" << endl << endl;
-                gameCount++;
-                break;
-
-            default:
-                break;
-            }
         }
 
         // EvilWizard
@@ -826,7 +826,7 @@ int main()
             gameCount++;
         }
         if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && evilWizard.getAlive() == true) {
-            int action = rand() % 3;
+            int action = rand() % 4;
             switch (action) {
             case 0:
                 Evil_S.isHit = false;
@@ -845,9 +845,56 @@ int main()
 
             case 2:
                 Evil_S.isHealing = true;
-                cout << evilWizard.getName() << " se soigne" << endl << endl;
-                infoBoxB = true;
-                textInfoBox.setString("Evil Wizard se soigne !");
+                quiSoigner = rand() % 3;
+                if (quiSoigner == 0 && fireWorm.getAlive() == true && fireWorm.getHealth() < 75) {
+                    fireWorm.heal();
+                    infoBoxB = true;
+                    textInfoBox.setString("Evil Wizard soigne le FireWorm de 30 PV !");
+                }
+                else if (quiSoigner == 1 && evilWizard.getAlive() == true && evilWizard.getHealth() < 150) {
+                    evilWizard.heal();
+                    infoBoxB = true;
+                    textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
+                }
+                else if (quiSoigner == 2 && boss.getAlive() == true < 425) {
+                    boss.heal();
+                    infoBoxB = true;
+                    textInfoBox.setString("Evil Wizard soigne ??? de 30 PV !");
+                }
+                else {
+                    infoBoxB = true;
+                    textInfoBox.setString("Evil Wizard a rate son incantation c'est vraiment un trou de balle !");
+                }
+                cout << evilWizard.getName() << " soigne" << endl << endl;
+
+                gameCount++;
+                break;
+
+            case 3:
+                Evil_S.isHealing = true;
+                quiSoigner = rand() % 3;
+                if (quiSoigner == 0 && fireWorm.getAlive() == true && fireWorm.getHealth() < 75) {
+                    fireWorm.heal();
+                    infoBoxB = true;
+                    textInfoBox.setString("Evil Wizard soigne le FireWorm de 30 PV !");
+                }
+                else if (quiSoigner == 1 && evilWizard.getAlive() == true && evilWizard.getHealth() < 150) {
+                    evilWizard.heal();
+                    infoBoxB = true;
+                    textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
+                }
+                else if (quiSoigner == 2 && boss.getAlive() == true < 425) {
+                    boss.heal();
+                    infoBoxB = true;
+                    textInfoBox.setString("Evil Wizard soigne ??? de 30 PV !");
+                }
+                else {
+                    infoBoxB = true;
+                    textInfoBox.setString("Evil Wizard a rate son incantation c'est vraiment un trou de balle !");
+                }
+
+                cout << evilWizard.getName() << " soigne" << endl << endl;
+
                 gameCount++;
                 break;
 
@@ -882,10 +929,6 @@ int main()
                 break;
 
             case 2:
-                cout << boss.getName() << " regarde les mouches voler" << endl << endl;
-                gameCount++;
-                break;
-            case 3:
                 Boss_S.isHit = false;
                 Boss_S.isAttacking = false;
                 Boss_S.isAttacking2 = true;
@@ -895,8 +938,25 @@ int main()
                 textInfoBox.setString("??? vous inflige 20 points de degats ! (attack2)");
                 gameCount++;
                 break;
+
+            case 3:
+                Boss_S.isHit = false;
+                Boss_S.isAttacking = true;
+                boss.attack(wizard);
+                Char_S.isHit = true;
+                infoBoxB = true;
+                textInfoBox.setString("??? vous inflige 20 points de degats ! (attack1)");
+                gameCount++;
+                break;
+
             case 4:
-                cout << boss.getName() << " regarde les mouches voler" << endl << endl;
+                Boss_S.isHit = false;
+                Boss_S.isAttacking = false;
+                Boss_S.isAttacking2 = true;
+                boss.attack(wizard);
+                Char_S.isHit = true;
+                infoBoxB = true;
+                textInfoBox.setString("??? vous inflige 20 points de degats ! (attack2)");
                 gameCount++;
                 break;
 
@@ -955,18 +1015,36 @@ int main()
             window.draw(perso_sprite_Hit);
             Sleep(25);
         }///////////////////////////////////
-        else if (wizard.getAlive() == false && !Worm_S.isAttacking && !Evil_S.isAttacking && !Boss_S.isAttacking) {
-            c_anim_Death.x++;
-            if (c_anim_Death.x * 256 >= perso_texture_Death.getSize().x)
-                c_anim_Death.x = 0;
-            perso_sprite_Death.setTextureRect(sf::IntRect(c_anim_Death.x * 256, 0, 256, 256));
-            Char_S.countAnimDeath++;
-            if (Char_S.countAnimDeath == 4) {
-                Char_S.isDead = false;
+        else if (Char_S.countAnimDeath == 0) {
+            if (wizard.getAlive() == false && !Worm_S.isAttacking && !Evil_S.isAttacking && !Boss_S.isAttacking) {
+                c_anim_Death.x++;
+                if (c_anim_Death.x * 256 >= perso_texture_Death.getSize().x)
+                    c_anim_Death.x = 0;
+                perso_sprite_Death.setTextureRect(sf::IntRect(c_anim_Death.x * 256, 0, 256, 256));
+                Char_S.countAnimDeath++;
+                if (Char_S.countAnimDeath == 4) {
+                    Char_S.isDead = false;
+                    Char_S.printBody = true;
+                }
+                window.draw(perso_sprite_Death);
+                Sleep(25);
             }
-            window.draw(perso_sprite_Death);
-            Sleep(25);
         }///////////////////////////////////
+
+
+        /*else if (!Char_S.isAttacking && !Char_S.isHealing && Char_S.isHit && wizard.getAlive() == true && (Worm_S.isAttacking || Evil_S.isAttacking || Boss_S.isAttacking || Boss_S.isAttacking2)) {
+            Char_S.countAnimAtk = 0;
+            Char_S.countAnimHeal = 0;
+            Char_S.countAnimHit = 0;
+            Char_S.countAnimDeath = 0;
+            c_anim.x++;
+            if (c_anim.x * 256 >= perso_texture.getSize().x) // boucle qui permet de revenir a la premiere slide de l'anim
+                c_anim.x = 0;
+            // ici, ce code permet de créer l'animation Idle du personnage
+            perso_sprite.setTextureRect(sf::IntRect(c_anim.x * 256, 0, 256, 256));
+            window.draw(perso_sprite);
+        }///////////////////////////////////*/
+
 
 
             ////////// Worm ///////////
@@ -977,7 +1055,7 @@ int main()
 
             else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit && fireWorm.getAlive() == true) {
                 f_anim_Attack.x++;
-                if (f_anim_Attack.x * 180 == fireWorm_texture_Attack.getSize().x)
+                if (f_anim_Attack.x * 180 >= fireWorm_texture_Attack.getSize().x)
                     f_anim_Attack.x = 0;
                 fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x * 180, 0, 180, 180));
                 Worm_S.countAnimAtk++;
@@ -1023,7 +1101,7 @@ int main()
         }
         else if (Evil_S.isAttacking && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && evilWizard.getAlive() == true) { //&& wormisHit/atk etc pour vraiment mettre de l'ordre dans la boucle
             e_anim_Attack.x++;
-            if (e_anim_Attack.x * 450 == evilWizard_texture_Attack.getSize().x)
+            if (e_anim_Attack.x * 450 >= evilWizard_texture_Attack.getSize().x)
                 e_anim_Attack.x = 0;
             evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x * 450, 0, 450, 450));
             Evil_S.countAnimAtk++;
@@ -1034,7 +1112,7 @@ int main()
         }
         else if (Evil_S.isHealing && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && evilWizard.getAlive() == true) {
             e_anim_Heal.x++;
-            if (e_anim_Heal.x * 450 == evilWizard_texture_Heal.getSize().x)
+            if (e_anim_Heal.x * 450 >= evilWizard_texture_Heal.getSize().x)
                 e_anim_Heal.x = 0;
             evilWizard_sprite_Heal.setTextureRect(sf::IntRect(e_anim_Heal.x * 450, 0, 450, 450));
             Evil_S.countAnimHeal++;
@@ -1045,7 +1123,7 @@ int main()
         }
         else if (Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && evilWizard.getAlive() == true) {
             e_anim_Hit.x++;
-            if (e_anim_Hit.x * 450 == evilWizard_texture_Hit.getSize().x)
+            if (e_anim_Hit.x * 450 >= evilWizard_texture_Hit.getSize().x)
                 e_anim_Hit.x = 0;
             evilWizard_sprite_Hit.setTextureRect(sf::IntRect(e_anim_Hit.x * 450, 0, 450, 450));
             evilWizard_sprite_Hit.setColor(sf::Color(255, 0, 0));
@@ -1058,7 +1136,7 @@ int main()
         else if (Evil_S.DeathCount == 0) {
             if (evilWizard.getAlive() == false) {
                 e_anim_Death.x++;
-                if (e_anim_Death.x * 450 == evilWizard_texture_Death.getSize().x)
+                if (e_anim_Death.x * 450 >= evilWizard_texture_Death.getSize().x)
                     e_anim_Death.x = 0;
                 evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x * 450, 0, 450, 450));
                 Evil_S.countAnimDeath++;
@@ -1075,9 +1153,9 @@ int main()
         if (!Boss_S.isAttacking && !Boss_S.isHit && !Boss_S.isAttacking2 && boss.getAlive() == true) {
             window.draw(boss_sprite);
         }
-        else if (Boss_S.isAttacking && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && boss.getAlive() == true) {
+        else if (Boss_S.isAttacking && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isDead && !Evil_S.isDead && boss.getAlive() == true) {
             b_anim_Attack.x++;
-            if (b_anim_Attack.x * 800 == boss_texture_Attack.getSize().x)
+            if (b_anim_Attack.x * 800 >= boss_texture_Attack.getSize().x)
                 b_anim_Attack.x = 0;
             boss_sprite_Attack.setTextureRect(sf::IntRect(b_anim_Attack.x * 800, 0, 800, 800));
             Boss_S.countAnimAtk++;
@@ -1088,7 +1166,7 @@ int main()
         }
         else if (Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && boss.getAlive() == true) {
             b_anim_Hit.x++;
-            if (b_anim_Hit.x * 800 == boss_texture_Hit.getSize().x)
+            if (b_anim_Hit.x * 800 >= boss_texture_Hit.getSize().x)
                 b_anim_Hit.x = 0;
             boss_sprite_Hit.setTextureRect(sf::IntRect(b_anim_Hit.x * 800, 0, 800, 800));
             boss_sprite_Hit.setColor(sf::Color(255, 0, 0));
@@ -1098,9 +1176,9 @@ int main()
             }
             window.draw(boss_sprite_Hit);
         }
-        else if (Boss_S.isAttacking2 && !Boss_S.isAttacking && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isDead && !Evil_S.isDead && boss.getAlive() == true) {
+        else if (Boss_S.isAttacking2 && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isDead && !Evil_S.isDead && boss.getAlive() == true) {
             b_anim_Attack2.x++;
-            if (b_anim_Attack2.x * 800 == boss_texture_Attack2.getSize().x)
+            if (b_anim_Attack2.x * 800 >= boss_texture_Attack2.getSize().x)
                 b_anim_Attack2.x = 0;
             boss_sprite_Attack2.setTextureRect(sf::IntRect(b_anim_Attack2.x * 800, 0, 800, 800));
             Boss_S.countAnimAtk2++;
@@ -1112,7 +1190,7 @@ int main()
         else if (Boss_S.DeathCount == 0) {
             if (boss.getAlive() == false) {
                 b_anim_Death.x++;
-                if (b_anim_Death.x * 800 == boss_texture_Death.getSize().x)
+                if (b_anim_Death.x * 800 >= boss_texture_Death.getSize().x)
                     b_anim_Death.x = 0;
                 boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x * 800, 0, 800, 800));
                 Boss_S.countAnimDeath++;

@@ -46,6 +46,14 @@ public :
 	virtual bool getAlive() {
 		return e_isAlive;
 	}
+	virtual int heal() {
+		e_health += 30;
+		return e_health;
+	}
+	virtual int setHealth(int pv) {
+		e_health = pv;
+		return e_health;
+	}
 };
 
 class Character : public Entities {
@@ -85,6 +93,14 @@ public :
 	bool getAlive() override {
 		return c_isAlive;
 	}
+	int heal() override {
+		c_health += 30;
+		return c_health;
+	}
+	int setHealth(int pv) override {
+		c_health = pv;
+		return c_health;
+	}
 };
 
 class Enemies : public Entities {
@@ -122,6 +138,14 @@ public :
 	}
 	bool getAlive() override {
 		return E_isAlive;
+	}
+	int heal() override {
+		E_health += 30;
+		return E_health;
+	}
+	int setHealth(int pv) override {
+		E_health = pv;
+		return E_health;
 	}
 };
 
