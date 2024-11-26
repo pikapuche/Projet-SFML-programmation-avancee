@@ -977,9 +977,9 @@ int main()
 
             else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit && fireWorm.getAlive() == true) {
                 f_anim_Attack.x++;
-                if (f_anim_Attack.x / 180 >= fireWorm_texture_Attack.getSize().x)
+                if (f_anim_Attack.x * 180 == fireWorm_texture_Attack.getSize().x)
                     f_anim_Attack.x = 0;
-                fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x / 1620, 0, 180, 180));
+                fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x * 180, 0, 180, 180));
                 Worm_S.countAnimAtk++;
                 if (Worm_S.countAnimAtk == 10) {
                     Worm_S.isAttacking = false;
