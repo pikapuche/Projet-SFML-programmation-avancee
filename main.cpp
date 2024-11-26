@@ -595,46 +595,44 @@ int main()
         //////////////////////////////////////////////////////////////////////////////////////
         // Worm
         if (!Worm_S.isHit && !Worm_S.isAttacking && fireWorm.getAlive() == true) {
+            f_anim.x--;
+            if (f_anim.x * (-180) < fireWorm_texture.getSize().x == 0) {
+                f_anim.x = 0;
+            }
+            fireWorm_sprite.setTextureRect(sf::IntRect(f_anim.x * (-180), 0, 180, 180));
             Worm_S.countAnimAtk = 0;
             Worm_S.countAnimHit = 0;
             Worm_S.countAnimDeath = 0;
-            f_anim.x--;
-            if (f_anim.x * (-180) <= fireWorm_texture.getSize().x <= 0)
-                f_anim.x = 0;
-            fireWorm_sprite.setTextureRect(sf::IntRect(f_anim.x * (-180), 0, 180, 180));
         }
 
         //////////////////////////////////////////////////////////////////////////////////////
         // EvilWizard
         if (!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && evilWizard.getAlive() == true) {
+            e_anim.x--;
+            if (e_anim.x * (-450) < evilWizard_texture.getSize().x == 0) {
+                e_anim.x = 0;
+            }
+            evilWizard_sprite.setTextureRect(sf::IntRect(e_anim.x * -450, 0, 450, 450));
             Evil_S.countAnimAtk = 0;
             Evil_S.countAnimHeal = 0;
             Evil_S.countAnimHit = 0;
             Evil_S.countAnimDeath = 0;
-            e_anim.x++;
-            if (e_anim.x * 450 == evilWizard_texture.getSize().x)
-                e_anim.x = 0;
-
-            evilWizard_sprite.setTextureRect(sf::IntRect(e_anim.x * 450, 0, 450, 450));
         }
+
 
         //////////////////////////////////////////////////////////////////////////////////////
         // Boss
         if (!Boss_S.isAttacking && !Boss_S.isAttacking2 && !Boss_S.isHit && boss.getAlive() == true) {
+            b_anim.x--;
+            if (b_anim.x * (-800) < boss_texture.getSize().x == 0)
+                b_anim.x = 0;
+
+            boss_sprite.setTextureRect(sf::IntRect(b_anim.x * (-800), 0, 800, 800));
             Boss_S.countAnimAtk = 0;
             Boss_S.countAnimAtk2 = 0;
             Boss_S.countAnimDeath = 0;
             Boss_S.countAnimHit = 0;
-
-            b_anim.x++;
-            if (b_anim.x * 800 == boss_texture.getSize().x)
-                b_anim.x = 0;
-
-            boss_sprite.setTextureRect(sf::IntRect(b_anim.x * 800, 0, 800, 800));
         }
-
-
-
 #pragma endregion animation
 #pragma region interMenu
 
