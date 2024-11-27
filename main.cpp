@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+ï»¿#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <windows.h>
@@ -93,8 +93,8 @@ int main()
     FireWorm fireWorm;
     Boss boss;
 
-    // Création de la fenêtre
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Fenêtre SFML");
+    // Crï¿½ation de la fenï¿½tre
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Fenï¿½tre SFML");
 
 #pragma region Gestion_images
     ////////// Background //////////
@@ -106,7 +106,7 @@ int main()
         return -1; // Erreur si le fichier est introuvable
     }
     background_texture.setSmooth(true);
-    // Associer la texture à un sprite
+    // Associer la texture ï¿½ un sprite
 
     sf::Sprite sprite_background;
     sprite_background.setTexture(background_texture);
@@ -212,7 +212,7 @@ int main()
     fireWorm_sprite_Death.setTexture(fireWorm_texture_Death);
     fireWorm_sprite_Death.setPosition(925, 650);
 
-    // Sorcier de feu méchant //
+    // Sorcier de feu mï¿½chant //
     sf::Texture evilWizard_texture;
     sf::Sprite evilWizard_sprite;
     if (!evilWizard_texture.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Evil Wizard\\Evil Wizard\\Sprites\\IdleV2.png")) {
@@ -350,7 +350,7 @@ int main()
 
     sf::SoundBuffer wizardAttack;
     if (!wizardAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\wizard attack V3.wav"))
-            return -1;
+        return -1;
 
     sf::Sound soundWizardAttack;
     soundWizardAttack.setBuffer(wizardAttack);
@@ -371,8 +371,102 @@ int main()
 
 #pragma endregion Gestion_son
 
+#pragma region Menu principal
+
+    sf::Texture background_texture_Menu;
+    if (!background_texture_Menu.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\1.png")) {
+        return -1;
+    }
+    background_texture_Menu.setSmooth(true);
+
+    sf::Sprite sprite_background_Menu;
+    sprite_background_Menu.setTexture(background_texture_Menu);
+    sprite_background_Menu.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
+    //
+    sf::Texture background_texture_Menu2;
+    if (!background_texture_Menu2.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\2.png")) {
+        return -1;
+    }
+    background_texture_Menu2.setSmooth(true);
+
+    sf::Sprite sprite_background_Menu2;
+    sprite_background_Menu2.setTexture(background_texture_Menu2);
+    sprite_background_Menu2.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
+    //
+    sf::Texture background_texture_Menu3;
+    if (!background_texture_Menu3.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\3.png")) {
+        return -1;
+    }
+    background_texture_Menu3.setSmooth(true);
+
+    sf::Sprite sprite_background_Menu3;
+    sprite_background_Menu3.setTexture(background_texture_Menu3);
+    sprite_background_Menu3.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
+    //
+    sf::Texture background_texture_Menu4;
+    if (!background_texture_Menu4.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\4.png")) {
+        return -1;
+    }
+    background_texture_Menu4.setSmooth(true);
+
+    sf::Sprite sprite_background_Menu4;
+    sprite_background_Menu4.setTexture(background_texture_Menu4);
+    sprite_background_Menu4.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
+    //
+    sf::Texture background_texture_Menu5;
+    if (!background_texture_Menu5.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\5.png")) {
+        return -1;
+    }
+    background_texture_Menu5.setSmooth(true);
+
+    sf::Sprite sprite_background_Menu5;
+    sprite_background_Menu5.setTexture(background_texture_Menu5);
+    sprite_background_Menu5.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
+    //
+    sf::Texture background_texture_Menu6;
+    if (!background_texture_Menu6.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\6.png")) {
+        return -1;
+    }
+    background_texture_Menu6.setSmooth(true);
+
+    sf::Sprite sprite_background_Menu6;
+    sprite_background_Menu6.setTexture(background_texture_Menu6);
+    sprite_background_Menu6.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
+    //
+    sf::Font fontMenu;
+    if (!fontMenu.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\minecraft\\minecraft.ttf"))
+    {
+        return -1;
+    }
+    sf::Text title_Menu;
+    title_Menu.setPosition(300, 200);
+    title_Menu.setFont(fontMenu);
+    title_Menu.setString("SYWAR, THE QUEST OF JAAJ");
+    title_Menu.setCharacterSize(90);
+    title_Menu.setFillColor(sf::Color::White);
+    title_Menu.setOutlineColor(sf::Color::Black);
+    title_Menu.setOutlineThickness(10.f);
+    title_Menu.setStyle(sf::Text::Bold);
+    //
+    sf::RectangleShape start(sf::Vector2f(420.0f, 226.f));
+    start.setPosition(20, 20);
+    start.setFillColor(sf::Color(255, 178, 101));
+    sf::Text start_Menu;
+    start_Menu.setPosition(300, 400);
+    start_Menu.setFont(fontMenu);
+    start_Menu.setString("START");
+    start_Menu.setCharacterSize(50);
+    start_Menu.setFillColor(sf::Color::White);
+    start_Menu.setOutlineColor(sf::Color::Black);
+    start_Menu.setOutlineThickness(8.f);
+    start_Menu.setStyle(sf::Text::Bold);
+
+
+
+#pragma endregion Menu principal
+
 #pragma region Menu
-// Mini menu 
+    // Mini menu 
     sf::RectangleShape menuBackground(sf::Vector2f(420.0f, 226.f));
     menuBackground.setPosition(20, 20);
     menuBackground.setFillColor(sf::Color(255, 178, 101));
@@ -600,14 +694,14 @@ int main()
 
 #pragma endregion Menu
 
-   
+
 
     // Boucle principale
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
-                window.close(); // Fermer la fenêtre
+                window.close(); // Fermer la fenï¿½tre
         }
 
         if (gameCount >= 5) {
@@ -635,7 +729,7 @@ int main()
             c_anim.x++;
             if (c_anim.x * 256 >= perso_texture.getSize().x) // boucle qui permet de revenir a la premiere slide de l'anim
                 c_anim.x = 0;
-            // ici, ce code permet de créer l'animation Idle du personnage
+            // ici, ce code permet de crï¿½er l'animation Idle du personnage
             perso_sprite.setTextureRect(sf::IntRect(c_anim.x * 256, 0, 256, 256));
         }
         //////////////////////////////////////////////////////////////////////////////////////
@@ -743,9 +837,9 @@ int main()
 #pragma region Gestion Entree
         if (gameCount == 1) {
             // Keyboard
-        // Sélection des membres du menu
+        // Sï¿½lection des membres du menu
         // if on fais les fleches haut et bas alors on fait pop un rectangle autour du menu atk ou autre
-        // COmpteur qui va de 1 a 3 avec a chaque fois -- dans le down et ++ dans le up ils ont pas le droit de dépasser 3 ou 1
+        // COmpteur qui va de 1 a 3 avec a chaque fois -- dans le down et ++ dans le up ils ont pas le droit de dï¿½passer 3 ou 1
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && countMenu <= 3)
             {
@@ -771,7 +865,7 @@ int main()
                 Char_S.isAttacking = true;
                 Worm_S.isHit = true;
                 wizard.attack(fireWorm);
-                //Création du rectangle de ce qui se passe
+                //Crï¿½ation du rectangle de ce qui se passe
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au fireWorm !");
                 gameCount++;
@@ -779,7 +873,7 @@ int main()
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && fireWorm.getAlive() == false) {
                 infoBoxB = true;
-                textInfoBox.setString("FireWorm est mort t'es bouché mec !");
+                textInfoBox.setString("FireWorm est mort t'es bouchï¿½ mec !");
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2 && Char_S.AttackMode && evilWizard.getAlive() == true)
             {
@@ -794,7 +888,7 @@ int main()
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && evilWizard.getAlive() == false) {
                 infoBoxB = true;
-                textInfoBox.setString("EvilWizard est mort t'es bouché mec !");
+                textInfoBox.setString("EvilWizard est mort t'es bouchï¿½ mec !");
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 3 && Char_S.AttackMode && boss.getAlive() == true)
             {
@@ -809,7 +903,7 @@ int main()
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && boss.getAlive() == false) {
                 infoBoxB = true;
-                textInfoBox.setString("??? est mort t'es bouché mec !");
+                textInfoBox.setString("??? est mort t'es bouchï¿½ mec !");
             }
             // Choix Soin
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2 && wizard.getHealth() < 500)
@@ -1018,7 +1112,7 @@ int main()
 #pragma endregion Gestion IA
 #pragma region atelier dessin
 
-        // Effacer la fenêtre
+        // Effacer la fenï¿½tre
         window.clear();
 
         // Dessiner la forme
@@ -1038,7 +1132,7 @@ int main()
             Char_S.countAnimAtk++;
             if (Char_S.countAnimAtk == 2) {
                 soundWizardAttack.play();
-            } 
+            }
             if (Char_S.countAnimAtk == 7) {
                 Char_S.isAttacking = false;
             }
@@ -1057,7 +1151,7 @@ int main()
                 soundFireWormAttack.stop();
                 soundWizardAttack.stop();
                 soundHeal.play();
-            } 
+            }
             if (Char_S.countAnimHeal == 10) {
                 Char_S.isHealing = false;
             }
@@ -1102,55 +1196,55 @@ int main()
             c_anim.x++;
             if (c_anim.x * 256 >= perso_texture.getSize().x) // boucle qui permet de revenir a la premiere slide de l'anim
                 c_anim.x = 0;
-            // ici, ce code permet de créer l'animation Idle du personnage
+            // ici, ce code permet de crï¿½er l'animation Idle du personnage
             perso_sprite.setTextureRect(sf::IntRect(c_anim.x * 256, 0, 256, 256));
             window.draw(perso_sprite);
         }///////////////////////////////////*/
 
 
 
-            ////////// Worm ///////////
+        ////////// Worm ///////////
 
-            if (!Worm_S.isHit && !Worm_S.isAttacking && !Worm_S.isHealing && fireWorm.getAlive() == true) {
-                window.draw(fireWorm_sprite);
-            }///////////////////////////////////
+        if (!Worm_S.isHit && !Worm_S.isAttacking && !Worm_S.isHealing && fireWorm.getAlive() == true) {
+            window.draw(fireWorm_sprite);
+        }///////////////////////////////////
 
-            else if (!Worm_S.isHit && !Worm_S.isAttacking && Worm_S.isHealing && fireWorm.getAlive() == true) {
-                fireWorm_sprite.setColor(sf::Color(0, 255, 0));
-            }///////////////////////////////////
+        else if (!Worm_S.isHit && !Worm_S.isAttacking && Worm_S.isHealing && fireWorm.getAlive() == true) {
+            fireWorm_sprite.setColor(sf::Color(0, 255, 0));
+        }///////////////////////////////////
 
 
-            else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit && fireWorm.getAlive() == true) {
-                f_anim_Attack.x++;
-                if (f_anim_Attack.x * 180 >= fireWorm_texture_Attack.getSize().x)
-                    f_anim_Attack.x = 0;
-                fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x * 180, 0, 180, 180));
-                Worm_S.countAnimAtk++;
-                if (Worm_S.countAnimAtk == 2) {
-                    soundWizardAttack.stop();
-                    soundFireWormAttack.play();
-                } 
-                if (Worm_S.countAnimAtk == 10) {
-                    Worm_S.isAttacking = false;
-                }
-                window.draw(fireWorm_sprite_Attack);
-            }///////////////////////////////////
+        else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit && fireWorm.getAlive() == true) {
+            f_anim_Attack.x++;
+            if (f_anim_Attack.x * 180 >= fireWorm_texture_Attack.getSize().x)
+                f_anim_Attack.x = 0;
+            fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x * 180, 0, 180, 180));
+            Worm_S.countAnimAtk++;
+            if (Worm_S.countAnimAtk == 2) {
+                soundWizardAttack.stop();
+                soundFireWormAttack.play();
+            }
+            if (Worm_S.countAnimAtk == 10) {
+                Worm_S.isAttacking = false;
+            }
+            window.draw(fireWorm_sprite_Attack);
+        }///////////////////////////////////
 
-            else if (Worm_S.isHit && !Char_S.isHealing && fireWorm.getAlive() == true) {
+        else if (Worm_S.isHit && !Char_S.isHealing && fireWorm.getAlive() == true) {
 
-                f_anim_Hit.x++;
-                if (f_anim_Hit.x * 180 >= fireWorm_texture_Hit.getSize().x)
-                    f_anim_Hit.x = 0;
-                fireWorm_sprite_Hit.setTextureRect(sf::IntRect(f_anim_Hit.x * 180, 0, 180, 180));
-                fireWorm_sprite_Hit.setColor(sf::Color(255, 0, 0));
-                Worm_S.countAnimHit++;
-                if (Worm_S.countAnimHit == 4) {
-                    Worm_S.isHit = false;
-                }
-                window.draw(fireWorm_sprite_Hit);
-            }///////////////////////////////////
-            else if (Worm_S.DeathCount == 0) {
-                if (fireWorm.getAlive() == false) {
+            f_anim_Hit.x++;
+            if (f_anim_Hit.x * 180 >= fireWorm_texture_Hit.getSize().x)
+                f_anim_Hit.x = 0;
+            fireWorm_sprite_Hit.setTextureRect(sf::IntRect(f_anim_Hit.x * 180, 0, 180, 180));
+            fireWorm_sprite_Hit.setColor(sf::Color(255, 0, 0));
+            Worm_S.countAnimHit++;
+            if (Worm_S.countAnimHit == 4) {
+                Worm_S.isHit = false;
+            }
+            window.draw(fireWorm_sprite_Hit);
+        }///////////////////////////////////
+        else if (Worm_S.DeathCount == 0) {
+            if (fireWorm.getAlive() == false) {
                 f_anim_Death.x++;
                 if (f_anim_Death.x * 180 >= fireWorm_texture_Death.getSize().x)
                     f_anim_Death.x = 0;
@@ -1162,10 +1256,10 @@ int main()
                 }
                 window.draw(fireWorm_sprite_Death);
             }
-            }///////////////////////////////////
+        }///////////////////////////////////
 
 
-        ////////// Evil Wizard ///////////
+    ////////// Evil Wizard ///////////
 
         if (!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && evilWizard.getAlive() == true) {
             window.draw(evilWizard_sprite);
@@ -1192,7 +1286,7 @@ int main()
                 soundWizardAttack.stop();
                 soundFireWormAttack.stop();
                 soundHeal.play();
-            } 
+            }
             if (Evil_S.countAnimHeal == 9) {
                 Evil_S.isHealing = false;
             }
