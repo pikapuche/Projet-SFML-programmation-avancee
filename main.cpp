@@ -1115,6 +1115,18 @@ int main()
         // Effacer la fen�tre
         window.clear();
 
+        if (gameCount == 0) {
+            window.draw(sprite_background_Menu);
+            window.draw(sprite_background_Menu2);
+            window.draw(sprite_background_Menu3);
+            window.draw(sprite_background_Menu4);
+            window.draw(sprite_background_Menu5);
+            window.draw(sprite_background_Menu6);
+
+            window.draw(start);
+            window.draw(start_Menu);
+        }
+
         // Dessiner la forme
         window.draw(sprite_background);
 
