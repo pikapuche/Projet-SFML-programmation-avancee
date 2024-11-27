@@ -15,6 +15,7 @@ int countFirstMenu = 0;
 int gameCount = 0;
 int stopMusic = 0;
 bool infoBoxB = false;
+bool menuExit = false;
 int quiSoigner = 0;
 
 #pragma region Struct
@@ -922,9 +923,10 @@ int main()
             {
                 countFirstMenu--;
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1)
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countFirstMenu == 1)
             {
                 gameCount++;
+                countMenu = 0;
             }
         }
         if (gameCount == 1) {
@@ -1158,7 +1160,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 20 points de degats ! (attack1)");
+                textInfoBox.setString("??? vous inflige 20 points de degats !");
                 gameCount++;
                 break;
 
@@ -1174,7 +1176,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 20 points de degats ! (attack2)");
+                textInfoBox.setString("??? vous inflige 20 points de degats !");
                 gameCount++;
                 break;
 
@@ -1184,7 +1186,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 20 points de degats ! (attack1)");
+                textInfoBox.setString("??? vous inflige 20 points de degats !");
                 gameCount++;
                 break;
 
@@ -1195,7 +1197,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 20 points de degats ! (attack2)");
+                textInfoBox.setString("??? vous inflige 20 points de degats !");
                 gameCount++;
                 break;
 
