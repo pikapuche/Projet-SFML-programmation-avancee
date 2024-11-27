@@ -344,6 +344,12 @@ int main()
     ////////////////////////////////
 #pragma endregion Gestion_images
 #pragma region Gestion_son
+    sf::Music menuMusic;
+    if (!menuMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\MenuWAV.wav"))
+        return -1;
+    menuMusic.setLoop(true);
+    if (gameCount == 0) menuMusic.play();
+
     sf::Music fightMusic;
     if (!fightMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\V2 120bpm.wav"))
         return -1;
