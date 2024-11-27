@@ -11,6 +11,7 @@
 using namespace std;
 
 int countMenu = 0;
+int countFirstMenu = 0;
 int gameCount = 0;
 bool infoBoxB = false;
 int quiSoigner = 0;
@@ -440,20 +441,21 @@ int main()
         return -1;
     }
     sf::Text title_Menu;
-    title_Menu.setPosition(230, 200);
+    title_Menu.setPosition(160, 110);
     title_Menu.setFont(fontMenu);
     title_Menu.setString("SYWAR, THE QUEST OF JAAJ");
-    title_Menu.setCharacterSize(90);
-    title_Menu.setFillColor(sf::Color::White);
+    title_Menu.setCharacterSize(100);
+    title_Menu.setFillColor(sf::Color::Cyan);
     title_Menu.setOutlineColor(sf::Color::Black);
-    title_Menu.setOutlineThickness(10.f);
+    title_Menu.setOutlineThickness(9.f);
     title_Menu.setStyle(sf::Text::Bold);
+    title_Menu.setStyle(sf::Text::Underlined);
     //
-    sf::RectangleShape start_Menuu(sf::Vector2f(250.f, 50.f));
-    start_Menuu.setPosition(300, 350);
+    sf::RectangleShape start_Menuu(sf::Vector2f(210.f, 80.f));
+    start_Menuu.setPosition(550, 340);
     start_Menuu.setFillColor(sf::Color(255, 178, 101));
     sf::Text start_Menu;
-    start_Menu.setPosition(300, 400);
+    start_Menu.setPosition(570, 350);
     start_Menu.setFont(fontMenu);
     start_Menu.setString("START");
     start_Menu.setCharacterSize(50);
@@ -461,6 +463,32 @@ int main()
     start_Menu.setOutlineColor(sf::Color::Black);
     start_Menu.setOutlineThickness(8.f);
     start_Menu.setStyle(sf::Text::Bold);
+    //
+    sf::RectangleShape settings_Menuu(sf::Vector2f(300.f, 80.f));
+    settings_Menuu.setPosition(500, 460);
+    settings_Menuu.setFillColor(sf::Color(255, 178, 101));
+    sf::Text settings_Menu;
+    settings_Menu.setPosition(520, 470);
+    settings_Menu.setFont(fontMenu);
+    settings_Menu.setString("SETTINGS");
+    settings_Menu.setCharacterSize(50);
+    settings_Menu.setFillColor(sf::Color::White);
+    settings_Menu.setOutlineColor(sf::Color::Black);
+    settings_Menu.setOutlineThickness(8.f);
+    settings_Menu.setStyle(sf::Text::Bold);
+    //
+    sf::RectangleShape quit_Menuu(sf::Vector2f(165.f, 80.f));
+    quit_Menuu.setPosition(570, 580);
+    quit_Menuu.setFillColor(sf::Color(255, 178, 101));
+    sf::Text quit_Menu;
+    quit_Menu.setPosition(590, 590);
+    quit_Menu.setFont(fontMenu);
+    quit_Menu.setString("QUIT");
+    quit_Menu.setCharacterSize(50);
+    quit_Menu.setFillColor(sf::Color::White);
+    quit_Menu.setOutlineColor(sf::Color::Black);
+    quit_Menu.setOutlineThickness(8.f);
+    quit_Menu.setStyle(sf::Text::Bold);
 
 
 
@@ -835,7 +863,57 @@ int main()
         }
 
 #pragma endregion interMenu
+#pragma region interFirstMenu
+
+        if (countFirstMenu <= 1) {
+            countFirstMenu = 1;
+        }
+        else if (countFirstMenu >= 3) {
+            countFirstMenu = 3;
+        }
+
+        if (countFirstMenu == 1) {
+            start_Menuu.setOutlineColor(sf::Color::Cyan);
+            start_Menuu.setOutlineThickness(5.f);
+        }
+        else {
+            start_Menuu.setOutlineColor(sf::Color::Transparent);
+            start_Menuu.setOutlineThickness(0);
+        }
+        if (countFirstMenu == 2) {
+            settings_Menuu.setOutlineColor(sf::Color::Cyan);
+            settings_Menuu.setOutlineThickness(5.f);
+        }
+        else {
+            settings_Menuu.setOutlineColor(sf::Color::Transparent);
+            settings_Menuu.setOutlineThickness(0);
+        }
+        if (countFirstMenu == 3) { 
+            quit_Menuu.setOutlineColor(sf::Color::Cyan);
+            quit_Menuu.setOutlineThickness(5.f);
+        }
+        else {
+            quit_Menuu.setOutlineColor(sf::Color::Transparent);
+            quit_Menuu.setOutlineThickness(0);
+        }
+
+#pragma endregion interFirstMenu
+
 #pragma region Gestion Entree
+        if (gameCount == 0) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && countFirstMenu <= 3)
+            {
+                countFirstMenu++;
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && countFirstMenu >= 1)
+            {
+                countFirstMenu--;
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1)
+            {
+                gameCount++;
+            }
+        }
         if (gameCount == 1) {
             // Keyboard
         // S�lection des membres du menu
@@ -1127,6 +1205,10 @@ int main()
             window.draw(title_Menu);
             window.draw(start_Menuu);
             window.draw(start_Menu);
+            window.draw(settings_Menuu);
+            window.draw(settings_Menu);
+            window.draw(quit_Menuu);
+            window.draw(quit_Menu);
         }
         if (gameCount >= 1) {
             // Dessiner la forme
