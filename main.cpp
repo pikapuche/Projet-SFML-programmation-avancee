@@ -11,7 +11,7 @@
 using namespace std;
 
 int countMenu = 0;
-int gameCount = 1;
+int gameCount = 0;
 bool infoBoxB = false;
 int quiSoigner = 0;
 
@@ -448,8 +448,8 @@ int main()
     title_Menu.setOutlineThickness(10.f);
     title_Menu.setStyle(sf::Text::Bold);
     //
-    sf::RectangleShape start(sf::Vector2f(420.0f, 226.f));
-    start.setPosition(20, 20);
+    sf::RectangleShape start(sf::Vector2f(100.f, 100.f));
+    start.setPosition(300, 350);
     start.setFillColor(sf::Color(255, 178, 101));
     sf::Text start_Menu;
     start_Menu.setPosition(300, 400);
