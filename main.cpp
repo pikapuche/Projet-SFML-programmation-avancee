@@ -13,6 +13,7 @@ using namespace std;
 int countMenu = 0;
 int countFirstMenu = 0;
 int gameCount = 0;
+int stopMusic = 0;
 bool infoBoxB = false;
 int quiSoigner = 0;
 
@@ -94,8 +95,8 @@ int main()
     FireWorm fireWorm;
     Boss boss;
 
-    // Cr�ation de la fen�tre
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Fen�tre SFML");
+    // Creation de la fenetre
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
     window.setFramerateLimit(8);
 
 #pragma region Gestion_images
@@ -108,7 +109,7 @@ int main()
         return -1; // Erreur si le fichier est introuvable
     }
     background_texture.setSmooth(true);
-    // Associer la texture � un sprite
+    // Associer la texture a un sprite
 
     sf::Sprite sprite_background;
     sprite_background.setTexture(background_texture);
@@ -736,7 +737,13 @@ int main()
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
-                window.close(); // Fermer la fen�tre
+                window.close(); // Fermer la fenetre
+        }
+
+        if (gameCount == 1 && stopMusic == 0) {
+            menuMusic.stop();
+            fightMusic.play();
+            stopMusic++;
         }
 
         if (gameCount >= 5) {
@@ -949,6 +956,7 @@ int main()
                 Char_S.AttackMode = false;
                 Char_S.isAttacking = true;
                 Worm_S.isHit = true;
+                Char_S.isHealing = false;
                 wizard.attack(fireWorm);
                 //Cr�ation du rectangle de ce qui se passe
                 infoBoxB = true;
@@ -962,6 +970,7 @@ int main()
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2 && Char_S.AttackMode && evilWizard.getAlive() == true)
             {
+                Char_S.isHealing = false;
                 Char_S.AttackMode = false;
                 Char_S.isAttacking = true;
                 Evil_S.isHit = true;
@@ -972,8 +981,9 @@ int main()
                 countMenu = 0;
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && evilWizard.getAlive() == false) {
+                Char_S.isHealing = false;
                 infoBoxB = true;
-                textInfoBox.setString("EvilWizard est mort t'es bouch� mec !");
+                textInfoBox.setString("EvilWizard est mort t'es bouche mec !");
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 3 && Char_S.AttackMode && boss.getAlive() == true)
             {
@@ -1021,11 +1031,9 @@ int main()
 #pragma region Gestion IA
         // FireWorm
         if (gameCount == 2 && fireWorm.getAlive() == false) {
-            if (fireWorm.getAlive() == false) {
-                Worm_S.isAttacking = false;
-                Worm_S.isHit = false;
-                gameCount++;
-            }
+            Worm_S.isAttacking = false;
+            Worm_S.isHit = false;
+            gameCount++;
         }
         if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit && fireWorm.getAlive() == true) {
             Worm_S.isHit = false;
@@ -1075,25 +1083,26 @@ int main()
                     fireWorm.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne le FireWorm de 30 PV !");
+                    cout << evilWizard.getName() << " soigne" << endl << endl;
                 }
                 else if (quiSoigner == 1 && evilWizard.getAlive() == true && evilWizard.getHealth() < 150) {
                     Evil_S.isHealing = true;
                     evilWizard.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
+                    cout << evilWizard.getName() << " soigne" << endl << endl;
                 }
                 else if (quiSoigner == 2 && boss.getAlive() == true < 425) {
                     Evil_S.isHealing = true;
                     boss.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne ??? de 30 PV !");
+                    cout << evilWizard.getName() << " soigne" << endl << endl;
                 }
                 else {
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard a rate son incantation c'est vraiment un trou de balle !");
                 }
-                cout << evilWizard.getName() << " soigne" << endl << endl;
-
                 gameCount++;
                 break;
 
@@ -1242,7 +1251,7 @@ int main()
                 window.draw(perso_sprite_Attack);
                 Sleep(25);
             }///////////////////////////////////
-            else if (Char_S.isHealing && wizard.getAlive() == true) {
+            else if (Char_S.isHealing && wizard.getAlive() == true && !Char_S.isAttacking) {
                 c_anim_Heal.x++;
                 if (c_anim_Heal.x * 256 >= perso_texture_Heal.getSize().x)
                     c_anim_Heal.x = 0;
@@ -1417,7 +1426,7 @@ int main()
                         Evil_S.isDead = false;
                         Evil_S.DeathCount++;
                     }
-                    window.draw(evilWizard_sprite_Hit);
+                    window.draw(evilWizard_sprite_Death);
                 }
             }
 
@@ -1536,7 +1545,7 @@ int main()
         }
         // Afficher le contenu
         window.display();
-    }
 #pragma endregion atelier dessin
+    }
     return 0;
 }
