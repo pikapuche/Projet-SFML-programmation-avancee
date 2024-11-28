@@ -17,6 +17,7 @@ int stopMusic = 0;
 bool infoBoxB = false;
 bool menuExit = false;
 int quiSoigner = 0;
+int countPlay = 0;
 
 #pragma region Struct
 struct CharacterStruct {
@@ -970,6 +971,7 @@ int main()
                 Char_S.isAttacking = false;
                 Char_S.isHealing = false;
                 Char_S.isHit = false;
+                Sleep(100);
             }
             // menu d'atk
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == true)
@@ -1054,8 +1056,12 @@ int main()
         // FireWorm
         if (gameCount == 2) {
             if (nowTime >= startTime + waitTime) {
-                Worm_S.readyToPlay = true;
+                countPlay++;
                 startTime = nowTime;
+            }
+            if (countPlay == 2 && gameCount == 2) {
+                Worm_S.readyToPlay = true;
+                countPlay = 0;
             }
         }
 
@@ -1079,8 +1085,12 @@ int main()
         // EvilWizard
         if (gameCount == 3) {
             if (nowTime >= startTime + waitTime) {
-                Evil_S.readyToPlay = true;
+                countPlay++;
                 startTime = nowTime;
+            }
+            if (countPlay == 2 && gameCount == 3) {
+                Evil_S.readyToPlay = true;
+                countPlay = 0;
             }
         }
         if (gameCount == 3 && evilWizard.getAlive() == false && Evil_S.readyToPlay == true) {
@@ -1183,8 +1193,12 @@ int main()
         // Boss
         if (gameCount == 4) {
             if (nowTime >= startTime + waitTime) {
-                Boss_S.readyToPlay = true;
+                countPlay++;
                 startTime = nowTime;
+            }
+            if (countPlay == 2 && gameCount == 4) {
+                Boss_S.readyToPlay = true;
+                countPlay = 0;
             }
         }
         if (gameCount == 4 && boss.getAlive() == false && Boss_S.readyToPlay == true) {
