@@ -89,12 +89,19 @@ struct BossStruct {
 
 #pragma endregion Struct
 
+sf::Clock atkTimer;
+const float atk_timer22 = 6.f;
+
 int main()
 {
     Wizard wizard;
     EvilWizard evilWizard;
     FireWorm fireWorm;
     Boss boss;
+
+    if (atkTimer.getElapsedTime().asSeconds() - atkTimer.getElapsedTime().asSeconds() == atk_timer22) {
+
+    }
 
     // Creation de la fenetre
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
@@ -761,6 +768,20 @@ int main()
             infoBox.setOutlineThickness(5.f);
         }
 
+#pragma region WinCondition
+        if (fireWorm.getAlive() == false && evilWizard.getAlive() == false && boss.getAlive() == false) {
+            sf::Text textWin;
+            textWin.setPosition(500, 500);
+            textAtk.setFont(font);
+            textAtk.setString("WIN");
+            textAtk.setCharacterSize(200);
+            textAtk.setFillColor(sf::Color::Green);
+            textAtk.setOutlineColor(sf::Color::Black);
+            textAtk.setOutlineThickness(10.f);
+            textAtk.setStyle(sf::Text::Bold);
+        }
+#pragma endregion WinCondition
+
 #pragma region animation
         //ici, on va rajouter 256px a notre image pour la faire changer et donc s'animer ;)
         // Character
@@ -934,6 +955,7 @@ int main()
         // S�lection des membres du menu
         // if on fais les fleches haut et bas alors on fait pop un rectangle autour du menu atk ou autre
         // COmpteur qui va de 1 a 3 avec a chaque fois -- dans le down et ++ dans le up ils ont pas le droit de d�passer 3 ou 1
+
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && countMenu <= 3)
             {
