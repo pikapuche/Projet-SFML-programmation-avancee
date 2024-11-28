@@ -732,30 +732,30 @@ int main()
 
 
     sf::Text textWin;
-    textWin.setPosition(760, 440);
+    textWin.setPosition(660, 130);
     textWin.setFont(font);
     textWin.setString("WIN");
-    textWin.setCharacterSize(200);
+    textWin.setCharacterSize(300);
     textWin.setFillColor(sf::Color::Green);
     textWin.setOutlineColor(sf::Color::Black);
     textWin.setOutlineThickness(10.f);
     textWin.setStyle(sf::Text::Bold);
 
     sf::Text textDefeat;
-    textDefeat.setPosition(760, 440);
+    textDefeat.setPosition(660, 130);
     textDefeat.setFont(font);
     textDefeat.setString("DEFEAT");
-    textDefeat.setCharacterSize(200);
+    textDefeat.setCharacterSize(300);
     textDefeat.setFillColor(sf::Color::Red);
     textDefeat.setOutlineColor(sf::Color::Black);
     textDefeat.setOutlineThickness(10.f);
     textDefeat.setStyle(sf::Text::Bold);
 
     sf::RectangleShape quit_End(sf::Vector2f(165.f, 80.f));
-    quit_End.setPosition(890, 700);
+    quit_End.setPosition(830, 590);
     quit_End.setFillColor(sf::Color(255, 178, 101));
     sf::Text quit_EndText;
-    quit_EndText.setPosition(910, 710);
+    quit_EndText.setPosition(850, 600);
     quit_EndText.setFont(fontMenu);
     quit_EndText.setString("QUIT");
     quit_EndText.setCharacterSize(50);
@@ -854,13 +854,6 @@ int main()
         }
 #pragma endregion animation
 #pragma region interMenu
-
-        if (countMenu <= 1) {
-            countMenu = 1;
-        }
-        else if (countMenu >= 3) {
-            countMenu = 3;
-        }
 
         if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && !Char_S.AttackMode) { // pointe sur attaque
             menuAtk.setOutlineColor(sf::Color::Cyan);
@@ -963,7 +956,6 @@ int main()
             if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 450 && sf::Mouse::getPosition().y >= 360 && sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 gameCount++;
-                countMenu = 0;
             }
         }
         if (gameCount == 1) {
@@ -1578,7 +1570,7 @@ int main()
             window.draw(textWin);
             window.draw(quit_End);
             window.draw(quit_EndText);
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 720) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 610) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
             }
@@ -1586,7 +1578,7 @@ int main()
                 quit_End.setOutlineColor(sf::Color::Transparent);
                 quit_End.setOutlineThickness(0.f);
             }
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 720 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 610 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
             }
         }
@@ -1594,7 +1586,7 @@ int main()
             window.draw(textDefeat);
             window.draw(quit_End);
             window.draw(quit_EndText);
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 720) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 610) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
             }
@@ -1602,7 +1594,7 @@ int main()
                 quit_End.setOutlineColor(sf::Color::Transparent);
                 quit_End.setOutlineThickness(0.f);
             }
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 720 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 610 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
             }
         }
