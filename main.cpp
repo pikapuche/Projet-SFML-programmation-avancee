@@ -1194,7 +1194,13 @@ int main()
 #pragma endregion Gestion Entree
 #pragma region Gestion IA
         // FireWorm
-        if (gameCount == 2) {
+        if (gameCount == 2 && fireWorm.getAlive() == false) {
+            Worm_S.isAttacking = false;
+            Worm_S.isHit = false;
+            gameCount++;
+            Worm_S.readyToPlay = false;
+        }
+        else if (gameCount == 2 && fireWorm.getAlive() == true) {
             if (nowTime >= startTime + waitTime) {
                 countPlay++;
                 startTime = nowTime;
@@ -1204,8 +1210,7 @@ int main()
                 countPlay = 0;
             }
         }
-
-        if (gameCount == 2 && fireWorm.getAlive() == false && Worm_S.readyToPlay == true) {
+        else if (gameCount == 2 && fireWorm.getAlive() == false && Worm_S.readyToPlay == true) {
             Worm_S.isAttacking = false;
             Worm_S.isHit = false;
             gameCount++;
@@ -1223,7 +1228,13 @@ int main()
         }
 
         // EvilWizard
-        if (gameCount == 3) {
+        if (gameCount == 3 && evilWizard.getAlive() == false) {
+            Evil_S.isAttacking = false;
+            Evil_S.isHit = false;
+            gameCount++;
+            Evil_S.readyToPlay = false;
+        }
+        else if (gameCount == 3) {
             if (nowTime >= startTime + waitTime) {
                 countPlay++;
                 startTime = nowTime;
@@ -1233,7 +1244,7 @@ int main()
                 countPlay = 0;
             }
         }
-        if (gameCount == 3 && evilWizard.getAlive() == false && Evil_S.readyToPlay == true) {
+        else if (gameCount == 3 && evilWizard.getAlive() == false && Evil_S.readyToPlay == true) {
             Evil_S.isAttacking = false;
             Evil_S.isHealing = false;
             Evil_S.isHit = false;
@@ -1331,7 +1342,13 @@ int main()
         }
 
         // Boss
-        if (gameCount == 4) {
+        if (gameCount == 4 && boss.getAlive() == false) {
+            Boss_S.isAttacking = false;
+            Boss_S.isHit = false;
+            gameCount++;
+            Boss_S.readyToPlay = false;
+        }
+        else if (gameCount == 4) {
             if (nowTime >= startTime + waitTime) {
                 countPlay++;
                 startTime = nowTime;
@@ -1341,7 +1358,7 @@ int main()
                 countPlay = 0;
             }
         }
-        if (gameCount == 4 && boss.getAlive() == false && Boss_S.readyToPlay == true) {
+        else if (gameCount == 4 && boss.getAlive() == false && Boss_S.readyToPlay == true) {
             Boss_S.isAttacking = false;
             Boss_S.isAttacking2 = false;
             Boss_S.isHit = false;
