@@ -1129,7 +1129,7 @@ int main()
                 Sleep(100);
             }
             // menu d'atk
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == true)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == true && gameCount == 1)
             {
                 c_anim_Attack.x = 0;
                 Char_S.AttackMode = false;
@@ -1146,9 +1146,9 @@ int main()
             }
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == false) {
                 infoBoxB = true;
-                textInfoBox.setString("FireWorm est mort t'es bouch� mec !");
+                textInfoBox.setString("FireWorm est mort !");
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == true)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == true && gameCount == 1)
             {
                 Char_S.isHealing = false;
                 Char_S.AttackMode = false;
@@ -1164,9 +1164,9 @@ int main()
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == false) {
                 Char_S.isHealing = false;
                 infoBoxB = true;
-                textInfoBox.setString("EvilWizard est mort t'es bouche mec !");
+                textInfoBox.setString("EvilWizard est mort !");
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == true)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == true && gameCount == 1)
             {
                 Char_S.AttackMode = false;
                 Char_S.isAttacking = true;
@@ -1180,10 +1180,10 @@ int main()
             }
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == false) {
                 infoBoxB = true;
-                textInfoBox.setString("??? est mort t'es bouch� mec !");
+                textInfoBox.setString("??? est mort !");
             }
             // Choix Soin
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && wizard.getHealth() < 500)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && wizard.getHealth() < 500 && gameCount == 1)
             {
                 c_anim_Heal.x = 0;
                 c_anim.x = 0;
@@ -1202,7 +1202,7 @@ int main()
                 wizard.setHealth(500);
             }
             // Choix passe ton tour
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && gameCount == 1)
             {
                 infoBoxB = true;
                 textInfoBox.setString("Vous passez un tour");
@@ -1213,6 +1213,16 @@ int main()
         }
 #pragma endregion Gestion Entree
 #pragma region Gestion IA
+        if (boss.getHealth() > 240) {
+            boss_sprite.setColor(sf::Color::Cyan);
+            boss_sprite_Attack.setColor(sf::Color::Cyan);
+            boss_sprite_Attack2.setColor(sf::Color::Cyan);
+        }
+        else {
+            boss_sprite.setColor(sf::Color::White);
+            boss_sprite_Attack.setColor(sf::Color::White);
+            boss_sprite_Attack2.setColor(sf::Color::White);
+        }
         // FireWorm
         if (gameCount == 2 && fireWorm.getAlive() == false) {
             Worm_S.isAttacking = false;
@@ -1242,7 +1252,7 @@ int main()
             fireWorm.attack(wizard);
             Char_S.isHit = true;
             infoBoxB = true;
-            textInfoBox.setString("FireWorm vous inflige 5 points de degats !");
+            textInfoBox.setString("FireWorm vous inflige 10 points de degats !");
             gameCount++;
             Worm_S.readyToPlay = false;
         }
@@ -1280,7 +1290,7 @@ int main()
                 evilWizard.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("Evil Wizard vous inflige 15 points de degats !");
+                textInfoBox.setString("Evil Wizard vous inflige 20 points de degats !");
                 gameCount++;
                 break;
 
@@ -1301,7 +1311,7 @@ int main()
                     textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
                     cout << evilWizard.getName() << " soigne" << endl << endl;
                 }
-                else if (quiSoigner == 2 && boss.getAlive() == true < 425) {
+                else if (quiSoigner == 2 && boss.getAlive() == true && boss.getHealth() < 300) {
                     Evil_S.isHealing = true;
                     boss.heal();
                     infoBoxB = true;
@@ -1310,7 +1320,7 @@ int main()
                 }
                 else {
                     infoBoxB = true;
-                    textInfoBox.setString("Evil Wizard a rate son incantation c'est vraiment un trou de balle !");
+                    textInfoBox.setString("Evil Wizard a rate son incantation !");
                 }
                 gameCount++;
                 break;
@@ -1331,7 +1341,7 @@ int main()
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
                 }
-                else if (quiSoigner == 5 && boss.getAlive() == true < 425) {
+                else if (quiSoigner == 5 && boss.getAlive() == true && boss.getHealth() < 300) {
                     Evil_S.isHealing = true;
                     boss.heal();
                     infoBoxB = true;
@@ -1339,7 +1349,7 @@ int main()
                 }
                 else {
                     infoBoxB = true;
-                    textInfoBox.setString("Evil Wizard a rate son incantation c'est vraiment un trou de balle !");
+                    textInfoBox.setString("Evil Wizard a rate son incantation !");
                 }
 
                 cout << evilWizard.getName() << " soigne" << endl << endl;
