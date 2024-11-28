@@ -1578,7 +1578,7 @@ int main()
             window.draw(textWin);
             window.draw(quit_End);
             window.draw(quit_EndText);
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 780) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 720) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
             }
@@ -1586,7 +1586,7 @@ int main()
                 quit_End.setOutlineColor(sf::Color::Transparent);
                 quit_End.setOutlineThickness(0.f);
             }
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 780 && sf::Mouse::getPosition().y >= 700 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 720 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
             }
         }
@@ -1594,7 +1594,7 @@ int main()
             window.draw(textDefeat);
             window.draw(quit_End);
             window.draw(quit_EndText);
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 780) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 720) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
             }
@@ -1602,7 +1602,7 @@ int main()
                 quit_End.setOutlineColor(sf::Color::Transparent);
                 quit_End.setOutlineThickness(0.f);
             }
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 780 && sf::Mouse::getPosition().y >= 700 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 720 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
             }
         }
