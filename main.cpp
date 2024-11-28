@@ -370,12 +370,16 @@ int main()
         return -1;
     menuMusic.setLoop(true);
     if (gameCount == 0) menuMusic.play();
+    menuMusic.setVolume(Settings_S.volumeMenuMusic);
+
 
     sf::Music fightMusic;
     if (!fightMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\V2 120bpm.wav"))
         return -1;
     fightMusic.setLoop(true);
     if(gameCount >= 1) fightMusic.play();
+    fightMusic.setVolume(Settings_S.volumeGameMusic);
+
 
     sf::SoundBuffer wizardAttack;
     if (!wizardAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\wizard attack V3.wav"))
@@ -383,6 +387,7 @@ int main()
 
     sf::Sound soundWizardAttack;
     soundWizardAttack.setBuffer(wizardAttack);
+    soundWizardAttack.setVolume(Settings_S.volumeGameSound);
 
     sf::SoundBuffer Heal;
     if (!Heal.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\HealWAV.wav"))
@@ -390,6 +395,8 @@ int main()
 
     sf::Sound soundHeal;
     soundHeal.setBuffer(Heal);
+    soundHeal.setVolume(Settings_S.volumeGameSound);
+
 
     sf::SoundBuffer fireWormAttack;
     if (!fireWormAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\fireWormAttackWAV.wav"))
@@ -397,6 +404,26 @@ int main()
 
     sf::Sound soundFireWormAttack;
     soundFireWormAttack.setBuffer(fireWormAttack);
+    soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
+
+    sf::SoundBuffer evilWizardAttack;
+    if (!evilWizardAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\fireWizardAttackLongWAV.wav"))
+        return -1;
+
+    sf::Sound soundEvilWizardAttack;
+    soundEvilWizardAttack.setBuffer(evilWizardAttack);
+    soundEvilWizardAttack.setVolume(Settings_S.volumeGameSound);
+    soundEvilWizardAttack.setPlayingOffset(sf::seconds(14));
+
+    sf::SoundBuffer bossAttack;
+    if (!bossAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\swooshEffectLourdWAV.wav"))
+        return -1;
+
+    sf::Sound soundBossAttack;
+    soundBossAttack.setBuffer(bossAttack);
+    soundBossAttack.setVolume(Settings_S.volumeGameSound);
+    soundBossAttack.setPlayingOffset(sf::seconds(2));
+
 
 #pragma endregion Gestion_son
 
@@ -1462,12 +1489,19 @@ int main()
                     if (Settings_S.volumeGameSound <= 0.f) Settings_S.volumeGameSound = 0.f;
                     cout << "-10 pour game sound";
                     soundWizardAttack.setVolume(Settings_S.volumeGameSound);
+                    soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
+                    soundHeal.setVolume(Settings_S.volumeGameSound);
+
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameSound == true) {
                     Settings_S.volumeGameSound += 10.f;
                     if (Settings_S.volumeGameMusic >= 100.f) Settings_S.volumeGameMusic = 100.f;
                     cout << "+10 pour game sound";
                     soundWizardAttack.setVolume(Settings_S.volumeGameSound);
+                    soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
+                    soundHeal.setVolume(Settings_S.volumeGameSound);
+                    soundEvilWizardAttack.setVolume(Settings_S.volumeGameSound);
+                    soundBossAttack.setVolume(Settings_S.volumeGameSound);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                     Settings_S.inSettings = false;
@@ -1611,6 +1645,7 @@ int main()
                     e_anim_Attack.x = 0;
                 evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x * 450, 0, 450, 450));
                 Evil_S.countAnimAtk++;
+                if(Evil_S.countAnimAtk == 1) soundEvilWizardAttack.play();
                 if (Evil_S.countAnimAtk == 9) {
                     Evil_S.isAttacking = false;
                 }
@@ -1675,6 +1710,8 @@ int main()
                     b_anim_Attack.x = 0;
                 boss_sprite_Attack.setTextureRect(sf::IntRect(b_anim_Attack.x * 800, 0, 800, 800));
                 Boss_S.countAnimAtk++;
+                if (Boss_S.countAnimAtk == 1) soundBossAttack.play();
+                //if (Boss_S.countAnimAtk == 4) soundBossAttack.play();
                 if (Boss_S.countAnimAtk == 8) {
                     Boss_S.isAttacking = false;
                 }
@@ -1698,6 +1735,8 @@ int main()
                     b_anim_Attack2.x = 0;
                 boss_sprite_Attack2.setTextureRect(sf::IntRect(b_anim_Attack2.x * 800, 0, 800, 800));
                 Boss_S.countAnimAtk2++;
+                if (Boss_S.countAnimAtk2 == 1) soundBossAttack.play();
+                if (Boss_S.countAnimAtk2 == 4) soundBossAttack.play();
                 if (Boss_S.countAnimAtk2 == 8) {
                     Boss_S.isAttacking2 = false;
                 }
