@@ -862,7 +862,7 @@ int main()
             countMenu = 3;
         }
 
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 90 && sf::Mouse::getPosition().y >= 25 && !Char_S.AttackMode) { // pointe sur attaque
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && !Char_S.AttackMode) { // pointe sur attaque
             menuAtk.setOutlineColor(sf::Color::Cyan);
             menuAtk.setOutlineThickness(5.f);
         }
@@ -870,7 +870,7 @@ int main()
             menuAtk.setOutlineColor(sf::Color::Transparent); // disparait
             menuAtk.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 165 && sf::Mouse::getPosition().y >= 100 && !Char_S.AttackMode) { // pointe sur soin
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && !Char_S.AttackMode) { // pointe sur soin
             menuHeal.setOutlineColor(sf::Color::Cyan);
             menuHeal.setOutlineThickness(5.f);
         }
@@ -878,7 +878,7 @@ int main()
             menuHeal.setOutlineColor(sf::Color::Transparent);
             menuHeal.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 240 && sf::Mouse::getPosition().y >= 175 && !Char_S.AttackMode) { // pointe sur passe tour
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && !Char_S.AttackMode) { // pointe sur passe tour
             menuSkip.setOutlineColor(sf::Color::Cyan);
             menuSkip.setOutlineThickness(5.f);
         }
@@ -887,7 +887,7 @@ int main()
             menuSkip.setOutlineThickness(0);
         }
 
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 90 && sf::Mouse::getPosition().y >= 25 && Char_S.AttackMode) { // fireworm
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && Char_S.AttackMode) { // fireworm
             menuWorm.setOutlineColor(sf::Color::Cyan);
             menuWorm.setOutlineThickness(5.f);
         }
@@ -895,7 +895,7 @@ int main()
             menuWorm.setOutlineColor(sf::Color::Transparent);
             menuWorm.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 165 && sf::Mouse::getPosition().y >= 100 && Char_S.AttackMode) { // evilWizard
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && Char_S.AttackMode) { // evilWizard
             menuEvilWizard.setOutlineColor(sf::Color::Cyan);
             menuEvilWizard.setOutlineThickness(5.f);
         }
@@ -903,7 +903,7 @@ int main()
             menuEvilWizard.setOutlineColor(sf::Color::Transparent);
             menuEvilWizard.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 240 && sf::Mouse::getPosition().y >= 175 && Char_S.AttackMode) { // boss
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && Char_S.AttackMode) { // boss
             menuBoss.setOutlineColor(sf::Color::Cyan);
             menuBoss.setOutlineThickness(5.f);
         }
@@ -915,58 +915,61 @@ int main()
 #pragma endregion interMenu
 #pragma region interFirstMenu
 
-        if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 460 && sf::Mouse::getPosition().y >= 340 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 450 && sf::Mouse::getPosition().y >= 360) {
             start_Menuu.setOutlineColor(sf::Color::Cyan);
             start_Menuu.setOutlineThickness(5.f);
-        }
-        else if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 460 && sf::Mouse::getPosition().y >= 340) {
-            start_Menuu.setOutlineColor(sf::Color::Transparent);
-            start_Menuu.setOutlineThickness(0);
-        }
-        if (sf::Mouse::getPosition().x <= 800 && sf::Mouse::getPosition().x >= 500 && sf::Mouse::getPosition().y <= 540 && sf::Mouse::getPosition().y >= 460 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            settings_Menuu.setOutlineColor(sf::Color::Cyan);
-            settings_Menuu.setOutlineThickness(5.f);
-        }
-        else if (sf::Mouse::getPosition().x <= 800 && sf::Mouse::getPosition().x >= 500 && sf::Mouse::getPosition().y <= 540 && sf::Mouse::getPosition().y >= 460) {
+            quit_Menuu.setOutlineColor(sf::Color::Transparent);
+            quit_Menuu.setOutlineThickness(0);
             settings_Menuu.setOutlineColor(sf::Color::Transparent);
             settings_Menuu.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 735 && sf::Mouse::getPosition().x >= 570 && sf::Mouse::getPosition().y <= 660 && sf::Mouse::getPosition().y >= 580 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            quit_Menuu.setOutlineColor(sf::Color::Cyan);
-            quit_Menuu.setOutlineThickness(5.f);
+        else {
+            start_Menuu.setOutlineColor(sf::Color::Transparent);
+            start_Menuu.setOutlineThickness(0);
+
         }
-        else if (sf::Mouse::getPosition().x <= 735 && sf::Mouse::getPosition().x >= 570 && sf::Mouse::getPosition().y <= 660 && sf::Mouse::getPosition().y >= 580) {
+        if (sf::Mouse::getPosition().x <= 800 && sf::Mouse::getPosition().x >= 500 && sf::Mouse::getPosition().y <= 570 && sf::Mouse::getPosition().y >= 480) {
+            settings_Menuu.setOutlineColor(sf::Color::Cyan);
+            settings_Menuu.setOutlineThickness(5.f);
+            start_Menuu.setOutlineColor(sf::Color::Transparent);
+            start_Menuu.setOutlineThickness(0);
             quit_Menuu.setOutlineColor(sf::Color::Transparent);
             quit_Menuu.setOutlineThickness(0);
+        }
+        else {
+            settings_Menuu.setOutlineColor(sf::Color::Transparent);
+            settings_Menuu.setOutlineThickness(0);
+
+
+        }
+        if (sf::Mouse::getPosition().x <= 735 && sf::Mouse::getPosition().x >= 570 && sf::Mouse::getPosition().y <= 690 && sf::Mouse::getPosition().y >= 600) {
+            quit_Menuu.setOutlineColor(sf::Color::Cyan);
+            quit_Menuu.setOutlineThickness(5.f);
+            start_Menuu.setOutlineColor(sf::Color::Transparent);
+            start_Menuu.setOutlineThickness(0);
+            settings_Menuu.setOutlineColor(sf::Color::Transparent);
+            settings_Menuu.setOutlineThickness(0);
+        }
+        else {
+            quit_Menuu.setOutlineColor(sf::Color::Transparent);
+            quit_Menuu.setOutlineThickness(0);
+
         }
 
 #pragma endregion interFirstMenu
 
 #pragma region Gestion Entree
         if (gameCount == 0) {
-            if (sf::Mouse::getPosition().x <= 735 && sf::Mouse::getPosition().x >= 570 && sf::Mouse::getPosition().y <= 660 && sf::Mouse::getPosition().y >= 580 && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 450 && sf::Mouse::getPosition().y >= 360 && sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 gameCount++;
                 countMenu = 0;
             }
         }
         if (gameCount == 1) {
-            // Keyboard
-        // S�lection des membres du menu
-        // if on fais les fleches haut et bas alors on fait pop un rectangle autour du menu atk ou autre
-        // COmpteur qui va de 1 a 3 avec a chaque fois -- dans le down et ++ dans le up ils ont pas le droit de d�passer 3 ou 1
 
-
-            /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && countMenu <= 3)
-            {
-                countMenu++;
-            }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && countMenu >= 1)
-            {
-                countMenu--;
-            }*/
             // Choix attaque
-            if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 90 && sf::Mouse::getPosition().y >= 25 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !Char_S.AttackMode)
+            if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !Char_S.AttackMode)
             {
                 Char_S.AttackMode = true;
                 Char_S.isAttacking = false;
@@ -974,7 +977,7 @@ int main()
                 Char_S.isHit = false;
             }
             // menu d'atk
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 90 && sf::Mouse::getPosition().y >= 25 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == true)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == true)
             {
                 c_anim_Attack.x = 0;
                 Char_S.AttackMode = false;
@@ -988,11 +991,11 @@ int main()
                 gameCount++;
                 countMenu = 0;
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 90 && sf::Mouse::getPosition().y >= 25 && sf::Mouse::isButtonPressed(sf::Mouse::Left)  && Char_S.AttackMode && fireWorm.getAlive() == false) {
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left)  && Char_S.AttackMode && fireWorm.getAlive() == false) {
                 infoBoxB = true;
                 textInfoBox.setString("FireWorm est mort t'es bouch� mec !");
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 165 && sf::Mouse::getPosition().y >= 65 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == true)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == true)
             {
                 Char_S.isHealing = false;
                 Char_S.AttackMode = false;
@@ -1004,12 +1007,12 @@ int main()
                 gameCount++;
                 countMenu = 0;
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 165 && sf::Mouse::getPosition().y >= 65 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == false) {
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == false) {
                 Char_S.isHealing = false;
                 infoBoxB = true;
                 textInfoBox.setString("EvilWizard est mort t'es bouche mec !");
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 240 && sf::Mouse::getPosition().y >= 175 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == true)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == true)
             {
                 Char_S.AttackMode = false;
                 Char_S.isAttacking = true;
@@ -1020,12 +1023,12 @@ int main()
                 gameCount++;
                 countMenu = 0;
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 240 && sf::Mouse::getPosition().y >= 175 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == false) {
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == false) {
                 infoBoxB = true;
                 textInfoBox.setString("??? est mort t'es bouch� mec !");
             }
             // Choix Soin
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 165 && sf::Mouse::getPosition().y >= 65 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && wizard.getHealth() < 500)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && wizard.getHealth() < 500)
             {
                 c_anim_Heal.x = 0;
                 c_anim.x = 0;
@@ -1036,14 +1039,14 @@ int main()
                 gameCount++;
                 countMenu = 0;
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 165 && sf::Mouse::getPosition().y >= 65 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && wizard.getHealth() >= 500)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && wizard.getHealth() >= 500)
             {
                 infoBoxB = true;
                 textInfoBox.setString("T'es full Vie mec");
                 wizard.setHealth(500);
             }
             // Choix passe ton tour
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 240 && sf::Mouse::getPosition().y >= 175 && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 infoBoxB = true;
                 textInfoBox.setString("Vous passez un tour");
