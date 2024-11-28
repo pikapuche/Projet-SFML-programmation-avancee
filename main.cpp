@@ -18,7 +18,7 @@ bool infoBoxB = false;
 bool menuExit = false;
 int quiSoigner = 0;
 int countPlay = 0;
-
+int fin = 0;
 
 #pragma region Struct
 struct CharacterStruct {
@@ -103,6 +103,9 @@ struct Settings {
 
     bool inGameSound = false;
     float volumeGameSound = 25.f;
+
+    bool loseMusic = false;
+    bool winMusic = false;
 
 }; Settings Settings_S;
 
@@ -372,6 +375,19 @@ int main()
     if (gameCount == 0) menuMusic.play();
     menuMusic.setVolume(Settings_S.volumeMenuMusic);
 
+    sf::Music endWinMusic;
+    if (!endWinMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\FinalFantasyWinWAV.wav"))
+        return -1;
+    endWinMusic.setVolume(Settings_S.volumeMenuMusic);
+    if (Settings_S.winMusic == true) endWinMusic.play();
+    endWinMusic.setLoop(true);
+
+    sf::Music endLoseMusic;
+    if (!endLoseMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\endLoseMusicWAV.wav"))
+        return -1;
+    endLoseMusic.setVolume(Settings_S.volumeMenuMusic);
+    if (Settings_S.loseMusic == true) endLoseMusic.play();
+    endLoseMusic.setLoop(true);
 
     sf::Music fightMusic;
     if (!fightMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\V2 120bpm.wav"))
@@ -895,6 +911,10 @@ int main()
             fightMusic.play();
             stopMusic++;
         }
+        if (Settings_S.winMusic == true && fin == 1) endWinMusic.play();
+            
+        if (Settings_S.loseMusic == true && fin == 1) endLoseMusic.play();
+
 
         if (gameCount >= 5) {
             gameCount = 1;
@@ -1252,7 +1272,7 @@ int main()
             Evil_S.readyToPlay = false;
         }
         if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && evilWizard.getAlive() == true && Evil_S.readyToPlay == true) {
-            int action = rand() % 4;
+            int action = rand() % 3;
             switch (action) {
             case 0:
                 Evil_S.isHit = false;
@@ -1260,21 +1280,12 @@ int main()
                 evilWizard.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("Evil Wizard vous inflige 8 points de degats !");
+                textInfoBox.setString("Evil Wizard vous inflige 15 points de degats !");
                 gameCount++;
                 break;
 
             case 1:
-                Evil_S.isHit = false;
-                Evil_S.isAttacking = true;
-                evilWizard.attack(wizard);
-                Char_S.isHit = true;
-                infoBoxB = true;
-                textInfoBox.setString("Evil Wizard vous inflige 8 points de degats !");
-                gameCount++;
-                break;
-
-            case 2:
+                quiSoigner = 0;
                 quiSoigner = rand() % 3;
                 if (quiSoigner == 0 && fireWorm.getAlive() == true && fireWorm.getHealth() < 75) {
                     Evil_S.isHealing = true;
@@ -1304,7 +1315,8 @@ int main()
                 gameCount++;
                 break;
 
-            case 3:
+            case 2:
+                quiSoigner = 0;
                 quiSoigner = rand() % 3;
                 quiSoigner += 3;
                 if (quiSoigner == 3 && fireWorm.getAlive() == true && fireWorm.getHealth() < 75) {
@@ -1374,7 +1386,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 15 points de degats !");
+                textInfoBox.setString("??? vous inflige 35 points de degats !");
                 gameCount++;
                 break;
 
@@ -1390,7 +1402,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 15 points de degats !");
+                textInfoBox.setString("??? vous inflige 35 points de degats !");
                 gameCount++;
                 break;
 
@@ -1400,7 +1412,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 15 points de degats !");
+                textInfoBox.setString("??? vous inflige 35 points de degats !");
                 gameCount++;
                 break;
 
@@ -1411,7 +1423,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 15 points de degats !");
+                textInfoBox.setString("??? vous inflige 35 points de degats !");
                 gameCount++;
                 break;
 
@@ -1843,6 +1855,19 @@ int main()
             window.draw(textWin);
             window.draw(quit_End);
             window.draw(quit_EndText);
+            fightMusic.stop();
+            Settings_S.winMusic = true;
+            if (Settings_S.winMusic == true) {
+                fin++;
+                if (nowTime >= startTime + waitTime) {
+                    countPlay++;
+                    startTime = nowTime;
+                }
+                if (countPlay == 4) {
+                    endWinMusic.setPlayingOffset(sf::seconds(4.4));
+                    countPlay = 0;
+                }
+            }
             if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
@@ -1859,6 +1884,11 @@ int main()
             window.draw(textDefeat);
             window.draw(quit_End);
             window.draw(quit_EndText);
+            fightMusic.stop();
+            Settings_S.loseMusic = true;
+            if (Settings_S.loseMusic == true) {
+                fin++;
+            }
             if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
