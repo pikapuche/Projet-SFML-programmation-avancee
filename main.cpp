@@ -1077,7 +1077,7 @@ int main()
             fireWorm.attack(wizard);
             Char_S.isHit = true;
             infoBoxB = true;
-            textInfoBox.setString("FireWorm vous inflige 8 points de degats !");
+            textInfoBox.setString("FireWorm vous inflige 5 points de degats !");
             gameCount++;
             Worm_S.readyToPlay = false;
         }
@@ -1109,7 +1109,7 @@ int main()
                 evilWizard.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("Evil Wizard vous inflige 12 points de degats !");
+                textInfoBox.setString("Evil Wizard vous inflige 8 points de degats !");
                 gameCount++;
                 break;
 
@@ -1119,7 +1119,7 @@ int main()
                 evilWizard.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("Evil Wizard vous inflige 12 points de degats !");
+                textInfoBox.setString("Evil Wizard vous inflige 8 points de degats !");
                 gameCount++;
                 break;
 
@@ -1217,7 +1217,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 20 points de degats !");
+                textInfoBox.setString("??? vous inflige 15 points de degats !");
                 gameCount++;
                 break;
 
@@ -1233,7 +1233,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 20 points de degats !");
+                textInfoBox.setString("??? vous inflige 15 points de degats !");
                 gameCount++;
                 break;
 
@@ -1243,7 +1243,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 20 points de degats !");
+                textInfoBox.setString("??? vous inflige 15 points de degats !");
                 gameCount++;
                 break;
 
@@ -1254,7 +1254,7 @@ int main()
                 boss.attack(wizard);
                 Char_S.isHit = true;
                 infoBoxB = true;
-                textInfoBox.setString("??? vous inflige 20 points de degats !");
+                textInfoBox.setString("??? vous inflige 15 points de degats !");
                 gameCount++;
                 break;
 
