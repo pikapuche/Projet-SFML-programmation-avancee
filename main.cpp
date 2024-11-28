@@ -96,13 +96,13 @@ struct BossStruct {
 struct Settings {
     bool inSettings = false;
     bool inMenuMusic = false;
-    float volumeMenuMusic = 100.f;
+    float volumeMenuMusic = 25.f;
 
     bool inGameMusic = false;
-    float volumeGameMusic = 100.f;
+    float volumeGameMusic = 25.f;
 
     bool inGameSound = false;
-    float volumeGameSound = 100.f;
+    float volumeGameSound = 25.f;
 
 }; Settings Settings_S;
 
@@ -1034,19 +1034,19 @@ int main()
             quit_Menuu.setOutlineThickness(0);
 
         }
-        if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 390 && sf::Mouse::getPosition().y >= 340 && Settings_S.inSettings == true) {
+        if (sf::Mouse::getPosition().x <= 600 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 430 && sf::Mouse::getPosition().y >= 380 && Settings_S.inSettings == true) {
             settings_menu_music.setFillColor(sf::Color::Cyan);
         }
         else {
             settings_menu_music.setFillColor(sf::Color::White);
         }
-        if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 590 && sf::Mouse::getPosition().y >= 540 && Settings_S.inSettings == true) {
+        if (sf::Mouse::getPosition().x <= 600 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 630 && sf::Mouse::getPosition().y >= 580 && Settings_S.inSettings == true) {
             settings_game_music.setFillColor(sf::Color::Cyan);
         }
         else {
             settings_game_music.setFillColor(sf::Color::White);
         }
-        if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 790 && sf::Mouse::getPosition().y >= 740 && Settings_S.inSettings == true) {
+        if (sf::Mouse::getPosition().x <= 870 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 830 && sf::Mouse::getPosition().y >= 780 && Settings_S.inSettings == true) {
             settings_game_sound.setFillColor(sf::Color::Cyan);
         }
         else {
@@ -1057,30 +1057,15 @@ int main()
 
 #pragma region Gestion Entree
         if (gameCount == 0) {
-            if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 450 && sf::Mouse::getPosition().y >= 360 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inMenuMusic == false)
+            if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 450 && sf::Mouse::getPosition().y >= 360 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == false)
             {
                 gameCount++;
             }
-            else if (sf::Mouse::getPosition().x <= 800 && sf::Mouse::getPosition().x >= 500 && sf::Mouse::getPosition().y <= 570 && sf::Mouse::getPosition().y >= 480 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inMenuMusic == false)
+            else if (sf::Mouse::getPosition().x <= 800 && sf::Mouse::getPosition().x >= 500 && sf::Mouse::getPosition().y <= 570 && sf::Mouse::getPosition().y >= 480 && sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 Settings_S.inSettings = true;
-                if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 390 && sf::Mouse::getPosition().y >= 340 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    Settings_S.inMenuMusic = true;
-                    Settings_S.inGameMusic = false;
-                    Settings_S.inGameSound = false;
-                }
-                else if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 590 && sf::Mouse::getPosition().y >= 540 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    Settings_S.inGameMusic = true;
-                    Settings_S.inMenuMusic = false;
-                    Settings_S.inGameSound = false;
-                }
-                else if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 790 && sf::Mouse::getPosition().y >= 740 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    Settings_S.inGameSound = true;
-                    Settings_S.inMenuMusic = false;
-                    Settings_S.inGameMusic = false;
-                }
             }
-            else if (sf::Mouse::getPosition().x <= 735 && sf::Mouse::getPosition().x >= 570 && sf::Mouse::getPosition().y <= 690 && sf::Mouse::getPosition().y >= 600 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inMenuMusic == false)
+            else if (sf::Mouse::getPosition().x <= 735 && sf::Mouse::getPosition().x >= 570 && sf::Mouse::getPosition().y <= 690 && sf::Mouse::getPosition().y >= 600 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == false)
             {
                 window.close();
             }
@@ -1112,7 +1097,7 @@ int main()
                 countPlay = 0;
                 startTime = nowTime;
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left)  && Char_S.AttackMode && fireWorm.getAlive() == false) {
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == false) {
                 infoBoxB = true;
                 textInfoBox.setString("FireWorm est mort t'es bouch� mec !");
             }
@@ -1427,37 +1412,65 @@ int main()
                 text_game_music.setString(Volume_fightMusic);
                 window.draw(text_game_music);
 
-
+                string Volume_gameSound(to_string(Settings_S.volumeGameSound));
+                text_game_sound.setString(Volume_gameSound);
                 window.draw(text_game_sound);
+
+                if (sf::Mouse::getPosition().x <= 600 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 430 && sf::Mouse::getPosition().y >= 380 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == true) {
+                    Settings_S.inMenuMusic = true;
+                    Settings_S.inGameMusic = false;
+                    Settings_S.inGameSound = false;
+                }
+                else if (sf::Mouse::getPosition().x <= 600 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 630 && sf::Mouse::getPosition().y >= 580 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == true) {
+                    Settings_S.inGameMusic = true;
+                    Settings_S.inMenuMusic = false;
+                    Settings_S.inGameSound = false;
+                }
+                else if (sf::Mouse::getPosition().x <= 870 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 830 && sf::Mouse::getPosition().y >= 780 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == true) {
+                    Settings_S.inGameSound = true;
+                    Settings_S.inMenuMusic = false;
+                    Settings_S.inGameMusic = false;
+                }
 
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inMenuMusic == true) {
                     Settings_S.volumeMenuMusic -= 10.f;
+                    if (Settings_S.volumeMenuMusic <= 0.f) Settings_S.volumeMenuMusic = 0.f;
+                    cout << "-10 pour menu musique";
                     menuMusic.setVolume(Settings_S.volumeMenuMusic);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inMenuMusic == true) {
                     Settings_S.volumeMenuMusic += 10.f;
+                    if (Settings_S.volumeMenuMusic >= 100.f) Settings_S.volumeMenuMusic = 100.f;
+                    cout << "+10 pour menu musique";
                     menuMusic.setVolume(Settings_S.volumeMenuMusic);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inGameMusic == true) {
                     Settings_S.volumeGameMusic -= 10.f;
+                    if (Settings_S.volumeGameMusic <= 0.f) Settings_S.volumeGameMusic = 0.f;
+                    cout << "-10 pour game musique";
                     fightMusic.setVolume(Settings_S.volumeGameMusic);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameMusic == true) {
                     Settings_S.volumeGameMusic += 10.f;
+                    if (Settings_S.volumeGameMusic >= 100.f) Settings_S.volumeGameMusic = 100.f;
+                    cout << "+10 pour game musique";
                     fightMusic.setVolume(Settings_S.volumeGameMusic);
- 
+
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inGameSound == true) {
                     Settings_S.volumeGameSound -= 10.f;
+                    if (Settings_S.volumeGameSound <= 0.f) Settings_S.volumeGameSound = 0.f;
+                    cout << "-10 pour game sound";
                     soundWizardAttack.setVolume(Settings_S.volumeGameSound);
-                    string Volume_gameSound(to_string(Settings_S.volumeGameSound));
-                    text_game_sound.setString(Volume_gameSound);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameSound == true) {
                     Settings_S.volumeGameSound += 10.f;
+                    if (Settings_S.volumeGameMusic >= 100.f) Settings_S.volumeGameMusic = 100.f;
+                    cout << "+10 pour game sound";
                     soundWizardAttack.setVolume(Settings_S.volumeGameSound);
-                    string Volume_gameSound(to_string(Settings_S.volumeGameSound));
-                    text_game_sound.setString(Volume_gameSound);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    Settings_S.inSettings = false;
                 }
             }
         }
@@ -1530,21 +1543,6 @@ int main()
                     window.draw(perso_sprite_Death);
                 }
             }///////////////////////////////////
-
-            /*else if (!Char_S.isAttacking && !Char_S.isHealing && Char_S.isHit && wizard.getAlive() == true && (Worm_S.isAttacking || Evil_S.isAttacking || Boss_S.isAttacking || Boss_S.isAttacking2)) {
-                Char_S.countAnimAtk = 0;
-                Char_S.countAnimHeal = 0;
-                Char_S.countAnimHit = 0;
-                Char_S.countAnimDeath = 0;
-                c_anim.x++;
-                if (c_anim.x * 256 >= perso_texture.getSize().x) // boucle qui permet de revenir a la premiere slide de l'anim
-                    c_anim.x = 0;
-                // ici, ce code permet de cr�er l'animation Idle du personnage
-                perso_sprite.setTextureRect(sf::IntRect(c_anim.x * 256, 0, 256, 256));
-                window.draw(perso_sprite);
-            }///////////////////////////////////*/
-
-
 
             ////////// Worm ///////////
 
