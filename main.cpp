@@ -742,7 +742,7 @@ int main()
     textWin.setStyle(sf::Text::Bold);
 
     sf::Text textDefeat;
-    textDefeat.setPosition(660, 130);
+    textDefeat.setPosition(360, 130);
     textDefeat.setFont(font);
     textDefeat.setString("DEFEAT");
     textDefeat.setCharacterSize(300);
@@ -1269,7 +1269,6 @@ int main()
                 }
                 // faut vraiment mettre un timeur pour permettre de faire les tours moins rapidement;
                 window.draw(perso_sprite_Attack);
-                Sleep(25);
             }///////////////////////////////////
             else if (Char_S.isHealing && wizard.getAlive() == true && !Char_S.isAttacking) {
                 c_anim_Heal.x++;
@@ -1287,7 +1286,6 @@ int main()
                     Char_S.isHealing = false;
                 }
                 window.draw(perso_sprite_Heal);
-                Sleep(25);
             }///////////////////////////////////
             else if (Char_S.isHit && !Char_S.isAttacking && !Char_S.isHealing && wizard.getAlive() == true) {
                 c_anim_Hit.x++;
@@ -1300,7 +1298,6 @@ int main()
                     Char_S.isHit = false;
                 }
                 window.draw(perso_sprite_Hit);
-                Sleep(25);
             }///////////////////////////////////
             else if (Char_S.countAnimDeath == 0) {
                 if (wizard.getAlive() == false && !Worm_S.isAttacking && !Evil_S.isAttacking && !Boss_S.isAttacking) {
@@ -1314,7 +1311,6 @@ int main()
                         Char_S.printBody = true;
                     }
                     window.draw(perso_sprite_Death);
-                    Sleep(25);
                 }
             }///////////////////////////////////
 
@@ -1510,7 +1506,7 @@ int main()
             }
 #pragma endregion animation qui marche la ptn de ta soeur
 
-            if (fireWorm.getAlive() == true || evilWizard.getAlive() == true || boss.getAlive() == true) {
+            if ((fireWorm.getAlive() == true || evilWizard.getAlive() == true || boss.getAlive() == true) && wizard.getAlive() == true) {
                 if (gameCount == 1 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
                     window.draw(menuBackground);
                     window.draw(menuAtk);
@@ -1570,7 +1566,7 @@ int main()
             window.draw(textWin);
             window.draw(quit_End);
             window.draw(quit_EndText);
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 610) {
+            if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
             }
@@ -1578,7 +1574,7 @@ int main()
                 quit_End.setOutlineColor(sf::Color::Transparent);
                 quit_End.setOutlineThickness(0.f);
             }
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 610 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
             }
         }
@@ -1586,7 +1582,7 @@ int main()
             window.draw(textDefeat);
             window.draw(quit_End);
             window.draw(quit_EndText);
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 610) {
+            if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
             }
@@ -1594,7 +1590,7 @@ int main()
                 quit_End.setOutlineColor(sf::Color::Transparent);
                 quit_End.setOutlineThickness(0.f);
             }
-            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 810 && sf::Mouse::getPosition().y >= 610 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
             }
         }
