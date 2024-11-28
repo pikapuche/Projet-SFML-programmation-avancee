@@ -93,9 +93,6 @@ struct BossStruct {
 
 #pragma endregion Struct
 
-sf::Clock atkTimer;
-const float atk_timer22 = 6.f;
-
 int main()
 {
     Wizard wizard;
@@ -773,7 +770,7 @@ int main()
 
 
     auto startTime = chrono::steady_clock::now();
-    auto waitTime = chrono::seconds(1);
+    auto waitTime = chrono::seconds(2);
     // Boucle principale
     while (window.isOpen()) {
         auto nowTime = chrono::steady_clock::now();
