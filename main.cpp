@@ -712,7 +712,7 @@ int main()
     UI_Boss_PV2.setOutlineThickness(3.5f);
     UI_Boss_PV2.setStyle(sf::Text::Bold);
 #pragma endregion UI des ennemies
-
+#pragma region autre menu
     sf::RectangleShape infoBox(sf::Vector2f(700.f, 180.f));
     infoBox.setPosition(1100, 35);
     infoBox.setFillColor(sf::Color::Black);
@@ -763,6 +763,8 @@ int main()
     quit_EndText.setOutlineColor(sf::Color::Black);
     quit_EndText.setOutlineThickness(8.f);
     quit_EndText.setStyle(sf::Text::Bold);
+#pragma endregion autre menu
+
 #pragma endregion Menu
 
 
@@ -979,7 +981,7 @@ int main()
                 countMenu--;
             }
             // Choix attaque
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && !Char_S.AttackMode)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 90 && sf::Mouse::getPosition().y >= 25 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !Char_S.AttackMode)
             {
                 Char_S.AttackMode = true;
                 Char_S.isAttacking = false;
@@ -987,7 +989,7 @@ int main()
                 Char_S.isHit = false;
             }
             // menu d'atk
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 1 && Char_S.AttackMode && fireWorm.getAlive() == true)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 90 && sf::Mouse::getPosition().y >= 25 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == true)
             {
                 c_anim_Attack.x = 0;
                 Char_S.AttackMode = false;
@@ -1005,7 +1007,7 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("FireWorm est mort t'es bouch� mec !");
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && countMenu == 2 && Char_S.AttackMode && evilWizard.getAlive() == true)
+            else if ((sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 165 && sf::Mouse::getPosition().y >= 65 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == true)
             {
                 Char_S.isHealing = false;
                 Char_S.AttackMode = false;
@@ -1598,7 +1600,7 @@ int main()
             window.draw(quit_End);
             window.draw(quit_EndText);
 
-            if (sf::Mouse::getPosition().x <= 640 && sf::Mouse::getPosition().x >= 540 && sf::Mouse::getPosition().y <= 640 && sf::Mouse::getPosition().y >= 540 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 780 && sf::Mouse::getPosition().y >= 700 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
             }
         }
