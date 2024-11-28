@@ -19,6 +19,7 @@ bool menuExit = false;
 int quiSoigner = 0;
 int countPlay = 0;
 
+
 #pragma region Struct
 struct CharacterStruct {
     bool isAttacking = false;
@@ -91,6 +92,19 @@ struct BossStruct {
     int countAnimDeath = 0;
     int DeathCount = 0;
 }; BossStruct Boss_S;
+
+struct Settings {
+    bool inSettings = false;
+    bool inMenuMusic = false;
+    float volumeMenuMusic = 100.f;
+
+    bool inGameMusic = false;
+    float volumeGameMusic = 100.f;
+
+    bool inGameSound = false;
+    float volumeGameSound = 100.f;
+
+}; Settings Settings_S;
 
 #pragma endregion Struct
 
@@ -715,14 +729,14 @@ int main()
     UI_Boss_PV2.setStyle(sf::Text::Bold);
 #pragma endregion UI des ennemies
 #pragma region autre menu
-    sf::RectangleShape infoBox(sf::Vector2f(700.f, 180.f));
-    infoBox.setPosition(1100, 35);
+    sf::RectangleShape infoBox(sf::Vector2f(850.f, 180.f));
+    infoBox.setPosition(1000, 35);
     infoBox.setFillColor(sf::Color::Black);
     infoBox.setOutlineColor(sf::Color::White);
     infoBox.setOutlineThickness(5.f);
 
     sf::Text textInfoBox;
-    textInfoBox.setPosition(1220, 105);
+    textInfoBox.setPosition(1120, 105);
     textInfoBox.setFont(font);
     textInfoBox.setString("Erreur");
     textInfoBox.setCharacterSize(25);
@@ -765,13 +779,81 @@ int main()
     quit_EndText.setOutlineColor(sf::Color::Black);
     quit_EndText.setOutlineThickness(8.f);
     quit_EndText.setStyle(sf::Text::Bold);
+
+    sf::RectangleShape settings_Window(sf::Vector2f(1400.f, 800.f));
+    settings_Window.setPosition(200, 100);
+    settings_Window.setFillColor(sf::Color::Black);
+
+    sf::Text settings_music;
+    settings_music.setPosition(250, 140);
+    settings_music.setFont(fontMenu);
+    settings_music.setString("MUSIC SETTINGS");
+    settings_music.setCharacterSize(75);
+    settings_music.setFillColor(sf::Color::White);
+    settings_music.setOutlineColor(sf::Color::Black);
+    settings_music.setOutlineThickness(8.f);
+    settings_music.setStyle(sf::Text::Bold);
+
+    sf::Text settings_menu_music;
+    settings_menu_music.setPosition(250, 340);
+    settings_menu_music.setFont(fontMenu);
+    settings_menu_music.setString("MENU MUSIC : ");
+    settings_menu_music.setCharacterSize(50);
+    settings_menu_music.setFillColor(sf::Color::White);
+    settings_menu_music.setOutlineColor(sf::Color::Black);
+    settings_menu_music.setOutlineThickness(8.f);
+    settings_menu_music.setStyle(sf::Text::Bold);
+    sf::Text text_menu_music;
+    text_menu_music.setPosition(720, 340);
+    text_menu_music.setFont(fontMenu);
+    text_menu_music.setCharacterSize(50);
+    text_menu_music.setFillColor(sf::Color::White);
+    text_menu_music.setOutlineColor(sf::Color::Black);
+    text_menu_music.setOutlineThickness(8.f);
+    text_menu_music.setStyle(sf::Text::Bold);
+
+    sf::Text settings_game_music;
+    settings_game_music.setPosition(250, 540);
+    settings_game_music.setFont(fontMenu);
+    settings_game_music.setString("GAME MUSIC : ");
+    settings_game_music.setCharacterSize(50);
+    settings_game_music.setFillColor(sf::Color::White);
+    settings_game_music.setOutlineColor(sf::Color::Black);
+    settings_game_music.setOutlineThickness(8.f);
+    settings_game_music.setStyle(sf::Text::Bold);
+    sf::Text text_game_music;
+    text_game_music.setPosition(720, 540);
+    text_game_music.setFont(fontMenu);
+    text_game_music.setCharacterSize(50);
+    text_game_music.setFillColor(sf::Color::White);
+    text_game_music.setOutlineColor(sf::Color::Black);
+    text_game_music.setOutlineThickness(8.f);
+    text_game_music.setStyle(sf::Text::Bold);
+
+    sf::Text settings_game_sound;
+    settings_game_sound.setPosition(250, 740);
+    settings_game_sound.setFont(fontMenu);
+    settings_game_sound.setString("GAME SOUND EFFECT : ");
+    settings_game_sound.setCharacterSize(50);
+    settings_game_sound.setFillColor(sf::Color::White);
+    settings_game_sound.setOutlineColor(sf::Color::Black);
+    settings_game_sound.setOutlineThickness(8.f);
+    settings_game_sound.setStyle(sf::Text::Bold);
+    sf::Text text_game_sound;
+    text_game_sound.setPosition(980, 740);
+    text_game_sound.setFont(fontMenu);
+    text_game_sound.setCharacterSize(50);
+    text_game_sound.setFillColor(sf::Color::White);
+    text_game_sound.setOutlineColor(sf::Color::Black);
+    text_game_sound.setOutlineThickness(8.f);
+    text_game_sound.setStyle(sf::Text::Bold);
 #pragma endregion autre menu
 
 #pragma endregion Menu
 
 
     auto startTime = chrono::steady_clock::now();
-    auto waitTime = chrono::seconds(2);
+    auto waitTime = chrono::seconds(1);
     // Boucle principale
     while (window.isOpen()) {
         auto nowTime = chrono::steady_clock::now();
@@ -952,14 +1034,55 @@ int main()
             quit_Menuu.setOutlineThickness(0);
 
         }
+        if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 390 && sf::Mouse::getPosition().y >= 340 && Settings_S.inSettings == true) {
+            settings_menu_music.setFillColor(sf::Color::Cyan);
+        }
+        else {
+            settings_menu_music.setFillColor(sf::Color::White);
+        }
+        if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 590 && sf::Mouse::getPosition().y >= 540 && Settings_S.inSettings == true) {
+            settings_game_music.setFillColor(sf::Color::Cyan);
+        }
+        else {
+            settings_game_music.setFillColor(sf::Color::White);
+        }
+        if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 790 && sf::Mouse::getPosition().y >= 740 && Settings_S.inSettings == true) {
+            settings_game_sound.setFillColor(sf::Color::Cyan);
+        }
+        else {
+            settings_game_sound.setFillColor(sf::Color::White);
+        }
 
 #pragma endregion interFirstMenu
 
 #pragma region Gestion Entree
         if (gameCount == 0) {
-            if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 450 && sf::Mouse::getPosition().y >= 360 && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 450 && sf::Mouse::getPosition().y >= 360 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inMenuMusic == false)
             {
                 gameCount++;
+            }
+            else if (sf::Mouse::getPosition().x <= 800 && sf::Mouse::getPosition().x >= 500 && sf::Mouse::getPosition().y <= 570 && sf::Mouse::getPosition().y >= 480 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inMenuMusic == false)
+            {
+                Settings_S.inSettings = true;
+                if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 390 && sf::Mouse::getPosition().y >= 340 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                    Settings_S.inMenuMusic = true;
+                    Settings_S.inGameMusic = false;
+                    Settings_S.inGameSound = false;
+                }
+                else if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 590 && sf::Mouse::getPosition().y >= 540 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                    Settings_S.inGameMusic = true;
+                    Settings_S.inMenuMusic = false;
+                    Settings_S.inGameSound = false;
+                }
+                else if (sf::Mouse::getPosition().x <= 300 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 790 && sf::Mouse::getPosition().y >= 740 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                    Settings_S.inGameSound = true;
+                    Settings_S.inMenuMusic = false;
+                    Settings_S.inGameMusic = false;
+                }
+            }
+            else if (sf::Mouse::getPosition().x <= 735 && sf::Mouse::getPosition().x >= 570 && sf::Mouse::getPosition().y <= 690 && sf::Mouse::getPosition().y >= 600 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inMenuMusic == false)
+            {
+                window.close();
             }
         }
         if (gameCount == 1) {
@@ -986,7 +1109,8 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au fireWorm !");
                 gameCount++;
-                countMenu = 0;
+                countPlay = 0;
+                startTime = nowTime;
             }
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left)  && Char_S.AttackMode && fireWorm.getAlive() == false) {
                 infoBoxB = true;
@@ -1002,7 +1126,8 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au Evil Wizard !");
                 gameCount++;
-                countMenu = 0;
+                countPlay = 0;
+                startTime = nowTime;
             }
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == false) {
                 Char_S.isHealing = false;
@@ -1018,7 +1143,8 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au ??? !");
                 gameCount++;
-                countMenu = 0;
+                countPlay = 0;
+                startTime = nowTime;
             }
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == false) {
                 infoBoxB = true;
@@ -1034,7 +1160,8 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous vous soignez de 30 PV");
                 gameCount++;
-                countMenu = 0;
+                countPlay = 0;
+                startTime = nowTime;
             }
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && wizard.getHealth() >= 500)
             {
@@ -1048,7 +1175,8 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Vous passez un tour");
                 gameCount++;
-                countMenu = 0;
+                countPlay = 0;
+                startTime = nowTime;
             }
         }
 #pragma endregion Gestion Entree
@@ -1284,6 +1412,54 @@ int main()
             window.draw(settings_Menu);
             window.draw(quit_Menuu);
             window.draw(quit_Menu);
+            if (Settings_S.inSettings == true) {
+                window.draw(settings_Window);
+                window.draw(settings_music);
+                window.draw(settings_menu_music);
+                window.draw(settings_game_music);
+                window.draw(settings_game_sound);
+
+                string Volume_MenuMusic(to_string(Settings_S.volumeMenuMusic));
+                text_menu_music.setString(Volume_MenuMusic);
+                window.draw(text_menu_music);
+
+                string Volume_fightMusic(to_string(Settings_S.volumeGameMusic));
+                text_game_music.setString(Volume_fightMusic);
+                window.draw(text_game_music);
+
+
+                window.draw(text_game_sound);
+
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inMenuMusic == true) {
+                    Settings_S.volumeMenuMusic -= 10.f;
+                    menuMusic.setVolume(Settings_S.volumeMenuMusic);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inMenuMusic == true) {
+                    Settings_S.volumeMenuMusic += 10.f;
+                    menuMusic.setVolume(Settings_S.volumeMenuMusic);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inGameMusic == true) {
+                    Settings_S.volumeGameMusic -= 10.f;
+                    fightMusic.setVolume(Settings_S.volumeGameMusic);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameMusic == true) {
+                    Settings_S.volumeGameMusic += 10.f;
+                    fightMusic.setVolume(Settings_S.volumeGameMusic);
+ 
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inGameSound == true) {
+                    Settings_S.volumeGameSound -= 10.f;
+                    soundWizardAttack.setVolume(Settings_S.volumeGameSound);
+                    string Volume_gameSound(to_string(Settings_S.volumeGameSound));
+                    text_game_sound.setString(Volume_gameSound);
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameSound == true) {
+                    Settings_S.volumeGameSound += 10.f;
+                    soundWizardAttack.setVolume(Settings_S.volumeGameSound);
+                    string Volume_gameSound(to_string(Settings_S.volumeGameSound));
+                    text_game_sound.setString(Volume_gameSound);
+                }
+            }
         }
         if (gameCount >= 1) {
             // Dessiner la forme
