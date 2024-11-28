@@ -94,7 +94,7 @@ public :
 		return c_isAlive;
 	}
 	int heal() override {
-		c_health += 30;
+		c_health += 18;
 		return c_health;
 	}
 	int setHealth(int pv) override {

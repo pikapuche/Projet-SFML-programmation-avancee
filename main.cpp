@@ -99,10 +99,6 @@ int main()
     FireWorm fireWorm;
     Boss boss;
 
-    if (atkTimer.getElapsedTime().asSeconds() - atkTimer.getElapsedTime().asSeconds() == atk_timer22) {
-
-    }
-
     // Creation de la fenetre
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
     window.setFramerateLimit(8);
@@ -504,9 +500,6 @@ int main()
     quit_Menu.setOutlineColor(sf::Color::Black);
     quit_Menu.setOutlineThickness(8.f);
     quit_Menu.setStyle(sf::Text::Bold);
-
-
-
 #pragma endregion Menu principal
 
 #pragma region Menu
@@ -736,6 +729,40 @@ int main()
     textInfoBox.setOutlineThickness(3.5f);
     textInfoBox.setStyle(sf::Text::Bold);
 
+
+
+    sf::Text textWin;
+    textWin.setPosition(760, 440);
+    textWin.setFont(font);
+    textWin.setString("WIN");
+    textWin.setCharacterSize(200);
+    textWin.setFillColor(sf::Color::Green);
+    textWin.setOutlineColor(sf::Color::Black);
+    textWin.setOutlineThickness(10.f);
+    textWin.setStyle(sf::Text::Bold);
+
+    sf::Text textDefeat;
+    textDefeat.setPosition(760, 440);
+    textDefeat.setFont(font);
+    textDefeat.setString("DEFEAT");
+    textDefeat.setCharacterSize(200);
+    textDefeat.setFillColor(sf::Color::Red);
+    textDefeat.setOutlineColor(sf::Color::Black);
+    textDefeat.setOutlineThickness(10.f);
+    textDefeat.setStyle(sf::Text::Bold);
+
+    sf::RectangleShape quit_End(sf::Vector2f(165.f, 80.f));
+    quit_End.setPosition(890, 700);
+    quit_End.setFillColor(sf::Color(255, 178, 101));
+    sf::Text quit_EndText;
+    quit_EndText.setPosition(910, 710);
+    quit_EndText.setFont(fontMenu);
+    quit_EndText.setString("QUIT");
+    quit_EndText.setCharacterSize(50);
+    quit_EndText.setFillColor(sf::Color::White);
+    quit_EndText.setOutlineColor(sf::Color::Black);
+    quit_EndText.setOutlineThickness(8.f);
+    quit_EndText.setStyle(sf::Text::Bold);
 #pragma endregion Menu
 
 
@@ -767,20 +794,6 @@ int main()
             infoBox.setOutlineColor(sf::Color::White);
             infoBox.setOutlineThickness(5.f);
         }
-
-#pragma region WinCondition
-        if (fireWorm.getAlive() == false && evilWizard.getAlive() == false && boss.getAlive() == false) {
-            sf::Text textWin;
-            textWin.setPosition(500, 500);
-            textAtk.setFont(font);
-            textAtk.setString("WIN");
-            textAtk.setCharacterSize(200);
-            textAtk.setFillColor(sf::Color::Green);
-            textAtk.setOutlineColor(sf::Color::Black);
-            textAtk.setOutlineThickness(10.f);
-            textAtk.setStyle(sf::Text::Bold);
-        }
-#pragma endregion WinCondition
 
 #pragma region animation
         //ici, on va rajouter 256px a notre image pour la faire changer et donc s'animer ;)
@@ -1054,10 +1067,12 @@ int main()
 #pragma endregion Gestion Entree
 #pragma region Gestion IA
         // FireWorm
+
         if (gameCount == 2 && fireWorm.getAlive() == false) {
             Worm_S.isAttacking = false;
             Worm_S.isHit = false;
             gameCount++;
+            atkTimer.restart().Zero;
         }
         if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit && fireWorm.getAlive() == true) {
             Worm_S.isHit = false;
@@ -1067,7 +1082,6 @@ int main()
             infoBoxB = true;
             textInfoBox.setString("FireWorm vous inflige 8 points de degats !");
             gameCount++;
-
         }
 
         // EvilWizard
@@ -1259,7 +1273,7 @@ int main()
                 window.draw(perso_sprite);
             }///////////////////////////////////
 
-            else if (Char_S.isAttacking && wizard.getAlive() == true) {
+            else if (Char_S.isAttacking && wizard.getAlive() == true && !Boss_S.isAttacking && !Boss_S.isAttacking2) {
                 c_anim_Attack.x++;
                 if (c_anim_Attack.x * 256 >= perso_texture_Attack.getSize().x)
                     c_anim_Attack.x = 0;
@@ -1445,6 +1459,7 @@ int main()
                     if (e_anim_Death.x * 450 >= evilWizard_texture_Death.getSize().x)
                         e_anim_Death.x = 0;
                     evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x * 450, 0, 450, 450));
+                    evilWizard_sprite_Death.setColor(sf::Color(255, 0, 0));
                     Evil_S.countAnimDeath++;
                     if (Evil_S.countAnimDeath == 5) {
                         Evil_S.isDead = false;
@@ -1500,43 +1515,43 @@ int main()
                 if (boss.getAlive() == false) {
                     b_anim_Death.x++;
                     if (b_anim_Death.x * 800 >= boss_texture_Death.getSize().x)
-                        b_anim_Death.x = 0;
+                        b_anim_Death.x = 5600;
                     boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x * 800, 0, 800, 800));
+                    boss_sprite_Death.setColor(sf::Color(255, 0, 0));
                     Boss_S.countAnimDeath++;
                     if (Boss_S.countAnimDeath == 7) {
                         Boss_S.isDead = false;
                         Boss_S.DeathCount++;
                     }
-                    window.draw(boss_sprite_Attack2);
+                    window.draw(boss_sprite_Death);
                 }
             }
 #pragma endregion animation qui marche la ptn de ta soeur
 
-            //Sleep(100);
+            if (fireWorm.getAlive() == true || evilWizard.getAlive() == true || boss.getAlive() == true) {
+                if (gameCount == 1 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
+                    window.draw(menuBackground);
+                    window.draw(menuAtk);
+                    window.draw(textAtk);
+                    window.draw(menuHeal);
+                    window.draw(textHeal);
+                    window.draw(menuSkip);
+                    window.draw(textSkip);
+                }
 
-            if (gameCount == 1 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
-                window.draw(menuBackground);
-                window.draw(menuAtk);
-                window.draw(textAtk);
-                window.draw(menuHeal);
-                window.draw(textHeal);
-                window.draw(menuSkip);
-                window.draw(textSkip);
-                //Sleep(50);
+                if (Char_S.AttackMode && gameCount == 1 && wizard.getAlive() == true) {
+                    window.draw(menuWhoAtk);
+                    window.draw(menuWorm);
+                    window.draw(textMenuWorm);
+                    window.draw(menuEvilWizard);
+                    window.draw(textMenuEvilWizard);
+                    window.draw(menuBoss);
+                    window.draw(textMenuBoss);
+                }
+
+                window.draw(infoBox);
+                window.draw(textInfoBox);
             }
-
-            if (Char_S.AttackMode && gameCount == 1 && wizard.getAlive() == true) {
-                window.draw(menuWhoAtk);
-                window.draw(menuWorm);
-                window.draw(textMenuWorm);
-                window.draw(menuEvilWizard);
-                window.draw(textMenuEvilWizard);
-                window.draw(menuBoss);
-                window.draw(textMenuBoss);
-            }
-
-            window.draw(infoBox);
-            window.draw(textInfoBox);
 
             if (wizard.getAlive() == true) {
                 window.draw(UI_Character);
@@ -1567,6 +1582,27 @@ int main()
                 UI_Boss_PV.setString(Vie_Boss);
             }
         }
+
+#pragma region WinCondition
+        if (fireWorm.getAlive() == false && evilWizard.getAlive() == false && boss.getAlive() == false) {
+            window.draw(textWin);
+            window.draw(quit_End);
+            window.draw(quit_EndText);
+
+            if (sf::Mouse::getPosition().x <= 1055 && sf::Mouse::getPosition().x >= 890 && sf::Mouse::getPosition().y <= 780 && sf::Mouse::getPosition().y >= 700 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                window.close();
+            }
+        }
+        else if (wizard.getAlive() == false) {
+            window.draw(textDefeat);
+            window.draw(quit_End);
+            window.draw(quit_EndText);
+
+            if (sf::Mouse::getPosition().x <= 640 && sf::Mouse::getPosition().x >= 540 && sf::Mouse::getPosition().y <= 640 && sf::Mouse::getPosition().y >= 540 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                window.close();
+            }
+        }
+#pragma endregion WinCondition
         // Afficher le contenu
         window.display();
 #pragma endregion atelier dessin
