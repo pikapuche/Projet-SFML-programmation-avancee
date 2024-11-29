@@ -119,7 +119,7 @@ int main()
     Boss boss;
 
     // Creation de la fenetre
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ"/*, sf::Style::Fullscreen*/);
     window.setFramerateLimit(8);
 
 
@@ -917,10 +917,19 @@ int main()
 #pragma endregion autre menu
 
 #pragma endregion Menu
+    f_anim_Death.x = 1440;
+    f_anim_Hit.x = 540;
+    f_anim_Attack.x = 2880;
+
+    e_anim_Death.x = 2250;
+    e_anim_Attack.x = 0;
+    e_anim_Heal.x = 0;
 
     b_anim_Death.x = 5600;
-    e_anim_Death.x = 2250;
-    f_anim_Death.x = 1440;
+    b_anim_Attack.x = 0;
+    b_anim_Attack2.x = 0;
+    b_anim_Hit.x = 0;
+
 
     auto startTime = chrono::steady_clock::now();
     auto waitTime = chrono::seconds(1);
@@ -1773,16 +1782,15 @@ int main()
 
 
             else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit && fireWorm.getAlive() == true) {
-                f_anim_Attack.x++;
-                if (f_anim_Attack.x * 180 >= fireWorm_texture_Attack.getSize().x)
-                    f_anim_Attack.x = 0;
-                fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x * 180, 0, 180, 180));
+                f_anim_Attack.x -= 180;
+                if (f_anim_Attack.x == 0) f_anim_Attack.x = 2880;
+                fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x - 180, 0, 180, 180));
                 Worm_S.countAnimAtk++;
-                if (Worm_S.countAnimAtk == 2) {
+                if (Worm_S.countAnimAtk == 8) {
                     soundWizardAttack.stop();
                     soundFireWormAttack.play();
                 }
-                if (Worm_S.countAnimAtk == 10) {
+                if (Worm_S.countAnimAtk == 16) {
                     Worm_S.isAttacking = false;
                 }
                 window.draw(fireWorm_sprite_Attack);
@@ -1790,10 +1798,9 @@ int main()
 
             else if (Worm_S.isHit && !Char_S.isHealing && fireWorm.getAlive() == true) {
 
-                f_anim_Hit.x++;
-                if (f_anim_Hit.x * 180 >= fireWorm_texture_Hit.getSize().x)
-                    f_anim_Hit.x = 0;
-                fireWorm_sprite_Hit.setTextureRect(sf::IntRect(f_anim_Hit.x * 180, 0, 180, 180));
+                f_anim_Hit.x -= 180;
+                if (f_anim_Hit.x == 0) f_anim_Hit.x = 540;
+                fireWorm_sprite_Hit.setTextureRect(sf::IntRect(f_anim_Hit.x - 180, 0, 180, 180));
                 fireWorm_sprite_Hit.setColor(sf::Color(255, 0, 0));
                 Worm_S.countAnimHit++;
                 if (Worm_S.countAnimHit == 4) {
@@ -1804,6 +1811,7 @@ int main()
             else if (Worm_S.DeathCount == 0) {
                 if (fireWorm.getAlive() == false) {
                     f_anim_Death.x -= 180;
+                    if (f_anim_Death.x == 0) f_anim_Hit.x = 1440;
                     fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x - 180, 0, 180, 180));
                     Worm_S.countAnimDeath++;
                     if (Worm_S.countAnimDeath == 8) {
@@ -1814,7 +1822,7 @@ int main()
                     window.draw(fireWorm_sprite_Death);
                 }
             }
-            else if (Worm_S.printBody == true) {
+            if (Worm_S.printBody == true) {
                 f_anim_Death.x = 0;
                 fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x * 180, 0, 180, 180));
                 window.draw(fireWorm_sprite_Death);
@@ -1883,7 +1891,7 @@ int main()
                     window.draw(evilWizard_sprite_Death);
                 }
             }
-            else if (Evil_S.printBody == true) {
+            if (Evil_S.printBody == true) {
                 e_anim_Death.x = 0;
                 evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x * 450, 0, 450, 450));
                 window.draw(evilWizard_sprite_Death);
@@ -1952,7 +1960,7 @@ int main()
                     window.draw(boss_sprite_Death);
                 }
             }
-            else if (Boss_S.printBody == true) {
+            if (Boss_S.printBody == true) {
                 b_anim_Death.x = 0;
                 boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x * 800, 0, 800, 800));
                 window.draw(boss_sprite_Death);
