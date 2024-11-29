@@ -54,6 +54,14 @@ public :
 		e_health = pv;
 		return e_health;
 	}
+	virtual int HealthReset(int pv) {
+		e_health = pv;
+		return e_health;
+	}
+	virtual bool LifeReset() {
+		e_isAlive = true;
+		return e_isAlive;
+	}
 };
 
 class Character : public Entities {
@@ -101,6 +109,14 @@ public :
 		c_health = pv;
 		return c_health;
 	}
+	int HealthReset(int pv) override {
+		c_health = pv;
+		return c_health;
+	}
+	bool LifeReset() {
+		c_isAlive = true;
+		return c_isAlive;
+	}
 };
 
 class Enemies : public Entities {
@@ -146,6 +162,14 @@ public :
 	int setHealth(int pv) override {
 		E_health = pv;
 		return E_health;
+	}
+	int HealthReset(int pv) override {
+		E_health = pv;
+		return E_health;
+	}
+	bool LifeReset() {
+		E_isAlive = true;
+		return E_isAlive;
 	}
 };
 

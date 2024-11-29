@@ -81,8 +81,7 @@ struct BossStruct {
     bool SoundHit = false;
     bool isHealing = false;
     bool isDead = false;
-    bool SoundDead = false;
-    bool printBody = false;
+    //bool printBody = false;
     bool readyToPlay = false;
     int countAnimAtk = 0;
     int countAnimAtk2 = 0;
@@ -921,6 +920,106 @@ int main()
 
         if (restartGame == true) {
             gameCount = 0;
+            //Char
+            Char_S.isAttacking = false;
+            Char_S.SoundAttack = false;
+            Char_S.AttackMode = false;
+            Char_S.isHealing = false;
+            Char_S.SoundHeal = false;
+            Char_S.isHit = false;
+            Char_S.SoundHit = false;
+            Char_S.isDead = false;
+            //bool printBody = false;
+            Char_S.readyToPlay = false;
+            Char_S.countAnimAtk = 0;
+            Char_S.countAnimHeal = 0;
+            Char_S.countAnimHit = 0;
+            Char_S.countAnimDeath = 0;
+            Char_S.DeathCount = 0;
+
+            //fireWorm
+            Worm_S.isAttacking = false;
+            Worm_S.SoundAttack = false;
+            Worm_S.isHit = false;
+            Worm_S.SoundHit = false;
+            Worm_S.isHealing = false;
+            Worm_S.isDead = false;
+            //bool printBody = false;
+            Worm_S.readyToPlay = false;
+            Worm_S.countAnimHit = 0;
+            Worm_S.countAnimAtk = 0;
+            Worm_S.countAnimDeath = 0;
+            Worm_S.DeathCount = 0;
+
+            //evilWizard
+            Evil_S.isAttacking = false;
+            Evil_S.SoundAttack = false;
+            Evil_S.isHealing = false;
+            Evil_S.SoundHeal = false;
+            Evil_S.isHit = false;
+            Evil_S.SoundHit = false;
+            Evil_S.isDead = false;
+            //bool printBody = false;
+            Evil_S.readyToPlay = false;
+            Evil_S.countAnimAtk = 0;
+            Evil_S.countAnimHeal = 0;
+            Evil_S.countAnimHit = 0;
+            Evil_S.countAnimDeath = 0;
+            Evil_S.DeathCount = 0;
+
+            //boss
+            Boss_S.isAttacking = false;
+            Boss_S.isAttacking2 = false;
+            Boss_S.SoundAttack = false;
+            Boss_S.SoundAttack2 = false;
+            Boss_S.isHit = false;
+            Boss_S.SoundHit = false;
+            Boss_S.isHealing = false;
+            Boss_S.isDead = false;
+            //bool printBody = false;
+            Boss_S.readyToPlay = false;
+            Boss_S.countAnimAtk = 0;
+            Boss_S.countAnimAtk2 = 0;
+            Boss_S.countAnimHit = 0;
+            Boss_S.countAnimDeath = 0;
+            Boss_S.DeathCount = 0;
+
+            //settings
+            Settings_S.inSettings = false;
+            Settings_S.inMenuMusic = false;
+
+            Settings_S.inGameMusic = false;
+
+            Settings_S.inGameSound = false;
+
+            Settings_S.loseMusic = false;
+            Settings_S.winMusic = false;
+
+            //autre
+            countMenu = 0;
+            countFirstMenu = 0;
+            stopMusic = 0;
+            infoBoxB = false;
+            menuExit = false;
+            quiSoigner = 0;
+            countPlay = 0;
+            endCount = 0;
+
+            endWinMusic.stop();
+            endLoseMusic.stop();
+            if (gameCount == 0) menuMusic.play();
+
+            wizard.HealthReset(500);
+            fireWorm.HealthReset(75);
+            evilWizard.HealthReset(150);
+            boss.HealthReset(240);
+
+            wizard.LifeReset();
+            fireWorm.LifeReset();
+            evilWizard.LifeReset();
+            boss.LifeReset();
+
+            restartGame = false;
         }
 
         if (gameCount == 1 && stopMusic == 0) {
@@ -1878,7 +1977,7 @@ int main()
         }
 
 #pragma region WinCondition
-        if (fireWorm.getAlive() == false && evilWizard.getAlive() == false && boss.getAlive() == false) {
+        if (fireWorm.getAlive() == false && evilWizard.getAlive() == false && boss.getAlive() == false && gameCount >= 1) {
             window.draw(textWin);
             window.draw(quit_End);
             window.draw(quit_EndText);
@@ -1922,7 +2021,7 @@ int main()
                 restartGame = true;
             }
         }
-        else if (wizard.getAlive() == false) {
+        else if (wizard.getAlive() == false && gameCount >= 1) {
             window.draw(textDefeat);
             window.draw(quit_End);
             window.draw(quit_EndText);
