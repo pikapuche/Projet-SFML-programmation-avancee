@@ -129,7 +129,7 @@ int main()
     // Charger une texture
 
     sf::Texture background_texture;
-    if (!background_texture.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\decor.png")) {
+    if (!background_texture.loadFromFile("Extra\\decor.png")) {
         return -1; // Erreur si le fichier est introuvable
     }
     background_texture.setSmooth(true);
