@@ -21,6 +21,7 @@ int countPlay = 0;
 int endCount = 0;
 bool restartGame = false;
 
+
 #pragma region Struct
 struct CharacterStruct {
     bool isAttacking = false;
@@ -31,7 +32,7 @@ struct CharacterStruct {
     bool isHit = false;
     bool SoundHit = false;
     bool isDead = false;
-    //bool printBody = false;
+    bool printBody = false;
     bool readyToPlay = false;
     int countAnimAtk = 0;
     int countAnimHeal = 0;
@@ -47,7 +48,7 @@ struct FireWormStruct {
     bool SoundHit = false;
     bool isHealing = false;
     bool isDead = false;
-    //bool printBody = false;
+    bool printBody = false;
     bool readyToPlay = false;
     int countAnimHit = 0;
     int countAnimAtk = 0;
@@ -63,7 +64,7 @@ struct EvilWizardStruct {
     bool isHit = false;
     bool SoundHit = false;
     bool isDead = false;
-    //bool printBody = false;
+    bool printBody = false;
     bool readyToPlay = false;
     int countAnimAtk = 0;
     int countAnimHeal = 0;
@@ -81,7 +82,7 @@ struct BossStruct {
     bool SoundHit = false;
     bool isHealing = false;
     bool isDead = false;
-    //bool printBody = false;
+    bool printBody = false;
     bool readyToPlay = false;
     int countAnimAtk = 0;
     int countAnimAtk2 = 0;
@@ -917,6 +918,9 @@ int main()
 
 #pragma endregion Menu
 
+    b_anim_Death.x = 5600;
+    e_anim_Death.x = 2250;
+    f_anim_Death.x = 1440;
 
     auto startTime = chrono::steady_clock::now();
     auto waitTime = chrono::seconds(1);
@@ -944,7 +948,7 @@ int main()
             Char_S.isHit = false;
             Char_S.SoundHit = false;
             Char_S.isDead = false;
-            //bool printBody = false;
+            Char_S.printBody = false;
             Char_S.readyToPlay = false;
             Char_S.countAnimAtk = 0;
             Char_S.countAnimHeal = 0;
@@ -959,7 +963,7 @@ int main()
             Worm_S.SoundHit = false;
             Worm_S.isHealing = false;
             Worm_S.isDead = false;
-            //bool printBody = false;
+            Worm_S.printBody = false;
             Worm_S.readyToPlay = false;
             Worm_S.countAnimHit = 0;
             Worm_S.countAnimAtk = 0;
@@ -974,7 +978,7 @@ int main()
             Evil_S.isHit = false;
             Evil_S.SoundHit = false;
             Evil_S.isDead = false;
-            //bool printBody = false;
+            Evil_S.printBody = false;
             Evil_S.readyToPlay = false;
             Evil_S.countAnimAtk = 0;
             Evil_S.countAnimHeal = 0;
@@ -991,7 +995,7 @@ int main()
             Boss_S.SoundHit = false;
             Boss_S.isHealing = false;
             Boss_S.isDead = false;
-            //bool printBody = false;
+            Boss_S.printBody = false;
             Boss_S.readyToPlay = false;
             Boss_S.countAnimAtk = 0;
             Boss_S.countAnimAtk2 = 0;
@@ -1799,18 +1803,22 @@ int main()
             }///////////////////////////////////
             else if (Worm_S.DeathCount == 0) {
                 if (fireWorm.getAlive() == false) {
-                    f_anim_Death.x++;
-                    if (f_anim_Death.x * 180 >= fireWorm_texture_Death.getSize().x)
-                        f_anim_Death.x = 0;
-                    fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x * 180, 0, 180, 180));
+                    f_anim_Death.x -= 180;
+                    fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x - 180, 0, 180, 180));
                     Worm_S.countAnimDeath++;
                     if (Worm_S.countAnimDeath == 8) {
                         Worm_S.isDead = false;
                         Worm_S.DeathCount++;
+                        Worm_S.printBody = true;
                     }
                     window.draw(fireWorm_sprite_Death);
                 }
-            }///////////////////////////////////
+            }
+            else if (Worm_S.printBody == true) {
+                f_anim_Death.x = 0;
+                fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x * 180, 0, 180, 180));
+                window.draw(fireWorm_sprite_Death);
+            }
 
 
         ////////// Evil Wizard ///////////
@@ -1864,18 +1872,21 @@ int main()
             }
             else if (Evil_S.DeathCount == 0) {
                 if (evilWizard.getAlive() == false) {
-                    e_anim_Death.x++;
-                    if (e_anim_Death.x * 450 >= evilWizard_texture_Death.getSize().x)
-                        e_anim_Death.x = 0;
-                    evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x * 450, 0, 450, 450));
-                    evilWizard_sprite_Death.setColor(sf::Color(255, 0, 0));
+                    e_anim_Death.x -= 450;
+                    evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x - 450, 0, 450, 450));
                     Evil_S.countAnimDeath++;
-                    if (Evil_S.countAnimDeath == 5) {
+                    if (Evil_S.countAnimDeath == 6) {
                         Evil_S.isDead = false;
                         Evil_S.DeathCount++;
+                        Evil_S.printBody = true;
                     }
                     window.draw(evilWizard_sprite_Death);
                 }
+            }
+            else if (Evil_S.printBody == true) {
+                e_anim_Death.x = 0;
+                evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x * 450, 0, 450, 450));
+                window.draw(evilWizard_sprite_Death);
             }
 
             ////////// Boss ///////////
@@ -1930,18 +1941,21 @@ int main()
             }
             else if (Boss_S.DeathCount == 0) {
                 if (boss.getAlive() == false) {
-                    b_anim_Death.x++;
-                    if (b_anim_Death.x * 800 >= boss_texture_Death.getSize().x)
-                        b_anim_Death.x = 5600;
-                    boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x * 800, 0, 800, 800));
-                    boss_sprite_Death.setColor(sf::Color(255, 0, 0));
+                    b_anim_Death.x -= 800;
+                    boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x - 800, 0, 800, 800));
                     Boss_S.countAnimDeath++;
-                    if (Boss_S.countAnimDeath == 7) {
+                    if (Boss_S.countAnimDeath == 6) {
                         Boss_S.isDead = false;
                         Boss_S.DeathCount++;
+                        Boss_S.printBody = true;
                     }
                     window.draw(boss_sprite_Death);
                 }
+            }
+            else if (Boss_S.printBody == true) {
+                b_anim_Death.x = 0;
+                boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x * 800, 0, 800, 800));
+                window.draw(boss_sprite_Death);
             }
 #pragma endregion animation qui marche la ptn de ta soeur
 
