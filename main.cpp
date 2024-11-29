@@ -1704,7 +1704,7 @@ int main()
             // Dessiner la forme
             window.draw(sprite_background);
 
-#pragma region animation qui marche la ptn de ta soeur
+#pragma region animation qui marche 
 
             if (!Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
                 window.draw(perso_sprite);
@@ -1960,7 +1960,7 @@ int main()
                 boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x * 800, 0, 800, 800));
                 window.draw(boss_sprite_Death);
             }
-#pragma endregion animation qui marche la ptn de ta soeur
+#pragma endregion animation qui marche
 
             if ((fireWorm.getAlive() == true || evilWizard.getAlive() == true || boss.getAlive() == true) && wizard.getAlive() == true) {
                 if (gameCount == 1 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
