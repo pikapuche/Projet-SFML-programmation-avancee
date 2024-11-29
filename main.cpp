@@ -147,7 +147,7 @@ int main()
     ////////// Personnage //////////
     sf::Texture perso_texture;
     sf::Sprite perso_sprite;
-    if (!perso_texture.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\free-wizard-sprite-sheets-pixel-art\\Wanderer Magican\\IdleV2.png")) {
+    if (!perso_texture.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\IdleV2.png")) {
         return -1;
     }
     perso_texture.setSmooth(true);
@@ -157,7 +157,7 @@ int main()
     //
     sf::Texture perso_texture_Attack;
     sf::Sprite perso_sprite_Attack;
-    if (!perso_texture_Attack.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\free-wizard-sprite-sheets-pixel-art\\Wanderer Magican\\Attack_1V2.png")) {
+    if (!perso_texture_Attack.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\Attack_1V2.png")) {
         return -1;
     }
     perso_texture_Attack.setSmooth(true);
@@ -167,7 +167,7 @@ int main()
     //
     sf::Texture perso_texture_Heal;
     sf::Sprite perso_sprite_Heal;
-    if (!perso_texture_Heal.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\free-wizard-sprite-sheets-pixel-art\\Wanderer Magican\\Attack_2V2.png")) {
+    if (!perso_texture_Heal.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\Attack_2V2.png")) {
         return -1;
     }
     perso_texture_Heal.setSmooth(true);
@@ -177,7 +177,7 @@ int main()
     //
     sf::Texture perso_texture_Hit;
     sf::Sprite perso_sprite_Hit;
-    if (!perso_texture_Hit.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\free-wizard-sprite-sheets-pixel-art\\Wanderer Magican\\HurtV2.png")) {
+    if (!perso_texture_Hit.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\HurtV2.png")) {
         return -1;
     }
     perso_texture_Hit.setSmooth(true);
@@ -187,7 +187,7 @@ int main()
     //
     sf::Texture perso_texture_Death;
     sf::Sprite perso_sprite_Death;
-    if (!perso_texture_Death.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\free-wizard-sprite-sheets-pixel-art\\Wanderer Magican\\DeadV2.png")) {
+    if (!perso_texture_Death.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\DeadV2.png")) {
         return -1;
     }
     perso_texture_Death.setSmooth(true);
@@ -201,7 +201,7 @@ int main()
     // Verre de terre de feu nul //
     sf::Texture fireWorm_texture;
     sf::Sprite fireWorm_sprite;
-    if (!fireWorm_texture.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Fire Worm\\Fire Worm\\Sprites\\Worm\\IdleV2.png")) {
+    if (!fireWorm_texture.loadFromFile("Extra\\TileSheets\\Fire Worm\\IdleV2.png")) {
         return -1;
     }
     fireWorm_texture.setSmooth(true);
@@ -211,7 +211,7 @@ int main()
     //
     sf::Texture fireWorm_texture_Attack;
     sf::Sprite fireWorm_sprite_Attack;
-    if (!fireWorm_texture_Attack.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Fire Worm\\Fire Worm\\Sprites\\Worm\\AttackV2.png")) {
+    if (!fireWorm_texture_Attack.loadFromFile("Extra\\TileSheets\\Fire Worm\\AttackV2.png")) {
         return -1;
     }
     fireWorm_texture_Attack.setSmooth(true);
@@ -221,7 +221,7 @@ int main()
     //
     sf::Texture fireWorm_texture_Hit;
     sf::Sprite fireWorm_sprite_Hit;
-    if (!fireWorm_texture_Hit.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Fire Worm\\Fire Worm\\Sprites\\Worm\\Get HitV2.png")) {
+    if (!fireWorm_texture_Hit.loadFromFile("Extra\\TileSheets\\Fire Worm\\Get HitV2.png")) {
         return -1;
     }
     fireWorm_texture_Hit.setSmooth(true);
@@ -231,7 +231,7 @@ int main()
     //
     sf::Texture fireWorm_texture_Death;
     sf::Sprite fireWorm_sprite_Death;
-    if (!fireWorm_texture_Death.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Fire Worm\\Fire Worm\\Sprites\\Worm\\DeathV2.png")) {
+    if (!fireWorm_texture_Death.loadFromFile("Extra\\TileSheets\\Fire Worm\\DeathV2.png")) {
         return -1;
     }
     fireWorm_texture_Death.setSmooth(true);
@@ -242,7 +242,7 @@ int main()
     // Sorcier de feu m�chant //
     sf::Texture evilWizard_texture;
     sf::Sprite evilWizard_sprite;
-    if (!evilWizard_texture.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Evil Wizard\\Evil Wizard\\Sprites\\IdleV2.png")) {
+    if (!evilWizard_texture.loadFromFile("Extra\\TileSheets\\Evil Wizard\\IdleV2.png")) {
         return -1;
     }
     evilWizard_texture.setSmooth(true);
@@ -252,7 +252,7 @@ int main()
     //
     sf::Texture evilWizard_texture_Attack;
     sf::Sprite evilWizard_sprite_Attack;
-    if (!evilWizard_texture_Attack.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Evil Wizard\\Evil Wizard\\Sprites\\AttackV2.png")) {
+    if (!evilWizard_texture_Attack.loadFromFile("Extra\\TileSheets\\Evil Wizard\\AttackV2.png")) {
         return -1;
     }
     evilWizard_texture_Attack.setSmooth(true);
@@ -262,7 +262,7 @@ int main()
     //
     sf::Texture evilWizard_texture_Heal;
     sf::Sprite evilWizard_sprite_Heal;
-    if (!evilWizard_texture_Heal.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Evil Wizard\\Evil Wizard\\Sprites\\MoveV2.png")) {
+    if (!evilWizard_texture_Heal.loadFromFile("Extra\\TileSheets\\Evil Wizard\\MoveV2.png")) {
         return -1;
     }
     evilWizard_texture_Heal.setSmooth(true);
@@ -272,7 +272,7 @@ int main()
     //
     sf::Texture evilWizard_texture_Hit;
     sf::Sprite evilWizard_sprite_Hit;
-    if (!evilWizard_texture_Hit.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Evil Wizard\\Evil Wizard\\Sprites\\HitV2.png")) {
+    if (!evilWizard_texture_Hit.loadFromFile("Extra\\TileSheets\\Evil Wizard\\HitV2.png")) {
         return -1;
     }
     evilWizard_texture_Hit.setSmooth(true);
@@ -282,7 +282,7 @@ int main()
     //
     sf::Texture evilWizard_texture_Death;
     sf::Sprite evilWizard_sprite_Death;
-    if (!evilWizard_texture_Death.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\Evil Wizard\\Evil Wizard\\Sprites\\DeathV2.png")) {
+    if (!evilWizard_texture_Death.loadFromFile("Extra\\TileSheets\\Evil Wizard\\DeathV2.png")) {
         return -1;
     }
     evilWizard_texture_Death.setSmooth(true);
@@ -293,7 +293,7 @@ int main()
     // LE BOSS DE SES MORTS //
     sf::Texture boss_texture;
     sf::Sprite boss_sprite;
-    if (!boss_texture.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\EVil Wizard 2\\EVil Wizard 2\\Sprites\\IdleV2.png")) {
+    if (!boss_texture.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\IdleV2.png")) {
         return -1;
     }
     boss_texture.setSmooth(true);
@@ -303,7 +303,7 @@ int main()
     //
     sf::Texture boss_texture_Attack;
     sf::Sprite boss_sprite_Attack;
-    if (!boss_texture_Attack.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\EVil Wizard 2\\EVil Wizard 2\\Sprites\\Attack1V2.png")) {
+    if (!boss_texture_Attack.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\Attack1V2.png")) {
         return -1;
     }
     boss_texture_Attack.setSmooth(true);
@@ -313,7 +313,7 @@ int main()
     //
     sf::Texture boss_texture_Attack2;
     sf::Sprite boss_sprite_Attack2;
-    if (!boss_texture_Attack2.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\EVil Wizard 2\\EVil Wizard 2\\Sprites\\Attack2V2.png")) {
+    if (!boss_texture_Attack2.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\Attack2V2.png")) {
         return -1;
     }
     boss_texture_Attack2.setSmooth(true);
@@ -323,7 +323,7 @@ int main()
     //
     sf::Texture boss_texture_Hit;
     sf::Sprite boss_sprite_Hit;
-    if (!boss_texture_Hit.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\EVil Wizard 2\\EVil Wizard 2\\Sprites\\HitV2.png")) {
+    if (!boss_texture_Hit.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\HitV2.png")) {
         return -1;
     }
     boss_texture_Hit.setSmooth(true);
@@ -333,7 +333,7 @@ int main()
     //
     sf::Texture boss_texture_Death;
     sf::Sprite boss_sprite_Death;
-    if (!boss_texture_Death.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Tilesheet Projet SFML\\EVil Wizard 2\\EVil Wizard 2\\Sprites\\DeathV2.png")) {
+    if (!boss_texture_Death.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\DeathV2.png")) {
         return -1;
     }
     boss_texture_Death.setSmooth(true);
@@ -370,28 +370,28 @@ int main()
 #pragma endregion Gestion_images
 #pragma region Gestion_son
     sf::Music menuMusic;
-    if (!menuMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\MenuWAV.wav"))
+    if (!menuMusic.openFromFile("Extra\\Musiques\\MenuWAV.wav"))
         return -1;
     menuMusic.setLoop(true);
     if (gameCount == 0) menuMusic.play();
     menuMusic.setVolume(Settings_S.volumeMenuMusic);
 
     sf::Music endWinMusic;
-    if (!endWinMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\FinalFantasyWinWAV.wav"))
+    if (!endWinMusic.openFromFile("Extra\\Musiques\\FinalFantasyWinWAV.wav"))
         return -1;
     endWinMusic.setVolume(Settings_S.volumeMenuMusic);
     if (Settings_S.winMusic == true) endWinMusic.play();
     endWinMusic.setLoop(true);
 
     sf::Music endLoseMusic;
-    if (!endLoseMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\endLoseMusicWAV.wav"))
+    if (!endLoseMusic.openFromFile("Extra\\Musiques\\endLoseMusicWAV.wav"))
         return -1;
     endLoseMusic.setVolume(Settings_S.volumeMenuMusic);
     if (Settings_S.loseMusic == true) endLoseMusic.play();
     endLoseMusic.setLoop(true);
 
     sf::Music fightMusic;
-    if (!fightMusic.openFromFile("C:\\Users\\quent\\Music\\MusicLab\\V2 120bpm.wav"))
+    if (!fightMusic.openFromFile("Extra\\Musiques\\V2 120bpm.wav"))
         return -1;
     fightMusic.setLoop(true);
     if(gameCount >= 1) fightMusic.play();
@@ -399,7 +399,7 @@ int main()
 
 
     sf::SoundBuffer wizardAttack;
-    if (!wizardAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\wizard attack V3.wav"))
+    if (!wizardAttack.loadFromFile("Extra\\Musiques\\wizard attack V3.wav"))
         return -1;
 
     sf::Sound soundWizardAttack;
@@ -407,7 +407,7 @@ int main()
     soundWizardAttack.setVolume(Settings_S.volumeGameSound);
 
     sf::SoundBuffer Heal;
-    if (!Heal.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\HealWAV.wav"))
+    if (!Heal.loadFromFile("Extra\\Musiques\\HealWAV.wav"))
         return -1;
 
     sf::Sound soundHeal;
@@ -416,7 +416,7 @@ int main()
 
 
     sf::SoundBuffer fireWormAttack;
-    if (!fireWormAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\fireWormAttackWAV.wav"))
+    if (!fireWormAttack.loadFromFile("Extra\\Musiques\\fireWormAttackWAV.wav"))
         return -1;
 
     sf::Sound soundFireWormAttack;
@@ -424,7 +424,7 @@ int main()
     soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
 
     sf::SoundBuffer evilWizardAttack;
-    if (!evilWizardAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\fireWizardAttackLongWAV.wav"))
+    if (!evilWizardAttack.loadFromFile("Extra\\Musiques\\fireWizardAttackLongWAV.wav"))
         return -1;
 
     sf::Sound soundEvilWizardAttack;
@@ -433,7 +433,7 @@ int main()
     soundEvilWizardAttack.setPlayingOffset(sf::seconds(14));
 
     sf::SoundBuffer bossAttack;
-    if (!bossAttack.loadFromFile("C:\\Users\\quent\\Music\\MusicLab\\swooshEffectLourdWAV.wav"))
+    if (!bossAttack.loadFromFile("Extra\\Musiques\\swooshEffectLourdWAV.wav"))
         return -1;
 
     sf::Sound soundBossAttack;
@@ -507,7 +507,7 @@ int main()
     sprite_background_Menu6.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
     //
     sf::Font fontMenu;
-    if (!fontMenu.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\minecraft\\minecraft.ttf"))
+    if (!fontMenu.loadFromFile("Extra\\minecraft.ttf"))
     {
         return -1;
     }
