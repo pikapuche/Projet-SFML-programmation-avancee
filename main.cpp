@@ -18,7 +18,8 @@ bool infoBoxB = false;
 bool menuExit = false;
 int quiSoigner = 0;
 int countPlay = 0;
-int fin = 0;
+int endCount = 0;
+bool restartGame = false;
 
 #pragma region Struct
 struct CharacterStruct {
@@ -30,8 +31,7 @@ struct CharacterStruct {
     bool isHit = false;
     bool SoundHit = false;
     bool isDead = false;
-    bool SoundDead = false;
-    bool printBody = false;
+    //bool printBody = false;
     bool readyToPlay = false;
     int countAnimAtk = 0;
     int countAnimHeal = 0;
@@ -47,8 +47,7 @@ struct FireWormStruct {
     bool SoundHit = false;
     bool isHealing = false;
     bool isDead = false;
-    bool SoundDead = false;
-    bool printBody = false;
+    //bool printBody = false;
     bool readyToPlay = false;
     int countAnimHit = 0;
     int countAnimAtk = 0;
@@ -64,8 +63,7 @@ struct EvilWizardStruct {
     bool isHit = false;
     bool SoundHit = false;
     bool isDead = false;
-    bool SoundDead = false;
-    bool printBody = false;
+    //bool printBody = false;
     bool readyToPlay = false;
     int countAnimAtk = 0;
     int countAnimHeal = 0;
@@ -121,6 +119,7 @@ int main()
     // Creation de la fenetre
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
     window.setFramerateLimit(8);
+
 
 #pragma region Gestion_images
     ////////// Background //////////
@@ -801,7 +800,7 @@ int main()
     textWin.setStyle(sf::Text::Bold);
 
     sf::Text textDefeat;
-    textDefeat.setPosition(360, 130);
+    textDefeat.setPosition(330, 130);
     textDefeat.setFont(font);
     textDefeat.setString("DEFEAT");
     textDefeat.setCharacterSize(300);
@@ -811,10 +810,10 @@ int main()
     textDefeat.setStyle(sf::Text::Bold);
 
     sf::RectangleShape quit_End(sf::Vector2f(165.f, 80.f));
-    quit_End.setPosition(830, 590);
+    quit_End.setPosition(830, 690);
     quit_End.setFillColor(sf::Color(255, 178, 101));
     sf::Text quit_EndText;
-    quit_EndText.setPosition(850, 600);
+    quit_EndText.setPosition(850, 700);
     quit_EndText.setFont(fontMenu);
     quit_EndText.setString("QUIT");
     quit_EndText.setCharacterSize(50);
@@ -822,6 +821,19 @@ int main()
     quit_EndText.setOutlineColor(sf::Color::Black);
     quit_EndText.setOutlineThickness(8.f);
     quit_EndText.setStyle(sf::Text::Bold);
+
+    sf::RectangleShape restart_End(sf::Vector2f(290.f, 80.f));
+    restart_End.setPosition(770, 540);
+    restart_End.setFillColor(sf::Color(255, 178, 101));
+    sf::Text restart_EndText;
+    restart_EndText.setPosition(790, 550);
+    restart_EndText.setFont(fontMenu);
+    restart_EndText.setString("RESTART");
+    restart_EndText.setCharacterSize(50);
+    restart_EndText.setFillColor(sf::Color::White);
+    restart_EndText.setOutlineColor(sf::Color::Black);
+    restart_EndText.setOutlineThickness(8.f);
+    restart_EndText.setStyle(sf::Text::Bold);
 
     sf::RectangleShape settings_Window(sf::Vector2f(1400.f, 800.f));
     settings_Window.setPosition(200, 100);
@@ -906,17 +918,22 @@ int main()
                 window.close(); // Fermer la fenetre
         }
 
+
+        if (restartGame == true) {
+            gameCount = 0;
+        }
+
         if (gameCount == 1 && stopMusic == 0) {
             menuMusic.stop();
             fightMusic.play();
             stopMusic++;
         }
-        if (Settings_S.winMusic == true && fin == 1) endWinMusic.play();
+        if (Settings_S.winMusic == true && endCount == 1) endWinMusic.play();
             
-        if (Settings_S.loseMusic == true && fin == 1) endLoseMusic.play();
+        if (Settings_S.loseMusic == true && endCount == 1) endLoseMusic.play();
 
 
-        if (gameCount >= 5) {
+        if (gameCount >= 5 && restartGame == false) {
             gameCount = 1;
         }
         if (!infoBoxB) {
@@ -1611,7 +1628,7 @@ int main()
                     if (Char_S.countAnimDeath == 4) {
                         Char_S.isDead = false;
                         Char_S.DeathCount++;
-                        Char_S.printBody = true;
+                        //Char_S.printBody = true;
                     }
                     window.draw(perso_sprite_Death);
                 }
@@ -1865,10 +1882,12 @@ int main()
             window.draw(textWin);
             window.draw(quit_End);
             window.draw(quit_EndText);
+            window.draw(restart_End);
+            window.draw(restart_EndText);
             fightMusic.stop();
             Settings_S.winMusic = true;
             if (Settings_S.winMusic == true) {
-                fin++;
+                endCount++;
                 if (nowTime >= startTime + waitTime) {
                     countPlay++;
                     startTime = nowTime;
@@ -1878,7 +1897,7 @@ int main()
                     countPlay = 0;
                 }
             }
-            if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610) {
+            if (sf::Mouse::getPosition().x <= 1015 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 800 && sf::Mouse::getPosition().y >= 710) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
             }
@@ -1886,20 +1905,35 @@ int main()
                 quit_End.setOutlineColor(sf::Color::Transparent);
                 quit_End.setOutlineThickness(0.f);
             }
-            if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1015 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 800 && sf::Mouse::getPosition().y >= 710 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
+            }
+
+            if (sf::Mouse::getPosition().x <= 1070 && sf::Mouse::getPosition().x >= 770 && sf::Mouse::getPosition().y <= 650 && sf::Mouse::getPosition().y >= 560) {
+                restart_End.setOutlineColor(sf::Color::Cyan);
+                restart_End.setOutlineThickness(5.f);
+            }
+            else {
+                restart_End.setOutlineColor(sf::Color::Transparent);
+                restart_End.setOutlineThickness(0.f);
+            }
+            if (sf::Mouse::getPosition().x <= 1070 && sf::Mouse::getPosition().x >= 770 && sf::Mouse::getPosition().y <= 650 && sf::Mouse::getPosition().y >= 560 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                cout << "restart";
+                restartGame = true;
             }
         }
         else if (wizard.getAlive() == false) {
             window.draw(textDefeat);
             window.draw(quit_End);
             window.draw(quit_EndText);
+            window.draw(restart_End);
+            window.draw(restart_EndText);
             fightMusic.stop();
             Settings_S.loseMusic = true;
             if (Settings_S.loseMusic == true) {
-                fin++;
+                endCount++;
             }
-            if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610) {
+            if (sf::Mouse::getPosition().x <= 1015 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 800 && sf::Mouse::getPosition().y >= 710) {
                 quit_End.setOutlineColor(sf::Color::Cyan);
                 quit_End.setOutlineThickness(5.f);
             }
@@ -1907,8 +1941,21 @@ int main()
                 quit_End.setOutlineColor(sf::Color::Transparent);
                 quit_End.setOutlineThickness(0.f);
             }
-            if (sf::Mouse::getPosition().x <= 1000 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 700 && sf::Mouse::getPosition().y >= 610 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (sf::Mouse::getPosition().x <= 1015 && sf::Mouse::getPosition().x >= 830 && sf::Mouse::getPosition().y <= 800 && sf::Mouse::getPosition().y >= 710 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 window.close();
+            }
+
+            if (sf::Mouse::getPosition().x <= 1070 && sf::Mouse::getPosition().x >= 770 && sf::Mouse::getPosition().y <= 650 && sf::Mouse::getPosition().y >= 560) {
+                restart_End.setOutlineColor(sf::Color::Cyan);
+                restart_End.setOutlineThickness(5.f);
+            }
+            else {
+                restart_End.setOutlineColor(sf::Color::Transparent);
+                restart_End.setOutlineThickness(0.f);
+            }
+            if (sf::Mouse::getPosition().x <= 1070 && sf::Mouse::getPosition().x >= 770 && sf::Mouse::getPosition().y <= 650 && sf::Mouse::getPosition().y >= 560 && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                cout << "restart";
+                restartGame = true;
             }
         }
 #pragma endregion WinCondition
