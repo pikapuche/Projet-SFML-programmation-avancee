@@ -177,7 +177,7 @@ class Wizard : public Character {
 public :
 	Wizard() : Character("William l'intervenant", 225, 625, 500) {}
 	void attack(Entities& target) override {
-		int damage = 35;
+		int damage = 500;
 		target.losePV(damage);
 		cout << target.getHealth() << " PV" << endl << endl;
 		cout << c_name << " lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;
@@ -188,7 +188,7 @@ class FireWorm : public Enemies {
 public:
 	FireWorm() : Enemies("Fire Worm, THE ELDEN LORD", 925, 650, 75) {}
 	void attack(Entities& target) override {
-		int damage = 500;
+		int damage = 10;
 		target.losePV(damage);
 		cout << target.getHealth() << " PV" << endl << endl;
 		cout << E_name << " lance une attaque sur " << target.getName() << " lui infligeant " << damage << " points de degats " << endl << endl;

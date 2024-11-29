@@ -104,6 +104,8 @@ struct Settings {
     bool loseMusic = false;
     bool winMusic = false;
 
+    int settingsCountPlay = 0;
+
 }; Settings Settings_S;
 
 #pragma endregion Struct
@@ -838,14 +840,24 @@ int main()
     settings_Window.setPosition(200, 100);
     settings_Window.setFillColor(sf::Color::Black);
 
+    sf::Text quit_settings_Window_Text;
+    quit_settings_Window_Text.setPosition(1120, 240);
+    quit_settings_Window_Text.setFont(fontMenu);
+    quit_settings_Window_Text.setString("QUIT THE GAME");
+    quit_settings_Window_Text.setCharacterSize(50);
+    quit_settings_Window_Text.setFillColor(sf::Color::White);
+    quit_settings_Window_Text.setOutlineColor(sf::Color::Black);
+    quit_settings_Window_Text.setOutlineThickness(8.f);
+    quit_settings_Window_Text.setStyle(sf::Text::Bold);
+
     sf::Text settings_music;
     settings_music.setPosition(250, 140);
     settings_music.setFont(fontMenu);
-    settings_music.setString("MUSIC SETTINGS");
-    settings_music.setCharacterSize(75);
+    settings_music.setString("SETTINGS ( ESCAPE FOR CLOSE )");
+    settings_music.setCharacterSize(73);
     settings_music.setFillColor(sf::Color::White);
-    settings_music.setOutlineColor(sf::Color::Black);
-    settings_music.setOutlineThickness(8.f);
+    settings_music.setOutlineColor(sf::Color::Magenta);
+    settings_music.setOutlineThickness(1.f);
     settings_music.setStyle(sf::Text::Bold);
 
     sf::Text settings_menu_music;
@@ -908,6 +920,9 @@ int main()
 
     auto startTime = chrono::steady_clock::now();
     auto waitTime = chrono::seconds(1);
+
+    auto startSetTime = chrono::steady_clock::now();
+    auto waitSetTime = chrono::seconds(1);
     // Boucle principale
     while (window.isOpen()) {
         auto nowTime = chrono::steady_clock::now();
@@ -1004,6 +1019,7 @@ int main()
             quiSoigner = 0;
             countPlay = 0;
             endCount = 0;
+            Settings_S.settingsCountPlay = 0;
 
             endWinMusic.stop();
             endLoseMusic.stop();
@@ -1215,6 +1231,12 @@ int main()
         else {
             settings_game_sound.setFillColor(sf::Color::White);
         }
+        if (sf::Mouse::getPosition().x <= 1545 && sf::Mouse::getPosition().x >= 1120 && sf::Mouse::getPosition().y <= 325 && sf::Mouse::getPosition().y >= 280 && Settings_S.inSettings == true) {
+            quit_settings_Window_Text.setFillColor(sf::Color::Red);
+        }
+        else {
+            quit_settings_Window_Text.setFillColor(sf::Color::White);
+        }
 
 #pragma endregion interFirstMenu
 
@@ -1235,6 +1257,7 @@ int main()
         }
         if (gameCount == 1) {
 
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && Settings_S.inSettings == false) Settings_S.inSettings = true;
             // Choix attaque
             if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !Char_S.AttackMode)
             {
@@ -1664,6 +1687,7 @@ int main()
             }
         }
         if (gameCount >= 1) {
+
             // Dessiner la forme
             window.draw(sprite_background);
 
@@ -1976,6 +2000,105 @@ int main()
             }
         }
 
+        if (Settings_S.inSettings == true && gameCount == 1) {
+            auto nowSetTime = chrono::steady_clock::now();
+            window.draw(settings_Window);
+            window.draw(settings_music);
+            window.draw(settings_menu_music);
+            window.draw(settings_game_music);
+            window.draw(settings_game_sound);
+            window.draw(quit_settings_Window_Text);
+
+            string Volume_MenuMusic(to_string(Settings_S.volumeMenuMusic));
+            text_menu_music.setString(Volume_MenuMusic);
+            window.draw(text_menu_music);
+
+            string Volume_fightMusic(to_string(Settings_S.volumeGameMusic));
+            text_game_music.setString(Volume_fightMusic);
+            window.draw(text_game_music);
+
+            string Volume_gameSound(to_string(Settings_S.volumeGameSound));
+            text_game_sound.setString(Volume_gameSound);
+            window.draw(text_game_sound);
+
+            if (sf::Mouse::getPosition().x <= 600 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 430 && sf::Mouse::getPosition().y >= 380 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == true) {
+                Settings_S.inMenuMusic = true;
+                Settings_S.inGameMusic = false;
+                Settings_S.inGameSound = false;
+            }
+            else if (sf::Mouse::getPosition().x <= 600 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 630 && sf::Mouse::getPosition().y >= 580 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == true) {
+                Settings_S.inGameMusic = true;
+                Settings_S.inMenuMusic = false;
+                Settings_S.inGameSound = false;
+            }
+            else if (sf::Mouse::getPosition().x <= 870 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 830 && sf::Mouse::getPosition().y >= 780 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == true) {
+                Settings_S.inGameSound = true;
+                Settings_S.inMenuMusic = false;
+                Settings_S.inGameMusic = false;
+            }
+            else if (sf::Mouse::getPosition().x <= 1545 && sf::Mouse::getPosition().x >= 1120 && sf::Mouse::getPosition().y <= 325 && sf::Mouse::getPosition().y >= 280 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Settings_S.inSettings == true) {
+                Settings_S.inGameSound = false;
+                Settings_S.inMenuMusic = false;
+                Settings_S.inGameMusic = false;
+                window.close();
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inMenuMusic == true) {
+                Settings_S.volumeMenuMusic -= 10.f;
+                if (Settings_S.volumeMenuMusic <= 0.f) Settings_S.volumeMenuMusic = 0.f;
+                cout << "-10 pour menu musique";
+                menuMusic.setVolume(Settings_S.volumeMenuMusic);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inMenuMusic == true) {
+                Settings_S.volumeMenuMusic += 10.f;
+                if (Settings_S.volumeMenuMusic >= 100.f) Settings_S.volumeMenuMusic = 100.f;
+                cout << "+10 pour menu musique";
+                menuMusic.setVolume(Settings_S.volumeMenuMusic);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inGameMusic == true) {
+                Settings_S.volumeGameMusic -= 10.f;
+                if (Settings_S.volumeGameMusic <= 0.f) Settings_S.volumeGameMusic = 0.f;
+                cout << "-10 pour game musique";
+                fightMusic.setVolume(Settings_S.volumeGameMusic);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameMusic == true) {
+                Settings_S.volumeGameMusic += 10.f;
+                if (Settings_S.volumeGameMusic >= 100.f) Settings_S.volumeGameMusic = 100.f;
+                cout << "+10 pour game musique";
+                fightMusic.setVolume(Settings_S.volumeGameMusic);
+
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inGameSound == true) {
+                Settings_S.volumeGameSound -= 10.f;
+                if (Settings_S.volumeGameSound <= 0.f) Settings_S.volumeGameSound = 0.f;
+                cout << "-10 pour game sound";
+                soundWizardAttack.setVolume(Settings_S.volumeGameSound);
+                soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
+                soundHeal.setVolume(Settings_S.volumeGameSound);
+
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameSound == true) {
+                Settings_S.volumeGameSound += 10.f;
+                if (Settings_S.volumeGameMusic >= 100.f) Settings_S.volumeGameMusic = 100.f;
+                cout << "+10 pour game sound";
+                soundWizardAttack.setVolume(Settings_S.volumeGameSound);
+                soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
+                soundHeal.setVolume(Settings_S.volumeGameSound);
+                soundEvilWizardAttack.setVolume(Settings_S.volumeGameSound);
+                soundBossAttack.setVolume(Settings_S.volumeGameSound);
+            }
+            if (nowSetTime >= startSetTime + waitSetTime) {
+                Settings_S.settingsCountPlay++;
+                startSetTime = nowSetTime;
+            }
+            if (Settings_S.settingsCountPlay >= 2) {
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    Settings_S.inSettings = false;
+                    Settings_S.settingsCountPlay = 0;
+                }
+            }
+        }
+
 #pragma region WinCondition
         if (fireWorm.getAlive() == false && evilWizard.getAlive() == false && boss.getAlive() == false && gameCount >= 1) {
             window.draw(textWin);
@@ -1992,7 +2115,7 @@ int main()
                     startTime = nowTime;
                 }
                 if (countPlay == 4) {
-                    endWinMusic.setPlayingOffset(sf::seconds(4.4));
+                    endWinMusic.setPlayingOffset(sf::seconds(4.39));
                     countPlay = 0;
                 }
             }
