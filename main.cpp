@@ -922,13 +922,13 @@ int main()
     f_anim_Attack.x = 2880;
 
     e_anim_Death.x = 2250;
-    e_anim_Attack.x = 0;
-    e_anim_Heal.x = 0;
+    e_anim_Attack.x = 3600;
+    e_anim_Hit.x = 1800;
 
     b_anim_Death.x = 5600;
-    b_anim_Attack.x = 0;
-    b_anim_Attack2.x = 0;
-    b_anim_Hit.x = 0;
+    b_anim_Attack.x = 6400;
+    b_anim_Attack2.x = 6400;
+    b_anim_Hit.x = 2400;
 
 
     auto startTime = chrono::steady_clock::now();
@@ -1835,10 +1835,9 @@ int main()
                 window.draw(evilWizard_sprite);
             }
             else if (Evil_S.isAttacking && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && evilWizard.getAlive() == true) { //&& wormisHit/atk etc pour vraiment mettre de l'ordre dans la boucle
-                e_anim_Attack.x++;
-                if (e_anim_Attack.x * 450 >= evilWizard_texture_Attack.getSize().x)
-                    e_anim_Attack.x = 0;
-                evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x * 450, 0, 450, 450));
+                e_anim_Attack.x -= 450;
+                if (e_anim_Attack.x == 0) e_anim_Attack.x = 3600;
+                evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x - 450, 0, 450, 450));
                 Evil_S.countAnimAtk++;
                 if (Evil_S.countAnimAtk == 1) {
                     soundEvilWizardAttack.setPlayingOffset(sf::seconds(14));
@@ -1867,10 +1866,9 @@ int main()
                 window.draw(evilWizard_sprite_Heal);
             }
             else if (Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && evilWizard.getAlive() == true) {
-                e_anim_Hit.x++;
-                if (e_anim_Hit.x * 450 >= evilWizard_texture_Hit.getSize().x)
-                    e_anim_Hit.x = 0;
-                evilWizard_sprite_Hit.setTextureRect(sf::IntRect(e_anim_Hit.x * 450, 0, 450, 450));
+                e_anim_Hit.x -= 450;
+                if (e_anim_Attack.x == 0) e_anim_Attack.x = 1800;
+                evilWizard_sprite_Hit.setTextureRect(sf::IntRect(e_anim_Hit.x - 450, 0, 450, 450));
                 evilWizard_sprite_Hit.setColor(sf::Color(255, 0, 0));
                 Evil_S.countAnimHit++;
                 if (Evil_S.countAnimHit == 5) {
@@ -1906,25 +1904,23 @@ int main()
                 boss_sprite.setColor(sf::Color(0, 255, 0));
             }///////////////////////////////////
             else if (Boss_S.isAttacking && !Boss_S.isAttacking2 && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isDead && !Evil_S.isDead && boss.getAlive() == true) {
-                b_anim_Attack.x++;
-                if (b_anim_Attack.x * 800 >= boss_texture_Attack.getSize().x)
-                    b_anim_Attack.x = 0;
-                boss_sprite_Attack.setTextureRect(sf::IntRect(b_anim_Attack.x * 800, 0, 800, 800));
+                b_anim_Attack.x -= 800;
+                if (b_anim_Attack.x == 0) b_anim_Attack.x = 6400;
+                boss_sprite_Attack.setTextureRect(sf::IntRect(b_anim_Attack.x - 800, 0, 800, 800));
                 Boss_S.countAnimAtk++;
                 if (Boss_S.countAnimAtk == 1) {
                     soundBossAttack.setPlayingOffset(sf::seconds(0.5));
                     soundBossAttack.play();
                 }
-                if (Boss_S.countAnimAtk == 4) {
+                if (Boss_S.countAnimAtk == 8) {
                     Boss_S.isAttacking = false;
                 }
                 window.draw(boss_sprite_Attack);
             }
             else if (Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && boss.getAlive() == true) {
-                b_anim_Hit.x++;
-                if (b_anim_Hit.x * 800 >= boss_texture_Hit.getSize().x)
-                    b_anim_Hit.x = 0;
-                boss_sprite_Hit.setTextureRect(sf::IntRect(b_anim_Hit.x * 800, 0, 800, 800));
+                b_anim_Hit.x -= 800;
+                if (b_anim_Hit.x == 0) b_anim_Hit.x = 2400;
+                boss_sprite_Hit.setTextureRect(sf::IntRect(b_anim_Hit.x - 800, 0, 800, 800));
                 boss_sprite_Hit.setColor(sf::Color(255, 0, 0));
                 Boss_S.countAnimHit++;
                 if (Boss_S.countAnimHit == 3) {
@@ -1933,16 +1929,15 @@ int main()
                 window.draw(boss_sprite_Hit);
             }
             else if (Boss_S.isAttacking2 && !Boss_S.isAttacking && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isDead && !Evil_S.isDead && boss.getAlive() == true) {
-                b_anim_Attack2.x++;
-                if (b_anim_Attack2.x * 800 >= boss_texture_Attack2.getSize().x)
-                    b_anim_Attack2.x = 0;
-                boss_sprite_Attack2.setTextureRect(sf::IntRect(b_anim_Attack2.x * 800, 0, 800, 800));
+                b_anim_Attack2.x -= 800;
+                if (b_anim_Attack2.x == 0) b_anim_Attack2.x = 6400;
+                boss_sprite_Attack2.setTextureRect(sf::IntRect(b_anim_Attack2.x - 800, 0, 800, 800));
                 Boss_S.countAnimAtk2++;
                 if (Boss_S.countAnimAtk2 == 1) {
                    soundBossAttack.setPlayingOffset(sf::seconds(0.5));
                     soundBossAttack.play();
                 }
-                if (Boss_S.countAnimAtk2 == 4) {
+                if (Boss_S.countAnimAtk2 == 8) {
                     Boss_S.isAttacking2 = false;
                 }
                 window.draw(boss_sprite_Attack2);
