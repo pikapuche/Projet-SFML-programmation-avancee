@@ -1867,11 +1867,11 @@ int main()
             }
             else if (Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && evilWizard.getAlive() == true) {
                 e_anim_Hit.x -= 450;
-                if (e_anim_Attack.x == 0) e_anim_Attack.x = 1800;
+                if (e_anim_Hit.x == 0) e_anim_Hit.x = 1800;
                 evilWizard_sprite_Hit.setTextureRect(sf::IntRect(e_anim_Hit.x - 450, 0, 450, 450));
                 evilWizard_sprite_Hit.setColor(sf::Color(255, 0, 0));
                 Evil_S.countAnimHit++;
-                if (Evil_S.countAnimHit == 5) {
+                if (Evil_S.countAnimHit == 4) {
                     Evil_S.isHit = false;
                 }
                 window.draw(evilWizard_sprite_Hit);
