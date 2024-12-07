@@ -18,6 +18,8 @@ bool infoBoxB = false;
 bool menuExit = false;
 int quiSoigner = 0;
 int countPlay = 0;
+int menuCOuntPlay = 0;
+bool menuEnter = false;
 int endCount = 0;
 bool restartGame = false;
 
@@ -50,6 +52,7 @@ struct FireWormStruct {
     bool isDead = false;
     bool printBody = false;
     bool readyToPlay = false;
+    bool readyToAttack = false;
     int countAnimHit = 0;
     int countAnimAtk = 0;
     int countAnimDeath = 0;
@@ -119,7 +122,7 @@ int main()
     Boss boss;
 
     // Creation de la fenetre
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ"/*, sf::Style::Fullscreen*/);
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
     window.setFramerateLimit(8);
 
 
@@ -936,6 +939,7 @@ int main()
 
     auto startSetTime = chrono::steady_clock::now();
     auto waitSetTime = chrono::seconds(1);
+
     // Boucle principale
     while (window.isOpen()) {
         auto nowTime = chrono::steady_clock::now();
@@ -974,6 +978,7 @@ int main()
             Worm_S.isDead = false;
             Worm_S.printBody = false;
             Worm_S.readyToPlay = false;
+            Worm_S.readyToAttack = false;
             Worm_S.countAnimHit = 0;
             Worm_S.countAnimAtk = 0;
             Worm_S.countAnimDeath = 0;
@@ -1268,7 +1273,7 @@ int main()
                 window.close();
             }
         }
-        if (gameCount == 1) {
+        if (gameCount == 1 && !Boss_S.isAttacking && !Boss_S.isAttacking2 && !Boss_S.isHit) {
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && Settings_S.inSettings == false) Settings_S.inSettings = true;
             // Choix attaque
@@ -1278,7 +1283,6 @@ int main()
                 Char_S.isAttacking = false;
                 Char_S.isHealing = false;
                 Char_S.isHit = false;
-                Sleep(100);
             }
             // menu d'atk
             else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == true && gameCount == 1)
@@ -1342,7 +1346,7 @@ int main()
                 Char_S.isHealing = true;
                 wizard.heal();
                 infoBoxB = true;
-                textInfoBox.setString("Vous vous soignez de 30 PV");
+                textInfoBox.setString("Vous vous soignez de 35 PV");
                 gameCount++;
                 countPlay = 0;
                 startTime = nowTime;
@@ -1397,16 +1401,16 @@ int main()
             Worm_S.isHit = false;
             gameCount++;
             Worm_S.readyToPlay = false;
+            countPlay = 0;
         }
         if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit && fireWorm.getAlive() == true && Worm_S.readyToPlay == true) {
             Worm_S.isHit = false;
             Worm_S.isAttacking = true;
-            fireWorm.attack(wizard);
-            Char_S.isHit = true;
             infoBoxB = true;
             textInfoBox.setString("FireWorm vous inflige 10 points de degats !");
             gameCount++;
             Worm_S.readyToPlay = false;
+            countPlay = 0;
         }
 
         // EvilWizard
@@ -1416,7 +1420,7 @@ int main()
             gameCount++;
             Evil_S.readyToPlay = false;
         }
-        else if (gameCount == 3) {
+        else if (gameCount == 3 && evilWizard.getAlive() == true) {
             if (nowTime >= startTime + waitTime) {
                 countPlay++;
                 startTime = nowTime;
@@ -1444,6 +1448,7 @@ int main()
                 infoBoxB = true;
                 textInfoBox.setString("Evil Wizard vous inflige 20 points de degats !");
                 gameCount++;
+                Evil_S.readyToPlay = false;
                 break;
 
             case 1:
@@ -1455,6 +1460,8 @@ int main()
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne le FireWorm de 30 PV !");
                     cout << evilWizard.getName() << " soigne" << endl << endl;
+                    gameCount++;
+                    Evil_S.readyToPlay = false;
                 }
                 else if (quiSoigner == 1 && evilWizard.getAlive() == true && evilWizard.getHealth() < 150) {
                     Evil_S.isHealing = true;
@@ -1462,6 +1469,8 @@ int main()
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
                     cout << evilWizard.getName() << " soigne" << endl << endl;
+                    gameCount++;
+                    Evil_S.readyToPlay = false;
                 }
                 else if (quiSoigner == 2 && boss.getAlive() == true && boss.getHealth() < 300) {
                     Evil_S.isHealing = true;
@@ -1469,12 +1478,16 @@ int main()
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne ??? de 30 PV !");
                     cout << evilWizard.getName() << " soigne" << endl << endl;
+                    gameCount++;
+                    Evil_S.readyToPlay = false;
                 }
                 else {
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard a rate son incantation !");
+                    cout << evilWizard.getName() << " fait caca" << endl << endl;
+                    gameCount++;
+                    Evil_S.readyToPlay = false;
                 }
-                gameCount++;
                 break;
 
             case 2:
@@ -1486,33 +1499,41 @@ int main()
                     fireWorm.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne le FireWorm de 30 PV !");
+                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    gameCount++;
+                    Evil_S.readyToPlay = false;
                 }
                 else if (quiSoigner == 4 && evilWizard.getAlive() == true && evilWizard.getHealth() < 150) {
                     Evil_S.isHealing = true;
                     evilWizard.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
+                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    gameCount++;
+                    Evil_S.readyToPlay = false;
                 }
                 else if (quiSoigner == 5 && boss.getAlive() == true && boss.getHealth() < 300) {
                     Evil_S.isHealing = true;
                     boss.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne ??? de 30 PV !");
+                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    gameCount++;
+                    Evil_S.readyToPlay = false;
                 }
                 else {
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard a rate son incantation !");
+                    cout << evilWizard.getName() << " fait caca" << endl << endl;
+                    gameCount++;
+                    Evil_S.readyToPlay = false;
                 }
-
-                cout << evilWizard.getName() << " soigne" << endl << endl;
-
-                gameCount++;
                 break;
 
             default:
                 break;
             }
-            Evil_S.readyToPlay = false;
+            countPlay = 0;
         }
 
         // Boss
@@ -1521,8 +1542,9 @@ int main()
             Boss_S.isHit = false;
             gameCount++;
             Boss_S.readyToPlay = false;
+            countPlay = 0;
         }
-        else if (gameCount == 4) {
+        else if (gameCount == 4 && boss.getAlive() == true) {
             if (nowTime >= startTime + waitTime) {
                 countPlay++;
                 startTime = nowTime;
@@ -1538,61 +1560,66 @@ int main()
             Boss_S.isHit = false;
             gameCount++;
             Boss_S.readyToPlay = false;
+            countPlay = 0;
         }
         if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && boss.getAlive() == true && Boss_S.readyToPlay == true) {
-            int action = rand() % 5;
-            switch (action) {
+            int actionBoss = rand() % 6;
+            switch (actionBoss) {
             case 0:
                 Boss_S.isHit = false;
                 Boss_S.isAttacking = true;
-                boss.attack(wizard);
-                Char_S.isHit = true;
                 infoBoxB = true;
                 textInfoBox.setString("??? vous inflige 35 points de degats !");
-                gameCount++;
+                Boss_S.readyToPlay = false;
+                countPlay = 0;
                 break;
 
             case 1:
                 cout << boss.getName() << " regarde les mouches voler" << endl << endl;
                 gameCount++;
+                Boss_S.readyToPlay = false;
+                countPlay = 0;
                 break;
 
             case 2:
                 Boss_S.isHit = false;
                 Boss_S.isAttacking = false;
                 Boss_S.isAttacking2 = true;
-                boss.attack(wizard);
-                Char_S.isHit = true;
                 infoBoxB = true;
                 textInfoBox.setString("??? vous inflige 35 points de degats !");
-                gameCount++;
+                Boss_S.readyToPlay = false;
+                countPlay = 0;
                 break;
 
             case 3:
                 Boss_S.isHit = false;
                 Boss_S.isAttacking = true;
-                boss.attack(wizard);
-                Char_S.isHit = true;
                 infoBoxB = true;
                 textInfoBox.setString("??? vous inflige 35 points de degats !");
-                gameCount++;
+                Boss_S.readyToPlay = false;
+                countPlay = 0;
                 break;
 
             case 4:
                 Boss_S.isHit = false;
                 Boss_S.isAttacking = false;
                 Boss_S.isAttacking2 = true;
-                boss.attack(wizard);
-                Char_S.isHit = true;
                 infoBoxB = true;
                 textInfoBox.setString("??? vous inflige 35 points de degats !");
+                Boss_S.readyToPlay = false;
+                countPlay = 0;
+                break;
+
+            case 5:
+                cout << boss.getName() << " regarde les mouches voler" << endl << endl;
                 gameCount++;
+                Boss_S.readyToPlay = false;
+                countPlay = 0;
                 break;
 
             default:
                 break;
             }
-            Boss_S.readyToPlay = true;
         }
 #pragma endregion Gestion IA
 #pragma region atelier dessin
@@ -1651,43 +1678,43 @@ int main()
                 }
 
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inMenuMusic == true) {
-                    Settings_S.volumeMenuMusic -= 10.f;
+                    Settings_S.volumeMenuMusic -= 5.f;
                     if (Settings_S.volumeMenuMusic <= 0.f) Settings_S.volumeMenuMusic = 0.f;
-                    cout << "-10 pour menu musique";
+                    cout << "-5 pour menu musique";
                     menuMusic.setVolume(Settings_S.volumeMenuMusic);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inMenuMusic == true) {
-                    Settings_S.volumeMenuMusic += 10.f;
+                    Settings_S.volumeMenuMusic += 5.f;
                     if (Settings_S.volumeMenuMusic >= 100.f) Settings_S.volumeMenuMusic = 100.f;
-                    cout << "+10 pour menu musique";
+                    cout << "+5 pour menu musique";
                     menuMusic.setVolume(Settings_S.volumeMenuMusic);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inGameMusic == true) {
-                    Settings_S.volumeGameMusic -= 10.f;
+                    Settings_S.volumeGameMusic -= 5.f;
                     if (Settings_S.volumeGameMusic <= 0.f) Settings_S.volumeGameMusic = 0.f;
-                    cout << "-10 pour game musique";
+                    cout << "-5 pour game musique";
                     fightMusic.setVolume(Settings_S.volumeGameMusic);
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameMusic == true) {
-                    Settings_S.volumeGameMusic += 10.f;
+                    Settings_S.volumeGameMusic += 5.f;
                     if (Settings_S.volumeGameMusic >= 100.f) Settings_S.volumeGameMusic = 100.f;
-                    cout << "+10 pour game musique";
+                    cout << "+5 pour game musique";
                     fightMusic.setVolume(Settings_S.volumeGameMusic);
 
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && Settings_S.inGameSound == true) {
-                    Settings_S.volumeGameSound -= 10.f;
+                    Settings_S.volumeGameSound -= 5.f;
                     if (Settings_S.volumeGameSound <= 0.f) Settings_S.volumeGameSound = 0.f;
-                    cout << "-10 pour game sound";
+                    cout << "-5 pour game sound";
                     soundWizardAttack.setVolume(Settings_S.volumeGameSound);
                     soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
                     soundHeal.setVolume(Settings_S.volumeGameSound);
 
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && Settings_S.inGameSound == true) {
-                    Settings_S.volumeGameSound += 10.f;
+                    Settings_S.volumeGameSound += 5.f;
                     if (Settings_S.volumeGameMusic >= 100.f) Settings_S.volumeGameMusic = 100.f;
-                    cout << "+10 pour game sound";
+                    cout << "+5 pour game sound";
                     soundWizardAttack.setVolume(Settings_S.volumeGameSound);
                     soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
                     soundHeal.setVolume(Settings_S.volumeGameSound);
@@ -1790,6 +1817,10 @@ int main()
                     soundWizardAttack.stop();
                     soundFireWormAttack.play();
                 }
+                if (Worm_S.countAnimAtk == 10) {
+                    fireWorm.attack(wizard);
+                    Char_S.isHit = true;
+                }
                 if (Worm_S.countAnimAtk == 16) {
                     Worm_S.isAttacking = false;
                 }
@@ -1811,7 +1842,6 @@ int main()
             else if (Worm_S.DeathCount == 0) {
                 if (fireWorm.getAlive() == false) {
                     f_anim_Death.x -= 180;
-                    if (f_anim_Death.x == 0) f_anim_Hit.x = 1440;
                     fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x - 180, 0, 180, 180));
                     Worm_S.countAnimDeath++;
                     if (Worm_S.countAnimDeath == 8) {
@@ -1881,7 +1911,7 @@ int main()
                     e_anim_Death.x -= 450;
                     evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x - 450, 0, 450, 450));
                     Evil_S.countAnimDeath++;
-                    if (Evil_S.countAnimDeath == 6) {
+                    if (Evil_S.countAnimDeath == 5) {
                         Evil_S.isDead = false;
                         Evil_S.DeathCount++;
                         Evil_S.printBody = true;
@@ -1912,8 +1942,13 @@ int main()
                     soundBossAttack.setPlayingOffset(sf::seconds(0.5));
                     soundBossAttack.play();
                 }
+                if (Boss_S.countAnimAtk == 5) {
+                    boss.attack(wizard);
+                    Char_S.isHit = true;
+                }
                 if (Boss_S.countAnimAtk == 8) {
                     Boss_S.isAttacking = false;
+                    gameCount++;
                 }
                 window.draw(boss_sprite_Attack);
             }
@@ -1937,8 +1972,13 @@ int main()
                    soundBossAttack.setPlayingOffset(sf::seconds(0.5));
                     soundBossAttack.play();
                 }
+                if (Boss_S.countAnimAtk2 == 5) {
+                    boss.attack(wizard);
+                    Char_S.isHit = true;
+                }
                 if (Boss_S.countAnimAtk2 == 8) {
                     Boss_S.isAttacking2 = false;
+                    gameCount++;
                 }
                 window.draw(boss_sprite_Attack2);
             }
@@ -1951,6 +1991,7 @@ int main()
                         Boss_S.isDead = false;
                         Boss_S.DeathCount++;
                         Boss_S.printBody = true;
+                        gameCount++;
                     }
                     window.draw(boss_sprite_Death);
                 }
@@ -1972,7 +2013,6 @@ int main()
                     window.draw(menuSkip);
                     window.draw(textSkip);
                 }
-
                 if (Char_S.AttackMode && gameCount == 1 && wizard.getAlive() == true) {
                     window.draw(menuWhoAtk);
                     window.draw(menuWorm);
