@@ -1,4 +1,4 @@
-bold<Bonjour> et bienvenue sur mon Github ! 
+Bonjour et bienvenue sur mon Github ! 
 
 Pour ce projet nous avions pour consigne de créer n'importe quelle application à l'aide de l'outil SFML.
 
