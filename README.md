@@ -22,7 +22,7 @@ Vous découvrirez le Fire Worm, un petit vers de feu qui vous crache des boules 
 Le Evil Wizard qui est un méchant sorcier du néant qui utilise des sorts de feu et qui soigne ses alliés.
 Enfin, le ???, un ennemi inconnu d'une puissance inégalé et redoutable.
 
-### 2.1. Assets
+## 3. Assets
 
   Pour ce projet, j'ai utilisé des assets provenant de itch.io.
 
