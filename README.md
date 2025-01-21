@@ -38,8 +38,8 @@ Sorcier (Vous) : Free Game Assets (https://free-game-assets.itch.io/free-wizard-
 
 Background : Google (https://www.reddit.com/r/PixelArt/comments/lc3ksr/i_made_origin_isle_from_monster_hunter_into_an/)
 
-Background Menu : Free Game Assets (
+Background Menu : Free Game Assets (https://free-game-assets.itch.io/free-sky-with-clouds-background-pixel-art-set)
 
-Musique : Création de moi-même avec MusicLab (sauf celle de victoire ^^)
+Musique : Création de moi-même avec MusicLab (sauf celle de victoire)
 
 Sound Effects : Piabay
