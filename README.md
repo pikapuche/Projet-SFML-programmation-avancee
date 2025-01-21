@@ -2,10 +2,12 @@
 
 ## 1. Présentation
 
-  SYWAR, THE QUEST OF JAAJ est un mini jeu créé en C++ avec la bibliothèque SFML. Ce mini est un combat tour par tour où le but est de tuer tout les ennemis pour gagner !
+  SYWAR, THE QUEST OF JAAJ est un mini jeu créé en C++ avec la bibliothèque SFML.
 
-Ce mini jeu a dû être créé en 1 semaine (limite de temps imposer par le professeur). C'est mon premier projet de jeu et je n'ai pas modifier son code depuis que j'ai rendu le projet.
-Cela me permet de voir le nombre incalculable d'erreur que j'ai pu faire dans l'organisation de ce  code qui est catastrophique et donc voir que je continue d'apprendre.
+Ce mini jeu est un combat tour par tour où le but est d'éliminer tout les ennemis pour gagner !
+
+Ce mini jeu a dû être créé en 1 semaine (limite de temps imposé par le professeur). C'est mon premier projet de jeu et je n'ai pas modifier son code depuis que j'ai rendu le projet.
+Cela me permet de voir le nombre incalculable d'erreur que j'ai pu faire dans l'organisation de ce code qui est catastrophique pour voir que je continue d'apprendre.
 
 ## 2. Gameplay
 
