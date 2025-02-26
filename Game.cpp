@@ -7,14 +7,12 @@ void Game::initAll()
 
     // Charger une texture
 
-    sf::Texture background_texture;
     if (!background_texture.loadFromFile("Extra\\decor.png")) {
         cout << "error load file decor.png" << endl;
     }
     background_texture.setSmooth(true);
     // Associer la texture a un sprite
 
-    sf::Sprite sprite_background;
     sprite_background.setTexture(background_texture);
     sprite_background.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
 
@@ -24,298 +22,207 @@ void Game::initAll()
 
 
     ////////// Personnage //////////
-    sf::Texture perso_texture;
-    sf::Sprite perso_sprite;
+
     if (!perso_texture.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\IdleV2.png")) {
-        cout << "error load file IdleB2.png" << endl;
+        cout << "error load file IdlePerso.png" << endl;
     }
     perso_texture.setSmooth(true);
 
-    perso_sprite.setTexture(perso_texture);
+    //perso_sprite.setTexture(perso_texture);
     perso_sprite.setPosition(225, 625);
     //
-    sf::Texture perso_texture_Attack;
-    sf::Sprite perso_sprite_Attack;
+
     if (!perso_texture_Attack.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\Attack_1V2.png")) {
-        return -1;
+        cout << "error load file attack1Perso.png" << endl;
     }
     perso_texture_Attack.setSmooth(true);
 
-    perso_sprite_Attack.setTexture(perso_texture_Attack);
-    perso_sprite_Attack.setPosition(225, 625);
     //
-    sf::Texture perso_texture_Heal;
-    sf::Sprite perso_sprite_Heal;
     if (!perso_texture_Heal.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\Attack_2V2.png")) {
-        return -1;
+        cout << "error load file attack2Perso.png" << endl;
     }
     perso_texture_Heal.setSmooth(true);
 
-    perso_sprite_Heal.setTexture(perso_texture_Heal);
-    perso_sprite_Heal.setPosition(225, 625);
     //
-    sf::Texture perso_texture_Hit;
-    sf::Sprite perso_sprite_Hit;
     if (!perso_texture_Hit.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\HurtV2.png")) {
-        return -1;
+        cout << "error load file HurtPerso.png" << endl;
     }
     perso_texture_Hit.setSmooth(true);
 
-    perso_sprite_Hit.setTexture(perso_texture_Hit);
-    perso_sprite_Hit.setPosition(225, 625);
     //
-    sf::Texture perso_texture_Death;
-    sf::Sprite perso_sprite_Death;
     if (!perso_texture_Death.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\DeadV2.png")) {
-        return -1;
+        cout << "error load file DeadPerso.png" << endl;
     }
     perso_texture_Death.setSmooth(true);
 
-    perso_sprite_Death.setTexture(perso_texture_Death);
-    perso_sprite_Death.setPosition(225, 625);
     ////////////////////////////////
 
     ////////// Ennemis //////////
 
     // Verre de terre de feu nul //
-    sf::Texture fireWorm_texture;
-    sf::Sprite fireWorm_sprite;
+
     if (!fireWorm_texture.loadFromFile("Extra\\TileSheets\\Fire Worm\\IdleV2.png")) {
-        return -1;
+        cout << "error load file IdleWorm.png" << endl;
     }
     fireWorm_texture.setSmooth(true);
 
     fireWorm_sprite.setTexture(fireWorm_texture);
     fireWorm_sprite.setPosition(925, 650);
     //
-    sf::Texture fireWorm_texture_Attack;
-    sf::Sprite fireWorm_sprite_Attack;
     if (!fireWorm_texture_Attack.loadFromFile("Extra\\TileSheets\\Fire Worm\\AttackV2.png")) {
-        return -1;
+        cout << "error load file attackWorm.png" << endl;
     }
     fireWorm_texture_Attack.setSmooth(true);
 
-    fireWorm_sprite_Attack.setTexture(fireWorm_texture_Attack);
-    fireWorm_sprite_Attack.setPosition(925, 650);
     //
-    sf::Texture fireWorm_texture_Hit;
-    sf::Sprite fireWorm_sprite_Hit;
     if (!fireWorm_texture_Hit.loadFromFile("Extra\\TileSheets\\Fire Worm\\Get HitV2.png")) {
-        return -1;
+        cout << "error load file hitWorm.png" << endl;
     }
     fireWorm_texture_Hit.setSmooth(true);
 
-    fireWorm_sprite_Hit.setTexture(fireWorm_texture_Hit);
-    fireWorm_sprite_Hit.setPosition(925, 650);
     //
-    sf::Texture fireWorm_texture_Death;
-    sf::Sprite fireWorm_sprite_Death;
     if (!fireWorm_texture_Death.loadFromFile("Extra\\TileSheets\\Fire Worm\\DeathV2.png")) {
-        return -1;
+        cout << "error load file DeathWorm.png" << endl;
     }
     fireWorm_texture_Death.setSmooth(true);
 
-    fireWorm_sprite_Death.setTexture(fireWorm_texture_Death);
-    fireWorm_sprite_Death.setPosition(925, 650);
+    // Sorcier de feu mechant //
 
-    // Sorcier de feu m�chant //
-    sf::Texture evilWizard_texture;
-    sf::Sprite evilWizard_sprite;
     if (!evilWizard_texture.loadFromFile("Extra\\TileSheets\\Evil Wizard\\IdleV2.png")) {
-        return -1;
+        cout << "error load file IdleWizard.png" << endl;
     }
     evilWizard_texture.setSmooth(true);
 
     evilWizard_sprite.setTexture(evilWizard_texture);
     evilWizard_sprite.setPosition(1125, 444);
     //
-    sf::Texture evilWizard_texture_Attack;
-    sf::Sprite evilWizard_sprite_Attack;
     if (!evilWizard_texture_Attack.loadFromFile("Extra\\TileSheets\\Evil Wizard\\AttackV2.png")) {
-        return -1;
+        cout << "error load file AttackWizard.png" << endl;
     }
     evilWizard_texture_Attack.setSmooth(true);
 
-    evilWizard_sprite_Attack.setTexture(evilWizard_texture_Attack);
-    evilWizard_sprite_Attack.setPosition(1125, 444);
     //
-    sf::Texture evilWizard_texture_Heal;
-    sf::Sprite evilWizard_sprite_Heal;
     if (!evilWizard_texture_Heal.loadFromFile("Extra\\TileSheets\\Evil Wizard\\MoveV2.png")) {
-        return -1;
+        cout << "error load file MoveWizard.png (heal)" << endl;
     }
     evilWizard_texture_Heal.setSmooth(true);
 
-    evilWizard_sprite_Heal.setTexture(evilWizard_texture_Heal);
-    evilWizard_sprite_Heal.setPosition(1125, 444);
     //
-    sf::Texture evilWizard_texture_Hit;
-    sf::Sprite evilWizard_sprite_Hit;
     if (!evilWizard_texture_Hit.loadFromFile("Extra\\TileSheets\\Evil Wizard\\HitV2.png")) {
-        return -1;
+        cout << "error load file HitWizard.png" << endl;
     }
     evilWizard_texture_Hit.setSmooth(true);
 
-    evilWizard_sprite_Hit.setTexture(evilWizard_texture_Hit);
-    evilWizard_sprite_Hit.setPosition(1125, 444);
     //
-    sf::Texture evilWizard_texture_Death;
-    sf::Sprite evilWizard_sprite_Death;
     if (!evilWizard_texture_Death.loadFromFile("Extra\\TileSheets\\Evil Wizard\\DeathV2.png")) {
-        return -1;
+        cout << "error load file DeathWizard.png" << endl;
     }
     evilWizard_texture_Death.setSmooth(true);
 
-    evilWizard_sprite_Death.setTexture(evilWizard_texture_Death);
-    evilWizard_sprite_Death.setPosition(1125, 444);
-
     // LE BOSS DE SES MORTS //
-    sf::Texture boss_texture;
-    sf::Sprite boss_sprite;
+
     if (!boss_texture.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\IdleV2.png")) {
-        return -1;
+        cout << "error load file IdleBoss.png" << endl;
     }
     boss_texture.setSmooth(true);
 
     boss_sprite.setTexture(boss_texture);
     boss_sprite.setPosition(1400, 333);
     //
-    sf::Texture boss_texture_Attack;
-    sf::Sprite boss_sprite_Attack;
     if (!boss_texture_Attack.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\Attack1V2.png")) {
-        return -1;
+        cout << "error load file Attack1Boss.png" << endl;
     }
     boss_texture_Attack.setSmooth(true);
 
-    boss_sprite_Attack.setTexture(boss_texture_Attack);
-    boss_sprite_Attack.setPosition(1400, 333);
     //
-    sf::Texture boss_texture_Attack2;
-    sf::Sprite boss_sprite_Attack2;
     if (!boss_texture_Attack2.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\Attack2V2.png")) {
-        return -1;
+        cout << "error load file Attack2Boss.png" << endl;
     }
     boss_texture_Attack2.setSmooth(true);
 
-    boss_sprite_Attack2.setTexture(boss_texture_Attack2);
-    boss_sprite_Attack2.setPosition(1400, 333);
     //
-    sf::Texture boss_texture_Hit;
-    sf::Sprite boss_sprite_Hit;
     if (!boss_texture_Hit.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\HitV2.png")) {
-        return -1;
+        cout << "error load file HitBoss.png" << endl;
     }
     boss_texture_Hit.setSmooth(true);
 
-    boss_sprite_Hit.setTexture(boss_texture_Hit);
-    boss_sprite_Hit.setPosition(1400, 333);
     //
-    sf::Texture boss_texture_Death;
-    sf::Sprite boss_sprite_Death;
     if (!boss_texture_Death.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\DeathV2.png")) {
-        return -1;
+        cout << "error load file DeathBoss.png" << endl;
     }
     boss_texture_Death.setSmooth(true);
 
-    boss_sprite_Death.setTexture(boss_texture_Death);
-    boss_sprite_Death.setPosition(1400, 333);
-
     ////////////////////////////////
 
-    ////////// Animation ///////////
-    sf::Vector2i c_anim(1, 0);
-    sf::Vector2i c_anim_Attack(1, 0);
-    sf::Vector2i c_anim_Heal(1, 0);
-    sf::Vector2i c_anim_Hit(1, 0);
-    sf::Vector2i c_anim_Death(1, 0);
+    f_anim_Death.x = 1440;
+    f_anim_Hit.x = 540;
+    f_anim_Attack.x = 2880;
 
-    sf::Vector2i f_anim(1, 0);
-    sf::Vector2i f_anim_Attack(1, 0);
-    sf::Vector2i f_anim_Hit(1, 0);
-    sf::Vector2i f_anim_Death(1, 0);
+    e_anim_Death.x = 2250;
+    e_anim_Attack.x = 3600;
+    e_anim_Hit.x = 1800;
 
-    sf::Vector2i e_anim(1, 0);
-    sf::Vector2i e_anim_Attack(1, 0);
-    sf::Vector2i e_anim_Hit(1, 0);
-    sf::Vector2i e_anim_Heal(1, 0);
-    sf::Vector2i e_anim_Death(1, 0);
+    b_anim_Death.x = 5600;
+    b_anim_Attack.x = 6400;
+    b_anim_Attack2.x = 6400;
+    b_anim_Hit.x = 2400;
 
-    sf::Vector2i b_anim(1, 0);
-    sf::Vector2i b_anim_Attack(1, 0);
-    sf::Vector2i b_anim_Attack2(1, 0);
-    sf::Vector2i b_anim_Hit(1, 0);
-    sf::Vector2i b_anim_Death(1, 0);
-    ////////////////////////////////
 #pragma endregion Gestion_images
 #pragma region Gestion_son
-    sf::Music menuMusic;
     if (!menuMusic.openFromFile("Extra\\Musiques\\MenuWAV.wav"))
-        return -1;
+        cout << "error load music MenuWAV" << endl;
     menuMusic.setLoop(true);
     if (gameCount == 0) menuMusic.play();
     menuMusic.setVolume(Settings_S.volumeMenuMusic);
 
-    sf::Music endWinMusic;
     if (!endWinMusic.openFromFile("Extra\\Musiques\\FinalFantasyWinWAV.wav"))
-        return -1;
+        cout << "error load music VictoryMusic (final fantasy)" << endl;
     endWinMusic.setVolume(Settings_S.volumeMenuMusic);
     if (Settings_S.winMusic == true) endWinMusic.play();
     endWinMusic.setLoop(true);
 
-    sf::Music endLoseMusic;
     if (!endLoseMusic.openFromFile("Extra\\Musiques\\endLoseMusicWAV.wav"))
-        return -1;
+        cout << "error load music LoseMusic" << endl;
     endLoseMusic.setVolume(Settings_S.volumeMenuMusic);
     if (Settings_S.loseMusic == true) endLoseMusic.play();
     endLoseMusic.setLoop(true);
 
-    sf::Music fightMusic;
     if (!fightMusic.openFromFile("Extra\\Musiques\\V2 120bpm.wav"))
-        return -1;
+        cout << "error load music V2 120bpm" << endl;
     fightMusic.setLoop(true);
     if (gameCount >= 1) fightMusic.play();
     fightMusic.setVolume(Settings_S.volumeGameMusic);
 
 
-    sf::SoundBuffer wizardAttack;
     if (!wizardAttack.loadFromFile("Extra\\Musiques\\wizard attack V3.wav"))
-        return -1;
+        cout << "error load sound wizardAttackV3" << endl;
 
-    sf::Sound soundWizardAttack;
     soundWizardAttack.setBuffer(wizardAttack);
     soundWizardAttack.setVolume(Settings_S.volumeGameSound);
 
-    sf::SoundBuffer Heal;
     if (!Heal.loadFromFile("Extra\\Musiques\\HealWAV.wav"))
-        return -1;
+        cout << "error load sound Heal" << endl;
 
-    sf::Sound soundHeal;
     soundHeal.setBuffer(Heal);
     soundHeal.setVolume(Settings_S.volumeGameSound);
 
 
-    sf::SoundBuffer fireWormAttack;
     if (!fireWormAttack.loadFromFile("Extra\\Musiques\\fireWormAttackWAV.wav"))
-        return -1;
+        cout << "error load sound fireWormAttack" << endl;
 
-    sf::Sound soundFireWormAttack;
     soundFireWormAttack.setBuffer(fireWormAttack);
     soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
 
-    sf::SoundBuffer evilWizardAttack;
     if (!evilWizardAttack.loadFromFile("Extra\\Musiques\\fireWizardAttackLongWAV.wav"))
-        return -1;
+        cout << "error load sound fireWizardAttackLong" << endl;
 
-    sf::Sound soundEvilWizardAttack;
     soundEvilWizardAttack.setBuffer(evilWizardAttack);
     soundEvilWizardAttack.setVolume(Settings_S.volumeGameSound);
     soundEvilWizardAttack.setPlayingOffset(sf::seconds(14));
 
-    sf::SoundBuffer bossAttack;
     if (!bossAttack.loadFromFile("Extra\\Musiques\\swooshEffectLourdWAV.wav"))
-        return -1;
+        cout << "error load sound swooshEffectLourdWAV" << endl;
 
-    sf::Sound soundBossAttack;
     soundBossAttack.setBuffer(bossAttack);
     soundBossAttack.setVolume(Settings_S.volumeGameSound);
     soundBossAttack.setPlayingOffset(sf::seconds(0.5));
@@ -325,72 +232,58 @@ void Game::initAll()
 
 #pragma region Menu principal
 
-    sf::Texture background_texture_Menu;
     if (!background_texture_Menu.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\1.png")) {
-        return -1;
+        cout << "error load image menuCloud1" << endl;
     }
     background_texture_Menu.setSmooth(true);
 
-    sf::Sprite sprite_background_Menu;
     sprite_background_Menu.setTexture(background_texture_Menu);
     sprite_background_Menu.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
     //
-    sf::Texture background_texture_Menu2;
     if (!background_texture_Menu2.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\2.png")) {
-        return -1;
+        cout << "error load image menuCloud2" << endl;
     }
     background_texture_Menu2.setSmooth(true);
 
-    sf::Sprite sprite_background_Menu2;
     sprite_background_Menu2.setTexture(background_texture_Menu2);
     sprite_background_Menu2.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
     //
-    sf::Texture background_texture_Menu3;
     if (!background_texture_Menu3.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\3.png")) {
-        return -1;
+        cout << "error load image menuCloud3" << endl;
     }
     background_texture_Menu3.setSmooth(true);
 
-    sf::Sprite sprite_background_Menu3;
     sprite_background_Menu3.setTexture(background_texture_Menu3);
     sprite_background_Menu3.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
     //
-    sf::Texture background_texture_Menu4;
     if (!background_texture_Menu4.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\4.png")) {
-        return -1;
+        cout << "error load image menuClou4" << endl;
     }
     background_texture_Menu4.setSmooth(true);
 
-    sf::Sprite sprite_background_Menu4;
     sprite_background_Menu4.setTexture(background_texture_Menu4);
     sprite_background_Menu4.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
     //
-    sf::Texture background_texture_Menu5;
     if (!background_texture_Menu5.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\5.png")) {
-        return -1;
+        cout << "error load image menuCloud5" << endl;
     }
     background_texture_Menu5.setSmooth(true);
 
-    sf::Sprite sprite_background_Menu5;
     sprite_background_Menu5.setTexture(background_texture_Menu5);
     sprite_background_Menu5.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
     //
-    sf::Texture background_texture_Menu6;
     if (!background_texture_Menu6.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\Image Projet\\free-sky-with-clouds-background-pixel-art-set\\Clouds\\Clouds 6\\6.png")) {
-        return -1;
+        cout << "error load image menuCloud6" << endl;
     }
     background_texture_Menu6.setSmooth(true);
 
-    sf::Sprite sprite_background_Menu6;
     sprite_background_Menu6.setTexture(background_texture_Menu6);
     sprite_background_Menu6.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
     //
-    sf::Font fontMenu;
     if (!fontMenu.loadFromFile("Extra\\minecraft.ttf"))
     {
-        return -1;
+        cout << "error load text minecraft" << endl;
     }
-    sf::Text title_Menu;
     title_Menu.setPosition(160, 110);
     title_Menu.setFont(fontMenu);
     title_Menu.setString("SYWAR, THE QUEST OF JAAJ");
@@ -401,10 +294,9 @@ void Game::initAll()
     title_Menu.setStyle(sf::Text::Bold);
     title_Menu.setStyle(sf::Text::Underlined);
     //
-    sf::RectangleShape start_Menuu(sf::Vector2f(210.f, 80.f));
-    start_Menuu.setPosition(550, 340);
-    start_Menuu.setFillColor(sf::Color(255, 178, 101));
-    sf::Text start_Menu;
+    start_Menu_RectangleShape.setSize((sf::Vector2f(210.f, 80.f)));
+    start_Menu_RectangleShape.setPosition(550, 340);
+    start_Menu_RectangleShape.setFillColor(sf::Color(255, 178, 101));
     start_Menu.setPosition(570, 350);
     start_Menu.setFont(fontMenu);
     start_Menu.setString("START");
@@ -414,10 +306,9 @@ void Game::initAll()
     start_Menu.setOutlineThickness(8.f);
     start_Menu.setStyle(sf::Text::Bold);
     //
-    sf::RectangleShape settings_Menuu(sf::Vector2f(300.f, 80.f));
-    settings_Menuu.setPosition(500, 460);
-    settings_Menuu.setFillColor(sf::Color(255, 178, 101));
-    sf::Text settings_Menu;
+    settings_Menu_RectangleShape.setSize(sf::Vector2f(300.f, 80.f));
+    settings_Menu_RectangleShape.setPosition(500, 460);
+    settings_Menu_RectangleShape.setFillColor(sf::Color(255, 178, 101));
     settings_Menu.setPosition(520, 470);
     settings_Menu.setFont(fontMenu);
     settings_Menu.setString("SETTINGS");
@@ -427,10 +318,9 @@ void Game::initAll()
     settings_Menu.setOutlineThickness(8.f);
     settings_Menu.setStyle(sf::Text::Bold);
     //
-    sf::RectangleShape quit_Menuu(sf::Vector2f(165.f, 80.f));
-    quit_Menuu.setPosition(570, 580);
-    quit_Menuu.setFillColor(sf::Color(255, 178, 101));
-    sf::Text quit_Menu;
+    quit_Menu_RectangleShape.setSize(sf::Vector2f(165.f, 80.f));
+    quit_Menu_RectangleShape.setPosition(570, 580);
+    quit_Menu_RectangleShape.setFillColor(sf::Color(255, 178, 101));
     quit_Menu.setPosition(590, 590);
     quit_Menu.setFont(fontMenu);
     quit_Menu.setString("QUIT");
@@ -440,40 +330,19 @@ void Game::initAll()
     quit_Menu.setOutlineThickness(8.f);
     quit_Menu.setStyle(sf::Text::Bold);
 #pragma endregion Menu principal
-}
-
-void Game::run()
-{
-    Character wizard("William l'intervenant", 225, 625, 500); // Character::Character(string n, int CX, int CY, int h) : c_name(n), c_CoordX(CX), c_CoordY(CY), c_health(h), Entities(true) {}
-
-    EvilWizard evilWizard;
-    FireWorm fireWorm;
-    Boss boss;
-
-    // Creation de la fenetre
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
-    window.setFramerateLimit(60);
-
-
-
 
 #pragma region Menu
     // Mini menu 
-    sf::RectangleShape menuBackground(sf::Vector2f(420.0f, 226.f));
+    menuBackground.setSize(sf::Vector2f(420.0f, 226.f));
     menuBackground.setPosition(20, 20);
     menuBackground.setFillColor(sf::Color(255, 178, 101));
 
-    sf::RectangleShape menuAtk(sf::Vector2f(420.f, 65.f));
+    menuAtk.setSize(sf::Vector2f(420.f, 65.f));
     menuAtk.setPosition(20, 25);
     menuAtk.setFillColor(sf::Color(183, 127, 71));
-    sf::Font font;
-    if (!font.loadFromFile("C:\\Users\\quent\\source\\repos\\Mini Projet FF\\minecraft\\minecraft.ttf"))
-    {
-        return -1;
-    }
-    sf::Text textAtk;
+
     textAtk.setPosition(130, 35);
-    textAtk.setFont(font);
+    textAtk.setFont(fontMenu);
     textAtk.setString("ATTAQUER");
     textAtk.setCharacterSize(35);
     textAtk.setFillColor(sf::Color::White);
@@ -483,16 +352,15 @@ void Game::run()
 
 #pragma region sousMenuAtk
     // apres avoir choisi attaquer
-    sf::RectangleShape menuWhoAtk(sf::Vector2f(420.f, 226.f));
+    menuWhoAtk.setSize(sf::Vector2f(420.f, 226.f));
     menuWhoAtk.setPosition(20, 20);
     menuWhoAtk.setFillColor(sf::Color(255, 178, 101));
 
-    sf::RectangleShape menuWorm(sf::Vector2f(420.f, 65.f));
+    menuWorm.setSize(sf::Vector2f(420.f, 65.f));
     menuWorm.setPosition(20, 25);
     menuWorm.setFillColor(sf::Color(183, 127, 71));
-    sf::Text textMenuWorm;
     textMenuWorm.setPosition(120, 35);
-    textMenuWorm.setFont(font);
+    textMenuWorm.setFont(fontMenu);
     textMenuWorm.setString("FIRE WORM");
     textMenuWorm.setCharacterSize(35);
     textMenuWorm.setFillColor(sf::Color::White);
@@ -500,12 +368,11 @@ void Game::run()
     textMenuWorm.setOutlineThickness(5.f);
     textMenuWorm.setStyle(sf::Text::Bold);
 
-    sf::RectangleShape menuEvilWizard(sf::Vector2f(420.f, 65.f));
+    menuEvilWizard.setSize(sf::Vector2f(420.f, 65.f));
     menuEvilWizard.setPosition(20, 100);
     menuEvilWizard.setFillColor(sf::Color(183, 127, 71));
-    sf::Text textMenuEvilWizard;
     textMenuEvilWizard.setPosition(100, 110);
-    textMenuEvilWizard.setFont(font);
+    textMenuEvilWizard.setFont(fontMenu);
     textMenuEvilWizard.setString("EVIL WIZARD");
     textMenuEvilWizard.setCharacterSize(35);
     textMenuEvilWizard.setFillColor(sf::Color::White);
@@ -513,12 +380,11 @@ void Game::run()
     textMenuEvilWizard.setOutlineThickness(5.f);
     textMenuEvilWizard.setStyle(sf::Text::Bold);
 
-    sf::RectangleShape menuBoss(sf::Vector2f(420.f, 65.f));
+    menuBoss.setSize(sf::Vector2f(420.f, 65.f));
     menuBoss.setPosition(20, 175);
     menuBoss.setFillColor(sf::Color(183, 127, 71));
-    sf::Text textMenuBoss;
     textMenuBoss.setPosition(180, 185);
-    textMenuBoss.setFont(font);
+    textMenuBoss.setFont(fontMenu);
     textMenuBoss.setString("???");
     textMenuBoss.setCharacterSize(35);
     textMenuBoss.setFillColor(sf::Color::White);
@@ -527,12 +393,11 @@ void Game::run()
     textMenuBoss.setStyle(sf::Text::Bold);
 #pragma endregion sousMenuAtk
 
-    sf::RectangleShape menuHeal(sf::Vector2f(420.f, 65.f));
+    menuHeal.setSize(sf::Vector2f(420.f, 65.f));
     menuHeal.setPosition(20, 100);
     menuHeal.setFillColor(sf::Color(183, 127, 71));
-    sf::Text textHeal;
     textHeal.setPosition(180, 110);
-    textHeal.setFont(font);
+    textHeal.setFont(fontMenu);
     textHeal.setString("SOIN");
     textHeal.setCharacterSize(35);
     textHeal.setFillColor(sf::Color::White);
@@ -540,13 +405,11 @@ void Game::run()
     textHeal.setOutlineThickness(5.f);
     textHeal.setStyle(sf::Text::Bold);
 
-
-    sf::RectangleShape menuSkip(sf::Vector2f(420.f, 65.f));
+    menuSkip.setSize(sf::Vector2f(420.f, 65.f));
     menuSkip.setPosition(20, 175);
     menuSkip.setFillColor(sf::Color(183, 127, 71));
-    sf::Text textSkip;
     textSkip.setPosition(70, 185);
-    textSkip.setFont(font);
+    textSkip.setFont(fontMenu);
     textSkip.setString("PASSER LE TOUR");
     textSkip.setCharacterSize(35);
     textSkip.setFillColor(sf::Color::White);
@@ -554,6 +417,7 @@ void Game::run()
     textSkip.setOutlineThickness(5.f);
     textSkip.setStyle(sf::Text::Bold);
 
+    // je me suis arreter la 
 #pragma region UI des ennemies 
     sf::Text UI_Character;
     UI_Character.setPosition(317, 690);
@@ -667,6 +531,7 @@ void Game::run()
     UI_Boss_PV2.setOutlineThickness(3.5f);
     UI_Boss_PV2.setStyle(sf::Text::Bold);
 #pragma endregion UI des ennemies
+
 #pragma region autre menu
     sf::RectangleShape infoBox(sf::Vector2f(850.f, 180.f));
     infoBox.setPosition(1000, 35);
@@ -812,25 +677,27 @@ void Game::run()
 #pragma endregion autre menu
 
 #pragma endregion Menu
-    f_anim_Death.x = 1440;
-    f_anim_Hit.x = 540;
-    f_anim_Attack.x = 2880;
+}
 
-    e_anim_Death.x = 2250;
-    e_anim_Attack.x = 3600;
-    e_anim_Hit.x = 1800;
+void Game::run()
+{
+    Character wizard("William l'intervenant", 225, 625, 500); // Character::Character(string n, int CX, int CY, int h) : c_name(n), c_CoordX(CX), c_CoordY(CY), c_health(h), Entities(true) {}
 
-    b_anim_Death.x = 5600;
-    b_anim_Attack.x = 6400;
-    b_anim_Attack2.x = 6400;
-    b_anim_Hit.x = 2400;
+    //EvilWizard evilWizard;
+    //FireWorm fireWorm;
+    //Boss boss;
 
+    // Creation de la fenetre
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
+    window.setFramerateLimit(8);
 
     auto startTime = chrono::steady_clock::now();
     auto waitTime = chrono::seconds(1);
 
     auto startSetTime = chrono::steady_clock::now();
     auto waitSetTime = chrono::seconds(1);
+
+    initAll();
 
     // Boucle principale
     while (window.isOpen()) {
@@ -842,7 +709,7 @@ void Game::run()
         }
 
 
-        if (restartGame == true) {
+/*        if (restartGame == true) {
             gameCount = 0;
             //Char
             Char_S.isAttacking = false;
@@ -946,7 +813,7 @@ void Game::run()
             boss.LifeReset();
 
             restartGame = false;
-        }
+        }*/
 
         if (gameCount == 1 && stopMusic == 0) {
             menuMusic.stop();
@@ -1084,43 +951,43 @@ void Game::run()
 #pragma region interFirstMenu
 
         if (sf::Mouse::getPosition().x <= 760 && sf::Mouse::getPosition().x >= 550 && sf::Mouse::getPosition().y <= 450 && sf::Mouse::getPosition().y >= 360) {
-            start_Menuu.setOutlineColor(sf::Color::Cyan);
-            start_Menuu.setOutlineThickness(5.f);
-            quit_Menuu.setOutlineColor(sf::Color::Transparent);
-            quit_Menuu.setOutlineThickness(0);
-            settings_Menuu.setOutlineColor(sf::Color::Transparent);
-            settings_Menuu.setOutlineThickness(0);
+            start_Menu_RectangleShape.setOutlineColor(sf::Color::Cyan);
+            start_Menu_RectangleShape.setOutlineThickness(5.f);
+            quit_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            quit_Menu_RectangleShape.setOutlineThickness(0);
+            settings_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            settings_Menu_RectangleShape.setOutlineThickness(0);
         }
         else {
-            start_Menuu.setOutlineColor(sf::Color::Transparent);
-            start_Menuu.setOutlineThickness(0);
+            start_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            start_Menu_RectangleShape.setOutlineThickness(0);
 
         }
         if (sf::Mouse::getPosition().x <= 800 && sf::Mouse::getPosition().x >= 500 && sf::Mouse::getPosition().y <= 570 && sf::Mouse::getPosition().y >= 480) {
-            settings_Menuu.setOutlineColor(sf::Color::Cyan);
-            settings_Menuu.setOutlineThickness(5.f);
-            start_Menuu.setOutlineColor(sf::Color::Transparent);
-            start_Menuu.setOutlineThickness(0);
-            quit_Menuu.setOutlineColor(sf::Color::Transparent);
-            quit_Menuu.setOutlineThickness(0);
+            settings_Menu_RectangleShape.setOutlineColor(sf::Color::Cyan);
+            settings_Menu_RectangleShape.setOutlineThickness(5.f);
+            start_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            start_Menu_RectangleShape.setOutlineThickness(0);
+            quit_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            quit_Menu_RectangleShape.setOutlineThickness(0);
         }
         else {
-            settings_Menuu.setOutlineColor(sf::Color::Transparent);
-            settings_Menuu.setOutlineThickness(0);
+            settings_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            settings_Menu_RectangleShape.setOutlineThickness(0);
 
 
         }
         if (sf::Mouse::getPosition().x <= 735 && sf::Mouse::getPosition().x >= 570 && sf::Mouse::getPosition().y <= 690 && sf::Mouse::getPosition().y >= 600) {
-            quit_Menuu.setOutlineColor(sf::Color::Cyan);
-            quit_Menuu.setOutlineThickness(5.f);
-            start_Menuu.setOutlineColor(sf::Color::Transparent);
-            start_Menuu.setOutlineThickness(0);
-            settings_Menuu.setOutlineColor(sf::Color::Transparent);
-            settings_Menuu.setOutlineThickness(0);
+            quit_Menu_RectangleShape.setOutlineColor(sf::Color::Cyan);
+            quit_Menu_RectangleShape.setOutlineThickness(5.f);
+            start_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            start_Menu_RectangleShape.setOutlineThickness(0);
+            settings_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            settings_Menu_RectangleShape.setOutlineThickness(0);
         }
         else {
-            quit_Menuu.setOutlineColor(sf::Color::Transparent);
-            quit_Menuu.setOutlineThickness(0);
+            quit_Menu_RectangleShape.setOutlineColor(sf::Color::Transparent);
+            quit_Menu_RectangleShape.setOutlineThickness(0);
 
         }
         if (sf::Mouse::getPosition().x <= 600 && sf::Mouse::getPosition().x >= 250 && sf::Mouse::getPosition().y <= 430 && sf::Mouse::getPosition().y >= 380 && Settings_S.inSettings == true) {
@@ -1528,11 +1395,11 @@ void Game::run()
             window.draw(sprite_background_Menu6);
 
             window.draw(title_Menu);
-            window.draw(start_Menuu);
+            window.draw(start_Menu_RectangleShape);
             window.draw(start_Menu);
-            window.draw(settings_Menuu);
+            window.draw(settings_Menu_RectangleShape);
             window.draw(settings_Menu);
-            window.draw(quit_Menuu);
+            window.draw(quit_Menu_RectangleShape);
             window.draw(quit_Menu);
             if (Settings_S.inSettings == true) {
                 window.draw(settings_Window);
