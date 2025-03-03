@@ -417,11 +417,9 @@ void Game::initAll()
     textSkip.setOutlineThickness(5.f);
     textSkip.setStyle(sf::Text::Bold);
 
-    // je me suis arreter la 
 #pragma region UI des ennemies 
-    sf::Text UI_Character;
     UI_Character.setPosition(317, 690);
-    UI_Character.setFont(font);
+    UI_Character.setFont(fontMenu);
     UI_Character.setString("YOU");
     UI_Character.setCharacterSize(20);
     UI_Character.setFillColor(sf::Color::White);
@@ -429,17 +427,16 @@ void Game::initAll()
     UI_Character.setOutlineThickness(3.5f);
     UI_Character.setStyle(sf::Text::Bold);
 
-    sf::Text UI_Character_PV;
     UI_Character_PV.setPosition(305, 720);
-    UI_Character_PV.setFont(font);
+    UI_Character_PV.setFont(fontMenu);
     UI_Character_PV.setCharacterSize(20);
     UI_Character_PV.setFillColor(sf::Color::Green);
     UI_Character_PV.setOutlineColor(sf::Color::Black);
     UI_Character_PV.setOutlineThickness(3.5f);
     UI_Character_PV.setStyle(sf::Text::Bold);
-    sf::Text UI_Character_PV2;
+
     UI_Character_PV2.setPosition(351, 720);
-    UI_Character_PV2.setFont(font);
+    UI_Character_PV2.setFont(fontMenu);
     UI_Character_PV2.setString(" PV");
     UI_Character_PV2.setCharacterSize(20);
     UI_Character_PV2.setFillColor(sf::Color::Green);
@@ -447,9 +444,8 @@ void Game::initAll()
     UI_Character_PV2.setOutlineThickness(3.5f);
     UI_Character_PV2.setStyle(sf::Text::Bold);
 
-    sf::Text UI_Worm;
     UI_Worm.setPosition(940, 620);
-    UI_Worm.setFont(font);
+    UI_Worm.setFont(fontMenu);
     UI_Worm.setString("FIRE WORM");
     UI_Worm.setCharacterSize(20);
     UI_Worm.setFillColor(sf::Color::White);
@@ -457,17 +453,16 @@ void Game::initAll()
     UI_Worm.setOutlineThickness(3.5f);
     UI_Worm.setStyle(sf::Text::Bold);
 
-    sf::Text UI_Worm_PV;
     UI_Worm_PV.setPosition(970, 650);
-    UI_Worm_PV.setFont(font);
+    UI_Worm_PV.setFont(fontMenu);
     UI_Worm_PV.setCharacterSize(20);
     UI_Worm_PV.setFillColor(sf::Color::Green);
     UI_Worm_PV.setOutlineColor(sf::Color::Black);
     UI_Worm_PV.setOutlineThickness(3.5f);
     UI_Worm_PV.setStyle(sf::Text::Bold);
-    sf::Text UI_Worm_PV2;
+
     UI_Worm_PV2.setPosition(1005, 650);
-    UI_Worm_PV2.setFont(font);
+    UI_Worm_PV2.setFont(fontMenu);
     UI_Worm_PV2.setString(" PV");
     UI_Worm_PV2.setCharacterSize(20);
     UI_Worm_PV2.setFillColor(sf::Color::Green);
@@ -475,9 +470,8 @@ void Game::initAll()
     UI_Worm_PV2.setOutlineThickness(3.5f);
     UI_Worm_PV2.setStyle(sf::Text::Bold);
 
-    sf::Text UI_Evil;
     UI_Evil.setPosition(1280, 520);
-    UI_Evil.setFont(font);
+    UI_Evil.setFont(fontMenu);
     UI_Evil.setString("EVIL WIZARD");
     UI_Evil.setCharacterSize(20);
     UI_Evil.setFillColor(sf::Color::White);
@@ -485,17 +479,16 @@ void Game::initAll()
     UI_Evil.setOutlineThickness(3.5f);
     UI_Evil.setStyle(sf::Text::Bold);
 
-    sf::Text UI_Evil_PV;
     UI_Evil_PV.setPosition(1310, 550);
-    UI_Evil_PV.setFont(font);;
+    UI_Evil_PV.setFont(fontMenu);;
     UI_Evil_PV.setCharacterSize(20);
     UI_Evil_PV.setFillColor(sf::Color::Green);
     UI_Evil_PV.setOutlineColor(sf::Color::Black);
     UI_Evil_PV.setOutlineThickness(3.5f);
     UI_Evil_PV.setStyle(sf::Text::Bold);
-    sf::Text UI_Evil_PV2;
+
     UI_Evil_PV2.setPosition(1356, 550);
-    UI_Evil_PV2.setFont(font);
+    UI_Evil_PV2.setFont(fontMenu);
     UI_Evil_PV2.setString(" PV");
     UI_Evil_PV2.setCharacterSize(20);
     UI_Evil_PV2.setFillColor(sf::Color::Green);
@@ -503,9 +496,8 @@ void Game::initAll()
     UI_Evil_PV2.setOutlineThickness(3.5f);
     UI_Evil_PV2.setStyle(sf::Text::Bold);
 
-    sf::Text UI_Boss;
     UI_Boss.setPosition(1780, 620);
-    UI_Boss.setFont(font);
+    UI_Boss.setFont(fontMenu);
     UI_Boss.setString("???");
     UI_Boss.setCharacterSize(20);
     UI_Boss.setFillColor(sf::Color::White);
@@ -513,17 +505,16 @@ void Game::initAll()
     UI_Boss.setOutlineThickness(3.5f);
     UI_Boss.setStyle(sf::Text::Bold);
 
-    sf::Text UI_Boss_PV;
     UI_Boss_PV.setPosition(1750, 650);
-    UI_Boss_PV.setFont(font);
+    UI_Boss_PV.setFont(fontMenu);
     UI_Boss_PV.setCharacterSize(20);
     UI_Boss_PV.setFillColor(sf::Color::Green);
     UI_Boss_PV.setOutlineColor(sf::Color::Black);
     UI_Boss_PV.setOutlineThickness(3.5f);
     UI_Boss_PV.setStyle(sf::Text::Bold);
-    sf::Text UI_Boss_PV2;
+
     UI_Boss_PV2.setPosition(1796, 650);
-    UI_Boss_PV2.setFont(font);
+    UI_Boss_PV2.setFont(fontMenu);
     UI_Boss_PV2.setString(" PV");
     UI_Boss_PV2.setCharacterSize(20);
     UI_Boss_PV2.setFillColor(sf::Color::Green);
@@ -533,15 +524,14 @@ void Game::initAll()
 #pragma endregion UI des ennemies
 
 #pragma region autre menu
-    sf::RectangleShape infoBox(sf::Vector2f(850.f, 180.f));
+    infoBox.setSize(sf::Vector2f(850.f, 180.f));
     infoBox.setPosition(1000, 35);
     infoBox.setFillColor(sf::Color::Black);
     infoBox.setOutlineColor(sf::Color::White);
     infoBox.setOutlineThickness(5.f);
 
-    sf::Text textInfoBox;
     textInfoBox.setPosition(1120, 105);
-    textInfoBox.setFont(font);
+    textInfoBox.setFont(fontMenu);
     textInfoBox.setString("Erreur");
     textInfoBox.setCharacterSize(25);
     textInfoBox.setFillColor(sf::Color::White);
@@ -551,9 +541,8 @@ void Game::initAll()
 
 
 
-    sf::Text textWin;
     textWin.setPosition(660, 130);
-    textWin.setFont(font);
+    textWin.setFont(fontMenu);
     textWin.setString("WIN");
     textWin.setCharacterSize(300);
     textWin.setFillColor(sf::Color::Green);
@@ -561,9 +550,8 @@ void Game::initAll()
     textWin.setOutlineThickness(10.f);
     textWin.setStyle(sf::Text::Bold);
 
-    sf::Text textDefeat;
     textDefeat.setPosition(330, 130);
-    textDefeat.setFont(font);
+    textDefeat.setFont(fontMenu);
     textDefeat.setString("DEFEAT");
     textDefeat.setCharacterSize(300);
     textDefeat.setFillColor(sf::Color::Red);
@@ -571,10 +559,10 @@ void Game::initAll()
     textDefeat.setOutlineThickness(10.f);
     textDefeat.setStyle(sf::Text::Bold);
 
-    sf::RectangleShape quit_End(sf::Vector2f(165.f, 80.f));
+    quit_End.setSize(sf::Vector2f(165.f, 80.f));
     quit_End.setPosition(830, 690);
     quit_End.setFillColor(sf::Color(255, 178, 101));
-    sf::Text quit_EndText;
+
     quit_EndText.setPosition(850, 700);
     quit_EndText.setFont(fontMenu);
     quit_EndText.setString("QUIT");
@@ -584,10 +572,10 @@ void Game::initAll()
     quit_EndText.setOutlineThickness(8.f);
     quit_EndText.setStyle(sf::Text::Bold);
 
-    sf::RectangleShape restart_End(sf::Vector2f(290.f, 80.f));
+    restart_End.setSize(sf::Vector2f(290.f, 80.f));
     restart_End.setPosition(770, 540);
     restart_End.setFillColor(sf::Color(255, 178, 101));
-    sf::Text restart_EndText;
+
     restart_EndText.setPosition(790, 550);
     restart_EndText.setFont(fontMenu);
     restart_EndText.setString("RESTART");
@@ -597,11 +585,10 @@ void Game::initAll()
     restart_EndText.setOutlineThickness(8.f);
     restart_EndText.setStyle(sf::Text::Bold);
 
-    sf::RectangleShape settings_Window(sf::Vector2f(1400.f, 800.f));
+    settings_Window.setSize(sf::Vector2f(1400.f, 800.f));
     settings_Window.setPosition(200, 100);
     settings_Window.setFillColor(sf::Color::Black);
 
-    sf::Text quit_settings_Window_Text;
     quit_settings_Window_Text.setPosition(1120, 240);
     quit_settings_Window_Text.setFont(fontMenu);
     quit_settings_Window_Text.setString("QUIT THE GAME");
@@ -611,7 +598,6 @@ void Game::initAll()
     quit_settings_Window_Text.setOutlineThickness(8.f);
     quit_settings_Window_Text.setStyle(sf::Text::Bold);
 
-    sf::Text settings_music;
     settings_music.setPosition(250, 140);
     settings_music.setFont(fontMenu);
     settings_music.setString("SETTINGS ( ESCAPE FOR CLOSE )");
@@ -621,7 +607,6 @@ void Game::initAll()
     settings_music.setOutlineThickness(1.f);
     settings_music.setStyle(sf::Text::Bold);
 
-    sf::Text settings_menu_music;
     settings_menu_music.setPosition(250, 340);
     settings_menu_music.setFont(fontMenu);
     settings_menu_music.setString("MENU MUSIC : ");
@@ -630,7 +615,7 @@ void Game::initAll()
     settings_menu_music.setOutlineColor(sf::Color::Black);
     settings_menu_music.setOutlineThickness(8.f);
     settings_menu_music.setStyle(sf::Text::Bold);
-    sf::Text text_menu_music;
+
     text_menu_music.setPosition(720, 340);
     text_menu_music.setFont(fontMenu);
     text_menu_music.setCharacterSize(50);
@@ -639,7 +624,6 @@ void Game::initAll()
     text_menu_music.setOutlineThickness(8.f);
     text_menu_music.setStyle(sf::Text::Bold);
 
-    sf::Text settings_game_music;
     settings_game_music.setPosition(250, 540);
     settings_game_music.setFont(fontMenu);
     settings_game_music.setString("GAME MUSIC : ");
@@ -648,7 +632,7 @@ void Game::initAll()
     settings_game_music.setOutlineColor(sf::Color::Black);
     settings_game_music.setOutlineThickness(8.f);
     settings_game_music.setStyle(sf::Text::Bold);
-    sf::Text text_game_music;
+
     text_game_music.setPosition(720, 540);
     text_game_music.setFont(fontMenu);
     text_game_music.setCharacterSize(50);
@@ -657,7 +641,6 @@ void Game::initAll()
     text_game_music.setOutlineThickness(8.f);
     text_game_music.setStyle(sf::Text::Bold);
 
-    sf::Text settings_game_sound;
     settings_game_sound.setPosition(250, 740);
     settings_game_sound.setFont(fontMenu);
     settings_game_sound.setString("GAME SOUND EFFECT : ");
@@ -666,7 +649,7 @@ void Game::initAll()
     settings_game_sound.setOutlineColor(sf::Color::Black);
     settings_game_sound.setOutlineThickness(8.f);
     settings_game_sound.setStyle(sf::Text::Bold);
-    sf::Text text_game_sound;
+
     text_game_sound.setPosition(980, 740);
     text_game_sound.setFont(fontMenu);
     text_game_sound.setCharacterSize(50);

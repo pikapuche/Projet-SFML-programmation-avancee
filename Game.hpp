@@ -144,8 +144,34 @@ private :
 	sf::Text textHeal;
 	sf::Text textSkip;
 
+	sf::Text UI_Character;
+	sf::Text UI_Character_PV;
+	sf::Text UI_Character_PV2;
+	sf::Text UI_Worm;
+	sf::Text UI_Worm_PV;
+	sf::Text UI_Worm_PV2;
+	sf::Text UI_Evil;
+	sf::Text UI_Evil_PV;
+	sf::Text UI_Evil_PV2;
+	sf::Text UI_Boss;
+	sf::Text UI_Boss_PV;
+	sf::Text UI_Boss_PV2;
 
 
+
+	sf::Text textInfoBox;
+	sf::Text textWin;
+	sf::Text textDefeat;
+	sf::Text quit_EndText;
+	sf::Text restart_EndText;
+	sf::Text quit_settings_Window_Text;
+	sf::Text settings_music;
+	sf::Text settings_menu_music;
+	sf::Text text_menu_music;
+	sf::Text settings_game_music;
+	sf::Text text_game_music;
+	sf::Text settings_game_sound;
+	sf::Text text_game_sound;
 
 
 
@@ -162,9 +188,10 @@ private :
 	sf::RectangleShape menuBoss;
 	sf::RectangleShape menuHeal;
 	sf::RectangleShape menuSkip;
-
-
-
+	sf::RectangleShape infoBox;
+	sf::RectangleShape quit_End;
+	sf::RectangleShape restart_End;
+	sf::RectangleShape settings_Window;
 
 
 
@@ -177,6 +204,7 @@ private :
 public : 
 
 	struct Settings {
+
 		bool inSettings = false;
 		bool inMenuMusic = false;
 		float volumeMenuMusic = 25.f;
