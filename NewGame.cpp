@@ -1,6 +1,12 @@
 #include "NewGame.hpp"
 
 void Game::initAll() {
+
+    //auto Boss = make_unique<Entities>();
+    //Boss->sprite.setPosition(200, 200);
+    //vector_Entities.push_back(move(Boss));
+
+    auto Character = make_unique<Entities>("William l'intervenant", 500, 25);
     if (!Character->texture.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\IdleV2.png")) {
         cout << "error load file IdlePerso.png" << endl;
     }
@@ -8,6 +14,8 @@ void Game::initAll() {
 
     Character->sprite.setTexture(Character->texture);
     Character->sprite.setPosition(225, 625);
+    vector_Entities.push_back(move(Character));
+
 }
 
 void Game::run()
@@ -40,8 +48,10 @@ void Game::run()
 
         window.clear();
 
-        Character->update(deltaTime);
-        Character->draw(window);
+        for (auto& Character : vector_Entities) {
+            Character->update(deltaTime);
+            Character->draw(window);
+        }
 
         window.display();
     }
