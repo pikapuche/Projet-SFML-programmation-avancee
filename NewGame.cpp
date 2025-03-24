@@ -7,15 +7,16 @@ void Game::initAll() {
     //vector_Entities.push_back(move(Boss));
 
     auto Character = make_unique<Entities>("William l'intervenant", 500, 25);
-    if (!Character->texture.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\IdleV2.png")) {
+    if (!Character->texture.loadFromFile("C:/Users/quent/source/repos/Mini Projet FF/Mini Projet FF/Projet SFML mini FF/Extra/TileSheets/Wanderer Magican/IdleV2.png")) {
         cout << "error load file IdlePerso.png" << endl;
     }
     Character->texture.setSmooth(true);
 
     Character->sprite.setTexture(Character->texture);
     Character->sprite.setPosition(225, 625);
-    vector_Entities.push_back(move(Character));
+    Character->sprite.setScale(0.5, 0.5);
 
+    vector_Entities.push_back(move(Character));
 }
 
 void Game::run()
@@ -33,6 +34,9 @@ void Game::run()
 
     Clock clock;
 
+    RectangleShape shape;
+    shape.setSize(Vector2f(32, 32));
+
     // Boucle principale
     while (window.isOpen()) {
         Time deltaT = clock.restart();
@@ -47,6 +51,8 @@ void Game::run()
 
 
         window.clear();
+
+        window.draw(shape);
 
         for (auto& Character : vector_Entities) {
             Character->update(deltaTime);

@@ -24,9 +24,9 @@ public:
 
 	vector<unique_ptr<Entities>> vector_Entities;
 
-	unique_ptr<Entities> Worm = make_unique<Entities>("Fire Worm, THE ELDEN LORD", 75, 10);
-	unique_ptr<Entities> EvilWizard = make_unique<Entities>("Omariu, THE LITTLE SHIT", 150, 20);
-	unique_ptr<Entities> Boss = make_unique<Entities>("???", 425, 25);
+	//unique_ptr<Entities> Worm = make_unique<Entities>("Fire Worm, THE ELDEN LORD", 75, 10);
+	//unique_ptr<Entities> EvilWizard = make_unique<Entities>("Omariu, THE LITTLE SHIT", 150, 20);
+	//unique_ptr<Entities> Boss = make_unique<Entities>("???", 425, 25);
 
 	struct Settings {
 
