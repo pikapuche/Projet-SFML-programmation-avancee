@@ -1,37 +1,56 @@
 #include "stdafx.hpp"
 
 class Entities {
-protected:
-	string e_name;
-	int e_damage;
-	int e_CoordX, e_CoordY;
-	int e_health;
-	bool e_isAlive = true;
-
 public:
-	Entities(bool A) : e_health(), e_damage(), e_CoordX(), e_CoordY(), e_isAlive(A) {}
+
+	string name;
+	int damage;
+	Vector2f position;
+	int life;
+	bool isAlive = true;
+
+	bool SoundAttack = false;
+	bool AttackMode = false;
+	bool SoundHeal = false;
+	bool SoundHit = false;
+	bool printBody = false;
+	bool readyToPlay = false;
+	bool SoundAttack2 = false;
+
+	int countAnimAtk = 0;
+	int countAnimHeal = 0;
+	int countAnimHit = 0;
+	int countAnimDeath = 0;
+	int DeathCount = 0;
+	int countAnimAtk2 = 0;
+
+	Texture texture;
+	Sprite sprite;
+
+	sf::Vector2i anim;
+	sf::Vector2i anim_Attack;
+	sf::Vector2i anim_Attack2;
+	sf::Vector2i anim_Hit;
+	sf::Vector2i anim_Death;
+
+	enum State { IDLE, ATTACK, ATTACK2, DEAD, HEAL, HIT };
+	State state;
+
+	Entities(string n, int health, int dmg);
 
 	void printInfos();
 
-	virtual void attack(Entities& target) = 0;
+	void attack(Entities& target, int dmg);
 
-	virtual int losePV(int damage);
+	int losePV(int damage);
 
-	virtual int getHealth();
+	int heal();
 
-	virtual int getCoordX();
+	int takeDamage(int pv);
 
-	virtual int getCoordY();
+	int setLife(int pv);
 
-	virtual string getName();
+	void update(float deltaTime);
 
-	virtual bool getAlive();
-
-	virtual int heal();
-
-	virtual int setHealth(int pv);
-
-	virtual int HealthReset(int pv);
-
-	virtual bool LifeReset();
+	void draw(RenderWindow& window);
 };

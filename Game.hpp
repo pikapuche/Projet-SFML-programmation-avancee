@@ -1,5 +1,4 @@
-#include "Character.hpp"
-#include "Enemy.hpp"
+#include "Entities.hpp"
 
 class Game {
 private : 
@@ -15,6 +14,7 @@ private :
 	bool menuEnter = false;
 	int endCount = 0;
 	bool restartGame = false;
+	int frameLimit = 60;
 
 #pragma region Initialisation
 
@@ -23,41 +23,6 @@ private :
 	// Background
 	sf::Texture background_texture;
 	sf::Sprite sprite_background;
-
-	// Personnage
-	sf::Texture perso_texture;
-	sf::Sprite perso_sprite; // ce sprite va etre le main sprite il faut juste changer la texture quand on fait une action
-
-	sf::Texture perso_texture_Attack;
-	sf::Texture perso_texture_Heal;
-	sf::Texture perso_texture_Hit;
-	sf::Texture perso_texture_Death;
-
-	// FireWorm
-	sf::Texture fireWorm_texture;
-	sf::Sprite fireWorm_sprite;
-
-	sf::Texture fireWorm_texture_Attack;
-	sf::Texture fireWorm_texture_Hit;
-	sf::Texture fireWorm_texture_Death;
-
-	// EvilWizard
-	sf::Texture evilWizard_texture;
-	sf::Sprite evilWizard_sprite;
-
-	sf::Texture evilWizard_texture_Attack;
-	sf::Texture evilWizard_texture_Heal;
-	sf::Texture evilWizard_texture_Hit;
-	sf::Texture evilWizard_texture_Death;
-
-	// Boss
-	sf::Texture boss_texture;
-	sf::Sprite boss_sprite;
-
-	sf::Texture boss_texture_Attack;
-	sf::Texture boss_texture_Attack2;
-	sf::Texture boss_texture_Hit;
-	sf::Texture boss_texture_Death;
 
 	// Menu 
 	sf::Texture background_texture_Menu;
@@ -80,31 +45,6 @@ private :
 
 	////////////////////////////////
 
-	////////// Animation ///////////
-	sf::Vector2i c_anim;
-	sf::Vector2i c_anim_Attack;
-	sf::Vector2i c_anim_Heal;
-	sf::Vector2i c_anim_Hit;
-	sf::Vector2i c_anim_Death;
-
-	sf::Vector2i f_anim;
-	sf::Vector2i f_anim_Attack;
-	sf::Vector2i f_anim_Hit;
-	sf::Vector2i f_anim_Death;
-
-	sf::Vector2i e_anim;
-	sf::Vector2i e_anim_Attack;
-	sf::Vector2i e_anim_Hit;
-	sf::Vector2i e_anim_Heal;
-	sf::Vector2i e_anim_Death;
-
-	sf::Vector2i b_anim;
-	sf::Vector2i b_anim_Attack;
-	sf::Vector2i b_anim_Attack2;
-	sf::Vector2i b_anim_Hit;
-	sf::Vector2i b_anim_Death;
-	////////////////////////////////
-
 	////////// Music ///////////
 	sf::Music menuMusic;
 	sf::Music endWinMusic;
@@ -112,24 +52,9 @@ private :
 	sf::Music fightMusic;
 	///////////////////////////
 
-	////////// Sound ///////////
-	sf::SoundBuffer wizardAttack;
-	sf::Sound soundWizardAttack;
-
-	sf::SoundBuffer Heal;
-	sf::Sound soundHeal;
-
-	sf::SoundBuffer fireWormAttack;
-	sf::Sound soundFireWormAttack;
-
-
-	sf::SoundBuffer evilWizardAttack;
-	sf::Sound soundEvilWizardAttack;
-
-
-	sf::SoundBuffer bossAttack;
-	sf::Sound soundBossAttack;
-	////////////////////////////
+		////////// Sound ///////////
+	sf::SoundBuffer bufferAttack;
+	sf::Sound soundAttack;
 	
 	////////// Font / Text ///////////
 	sf::Font fontMenu;
@@ -157,8 +82,6 @@ private :
 	sf::Text UI_Boss_PV;
 	sf::Text UI_Boss_PV2;
 
-
-
 	sf::Text textInfoBox;
 	sf::Text textWin;
 	sf::Text textDefeat;
@@ -173,10 +96,8 @@ private :
 	sf::Text settings_game_sound;
 	sf::Text text_game_sound;
 
-
-
-
 	////////// RectangleShape / CircleShape ///////////
+
 	sf::RectangleShape start_Menu_RectangleShape;
 	sf::RectangleShape settings_Menu_RectangleShape;
 	sf::RectangleShape quit_Menu_RectangleShape;
@@ -193,15 +114,18 @@ private :
 	sf::RectangleShape restart_End;
 	sf::RectangleShape settings_Window;
 
-
-
-
-
 	///////////////////////////
 
 #pragma endregion Initialisation
 
 public : 
+
+	vector<unique_ptr<Entities>> vector_Entities;
+
+	unique_ptr<Entities> Character = make_unique<Entities>("William l'intervenant", 500, 25, 225, 625); // (string n, int life, int dmg, int X, int Y, bool A)
+	unique_ptr<Entities> Worm = make_unique<Entities>("Fire Worm, THE ELDEN LORD", 75, 10, 925, 650);
+	unique_ptr<Entities> EvilWizard = make_unique<Entities>("Omariu, THE LITTLE SHIT", 150, 20, 1125, 755);
+	unique_ptr<Entities> Boss = make_unique<Entities>("???", 425, 25, 1400, 625);
 
 	struct Settings {
 

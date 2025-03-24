@@ -1,47 +1,44 @@
 #include "Entities.hpp"
 
-Entities::Entities(bool A) : e_health(), e_damage(), e_CoordX(), e_CoordY(), e_isAlive(A) {}
+Entities::Entities(string n, int health, int dmg) : name(n), life(health), damage(dmg) {}
 
 void Entities::printInfos() {
-	cout << "Degats : " << e_damage << "Coordonnees : " << e_CoordX << ", " << e_CoordY << endl << endl;
+	cout << "Degats : " << damage << "Coordonnees : " << position.x << ", " << position.y << endl << endl;
+}
+
+void Entities::attack(Entities& target, int dmg) {
+	damage = dmg;
+	target.losePV(damage);
+	cout << target.life << " PV" << endl << endl;
+	cout << name << "lance une attaque sur " << target.name << " lui infligeant " << damage << " points de degats " << endl << endl;
 }
 
 int Entities::losePV(int damage) {
-	e_health -= damage;
-	if (e_health <= 0) {
-		e_health = 0;
-		e_isAlive = false;
+	life -= damage;
+	if (life <= 0) {
+		life = 0;
+		isAlive = false;
 	}
-	return e_health;
+	return life;
 }
-int Entities::getHealth() {
-	return e_health;
-}
-int Entities::getCoordX() {
-	return e_CoordX;
-}
-int Entities::getCoordY() {
-	return e_CoordY;
-}
-string Entities::getName() {
-	return e_name;
-}
-bool Entities::getAlive() {
-	return e_isAlive;
-}
+
 int Entities::heal() {
-	e_health += 30;
-	return e_health;
+	life += 30;
+	return life;
 }
-int Entities::setHealth(int pv) {
-	e_health = pv;
-	return e_health;
+int Entities::takeDamage(int pv) {
+	life -= pv;
+	return life;
 }
-int Entities::HealthReset(int pv) {
-	e_health = pv;
-	return e_health;
+int Entities::setLife(int pv) {
+	life = pv;
+	return life;
 }
-bool Entities::LifeReset() {
-	e_isAlive = true;
-	return e_isAlive;
+
+void Entities::update(float deltaTime) {
+	sprite.setPosition(position);
+}
+
+void Entities::draw(RenderWindow& window) {
+	window.draw(sprite);
 }

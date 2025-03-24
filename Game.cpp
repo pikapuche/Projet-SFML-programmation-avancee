@@ -1,59 +1,51 @@
 ﻿#include "Game.hpp"
-
+/*
 void Game::initAll()
 {
 #pragma region Gestion_images
     ////////// Background //////////
 
-    // Charger une texture
-
     if (!background_texture.loadFromFile("Extra\\decor.png")) {
         cout << "error load file decor.png" << endl;
     }
     background_texture.setSmooth(true);
-    // Associer la texture a un sprite
 
     sprite_background.setTexture(background_texture);
     sprite_background.setTextureRect(sf::IntRect(0, 0, 1920, 1080));
 
-
     ////////////////////////////////
-
-
 
     ////////// Personnage //////////
 
-    if (!perso_texture.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\IdleV2.png")) {
+    if (!Character->texture.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\IdleV2.png")) {
         cout << "error load file IdlePerso.png" << endl;
     }
-    perso_texture.setSmooth(true);
+    Character->texture.setSmooth(true);
 
-    //perso_sprite.setTexture(perso_texture);
-    perso_sprite.setPosition(225, 625);
-    //
+    Character->sprite.setTexture(Character->texture);
+    Character->sprite.setPosition(225, 625);
 
-    if (!perso_texture_Attack.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\Attack_1V2.png")) {
+    /*if (!Character->texture_Attack.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\Attack_1V2.png")) {
         cout << "error load file attack1Perso.png" << endl;
     }
-    perso_texture_Attack.setSmooth(true);
+    Character->texture_Attack.setSmooth(true);
 
-    //
-    if (!perso_texture_Heal.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\Attack_2V2.png")) {
+   
+    if (!Character->texture_Heal.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\Attack_2V2.png")) {
         cout << "error load file attack2Perso.png" << endl;
     }
-    perso_texture_Heal.setSmooth(true);
+    Character->texture_Heal.setSmooth(true);
 
-    //
-    if (!perso_texture_Hit.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\HurtV2.png")) {
+    
+    if (!Character->texture_Hit.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\HurtV2.png")) {
         cout << "error load file HurtPerso.png" << endl;
     }
-    perso_texture_Hit.setSmooth(true);
+    Character->texture_Hit.setSmooth(true);
 
-    //
-    if (!perso_texture_Death.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\DeadV2.png")) {
+    if (!Character->texture_Death.loadFromFile("Extra\\TileSheets\\Wanderer Magican\\DeadV2.png")) {
         cout << "error load file DeadPerso.png" << endl;
     }
-    perso_texture_Death.setSmooth(true);
+    Character->texture_Death.setSmooth(true);
 
     ////////////////////////////////
 
@@ -61,26 +53,24 @@ void Game::initAll()
 
     // Verre de terre de feu nul //
 
-    if (!fireWorm_texture.loadFromFile("Extra\\TileSheets\\Fire Worm\\IdleV2.png")) {
+    if (!Worm->texture.loadFromFile("Extra\\TileSheets\\Fire Worm\\IdleV2.png")) {
         cout << "error load file IdleWorm.png" << endl;
     }
-    fireWorm_texture.setSmooth(true);
+    Worm->texture.setSmooth(true);
 
-    fireWorm_sprite.setTexture(fireWorm_texture);
-    fireWorm_sprite.setPosition(925, 650);
-    //
-    if (!fireWorm_texture_Attack.loadFromFile("Extra\\TileSheets\\Fire Worm\\AttackV2.png")) {
+    Worm->sprite.setTexture(Worm->texture);
+    Worm->sprite.setPosition(925, 650);
+    
+    /*if (!fireWorm_texture_Attack.loadFromFile("Extra\\TileSheets\\Fire Worm\\AttackV2.png")) {
         cout << "error load file attackWorm.png" << endl;
     }
     fireWorm_texture_Attack.setSmooth(true);
 
-    //
     if (!fireWorm_texture_Hit.loadFromFile("Extra\\TileSheets\\Fire Worm\\Get HitV2.png")) {
         cout << "error load file hitWorm.png" << endl;
     }
     fireWorm_texture_Hit.setSmooth(true);
 
-    //
     if (!fireWorm_texture_Death.loadFromFile("Extra\\TileSheets\\Fire Worm\\DeathV2.png")) {
         cout << "error load file DeathWorm.png" << endl;
     }
@@ -88,47 +78,45 @@ void Game::initAll()
 
     // Sorcier de feu mechant //
 
-    if (!evilWizard_texture.loadFromFile("Extra\\TileSheets\\Evil Wizard\\IdleV2.png")) {
+    if (!EvilWizard->texture.loadFromFile("Extra\\TileSheets\\Evil Wizard\\IdleV2.png")) {
         cout << "error load file IdleWizard.png" << endl;
     }
-    evilWizard_texture.setSmooth(true);
+    EvilWizard->texture.setSmooth(true);
 
-    evilWizard_sprite.setTexture(evilWizard_texture);
-    evilWizard_sprite.setPosition(1125, 444);
-    //
-    if (!evilWizard_texture_Attack.loadFromFile("Extra\\TileSheets\\Evil Wizard\\AttackV2.png")) {
+    EvilWizard->sprite.setTexture(EvilWizard->texture);
+    EvilWizard->sprite.setPosition(1125, 444);
+    /*
+    if (!EvilWizard_texture_Attack.loadFromFile("Extra\\TileSheets\\Evil Wizard\\AttackV2.png")) {
         cout << "error load file AttackWizard.png" << endl;
     }
-    evilWizard_texture_Attack.setSmooth(true);
+    EvilWizard_texture_Attack.setSmooth(true);
 
-    //
-    if (!evilWizard_texture_Heal.loadFromFile("Extra\\TileSheets\\Evil Wizard\\MoveV2.png")) {
+    if (!EvilWizard_texture_Heal.loadFromFile("Extra\\TileSheets\\Evil Wizard\\MoveV2.png")) {
         cout << "error load file MoveWizard.png (heal)" << endl;
     }
-    evilWizard_texture_Heal.setSmooth(true);
+    EvilWizard_texture_Heal.setSmooth(true);
 
-    //
-    if (!evilWizard_texture_Hit.loadFromFile("Extra\\TileSheets\\Evil Wizard\\HitV2.png")) {
+    if (!EvilWizard_texture_Hit.loadFromFile("Extra\\TileSheets\\Evil Wizard\\HitV2.png")) {
         cout << "error load file HitWizard.png" << endl;
     }
-    evilWizard_texture_Hit.setSmooth(true);
+    EvilWizard_texture_Hit.setSmooth(true);
 
-    //
-    if (!evilWizard_texture_Death.loadFromFile("Extra\\TileSheets\\Evil Wizard\\DeathV2.png")) {
+    if (!EvilWizard_texture_Death.loadFromFile("Extra\\TileSheets\\Evil Wizard\\DeathV2.png")) {
         cout << "error load file DeathWizard.png" << endl;
     }
-    evilWizard_texture_Death.setSmooth(true);
+    EvilWizard_texture_Death.setSmooth(true);
 
     // LE BOSS DE SES MORTS //
 
-    if (!boss_texture.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\IdleV2.png")) {
+    if (!Boss->texture.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\IdleV2.png")) {
         cout << "error load file IdleBoss.png" << endl;
     }
-    boss_texture.setSmooth(true);
+    Boss->texture.setSmooth(true);
 
-    boss_sprite.setTexture(boss_texture);
-    boss_sprite.setPosition(1400, 333);
-    //
+    Boss->sprite.setTexture(Boss->texture);
+    Boss->sprite.setPosition(1400, 333);
+
+    /*
     if (!boss_texture_Attack.loadFromFile("Extra\\TileSheets\\EVil Wizard 2\\Attack1V2.png")) {
         cout << "error load file Attack1Boss.png" << endl;
     }
@@ -151,21 +139,9 @@ void Game::initAll()
         cout << "error load file DeathBoss.png" << endl;
     }
     boss_texture_Death.setSmooth(true);
+    
 
     ////////////////////////////////
-
-    f_anim_Death.x = 1440;
-    f_anim_Hit.x = 540;
-    f_anim_Attack.x = 2880;
-
-    e_anim_Death.x = 2250;
-    e_anim_Attack.x = 3600;
-    e_anim_Hit.x = 1800;
-
-    b_anim_Death.x = 5600;
-    b_anim_Attack.x = 6400;
-    b_anim_Attack2.x = 6400;
-    b_anim_Hit.x = 2400;
 
 #pragma endregion Gestion_images
 #pragma region Gestion_son
@@ -213,10 +189,10 @@ void Game::initAll()
     soundFireWormAttack.setBuffer(fireWormAttack);
     soundFireWormAttack.setVolume(Settings_S.volumeGameSound);
 
-    if (!evilWizardAttack.loadFromFile("Extra\\Musiques\\fireWizardAttackLongWAV.wav"))
+    if (!EvilWizardAttack.loadFromFile("Extra\\Musiques\\fireWizardAttackLongWAV.wav"))
         cout << "error load sound fireWizardAttackLong" << endl;
 
-    soundEvilWizardAttack.setBuffer(evilWizardAttack);
+    soundEvilWizardAttack.setBuffer(EvilWizardAttack);
     soundEvilWizardAttack.setVolume(Settings_S.volumeGameSound);
     soundEvilWizardAttack.setPlayingOffset(sf::seconds(14));
 
@@ -361,7 +337,7 @@ void Game::initAll()
     menuWorm.setFillColor(sf::Color(183, 127, 71));
     textMenuWorm.setPosition(120, 35);
     textMenuWorm.setFont(fontMenu);
-    textMenuWorm.setString("FIRE WORM");
+    textMenuWorm.setString("FIRE Worm");
     textMenuWorm.setCharacterSize(35);
     textMenuWorm.setFillColor(sf::Color::White);
     textMenuWorm.setOutlineColor(sf::Color::Black);
@@ -446,7 +422,7 @@ void Game::initAll()
 
     UI_Worm.setPosition(940, 620);
     UI_Worm.setFont(fontMenu);
-    UI_Worm.setString("FIRE WORM");
+    UI_Worm.setString("FIRE Worm");
     UI_Worm.setCharacterSize(20);
     UI_Worm.setFillColor(sf::Color::White);
     UI_Worm.setOutlineColor(sf::Color::Black);
@@ -661,18 +637,21 @@ void Game::initAll()
 
 #pragma endregion Menu
 }
-
+*/
+/*
 void Game::run()
 {
-    Character wizard("William l'intervenant", 225, 625, 500); // Character::Character(string n, int CX, int CY, int h) : c_name(n), c_CoordX(CX), c_CoordY(CY), c_health(h), Entities(true) {}
+    /*unique_ptr<Character> Character = make_unique<Character>("William l'intervenant", 225, 625, 500); // Character::Character(string n, int CX, int CY, int h) : c_name(n), c_CoordX(CX), c_CoordY(CY), c_health(h), Entities(true) {}
 
-    //EvilWizard evilWizard;
-    //FireWorm fireWorm;
-    //Boss boss;
+    unique_ptr<FireWorm> Worm = make_unique<FireWorm>("Fire Worm, THE ELDEN LORD", 925, 650, 75); // FireWorm() : Enemy("Fire Worm, THE ELDEN LORD", 925, 650, 75) {}
+
+    unique_ptr<EvilWizard> EvilWizard = make_unique<EvilWizard>("Omariu, THE LITTLE SHIT", 1125, 755, 150); // EvilWizard::EvilWizard() : Enemy("Omariu, THE LITTLE SHIT", 1125, 755, 150) {}
+
+    unique_ptr<Boss> boss = make_unique<Boss>("???", 1400, 625, 240); // Boss::Boss() : Enemy("???", 1400, 625, 240) {}
 
     // Creation de la fenetre
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SYWAR, THE QUEST OF JAAJ");
-    window.setFramerateLimit(8);
+    window.setFramerateLimit(frameLimit);
 
     auto startTime = chrono::steady_clock::now();
     auto waitTime = chrono::seconds(1);
@@ -695,69 +674,69 @@ void Game::run()
 /*        if (restartGame == true) {
             gameCount = 0;
             //Char
-            Char_S.isAttacking = false;
-            Char_S.SoundAttack = false;
-            Char_S.AttackMode = false;
-            Char_S.isHealing = false;
-            Char_S.SoundHeal = false;
-            Char_S.isHit = false;
-            Char_S.SoundHit = false;
-            Char_S.isDead = false;
-            Char_S.printBody = false;
-            Char_S.readyToPlay = false;
-            Char_S.countAnimAtk = 0;
-            Char_S.countAnimHeal = 0;
-            Char_S.countAnimHit = 0;
-            Char_S.countAnimDeath = 0;
-            Char_S.DeathCount = 0;
+            Character->isAttacking = false;
+            Character->SoundAttack = false;
+            Character->AttackMode = false;
+            Character->isHealing = false;
+            Character->SoundHeal = false;
+            Character->isHit = false;
+            Character->SoundHit = false;
+            Character->isDead = false;
+            Character->printBody = false;
+            Character->readyToPlay = false;
+            Character->countAnimAtk = 0;
+            Character->countAnimHeal = 0;
+            Character->countAnimHit = 0;
+            Character->countAnimDeath = 0;
+            Character->DeathCount = 0;
 
             //fireWorm
-            Worm_S.isAttacking = false;
-            Worm_S.SoundAttack = false;
-            Worm_S.isHit = false;
-            Worm_S.SoundHit = false;
-            Worm_S.isHealing = false;
-            Worm_S.isDead = false;
-            Worm_S.printBody = false;
-            Worm_S.readyToPlay = false;
-            Worm_S.readyToAttack = false;
-            Worm_S.countAnimHit = 0;
-            Worm_S.countAnimAtk = 0;
-            Worm_S.countAnimDeath = 0;
-            Worm_S.DeathCount = 0;
+            Worm->isAttacking = false;
+            Worm->SoundAttack = false;
+            Worm->isHit = false;
+            Worm->SoundHit = false;
+            Worm->isHealing = false;
+            Worm->isDead = false;
+            Worm->printBody = false;
+            Worm->readyToPlay = false;
+            Worm->readyToAttack = false;
+            Worm->countAnimHit = 0;
+            Worm->countAnimAtk = 0;
+            Worm->countAnimDeath = 0;
+            Worm->DeathCount = 0;
 
-            //evilWizard
-            Evil_S.isAttacking = false;
-            Evil_S.SoundAttack = false;
-            Evil_S.isHealing = false;
-            Evil_S.SoundHeal = false;
-            Evil_S.isHit = false;
-            Evil_S.SoundHit = false;
-            Evil_S.isDead = false;
-            Evil_S.printBody = false;
-            Evil_S.readyToPlay = false;
-            Evil_S.countAnimAtk = 0;
-            Evil_S.countAnimHeal = 0;
-            Evil_S.countAnimHit = 0;
-            Evil_S.countAnimDeath = 0;
-            Evil_S.DeathCount = 0;
+            //EvilWizard
+            EvilWizard->isAttacking = false;
+            EvilWizard->SoundAttack = false;
+            EvilWizard->isHealing = false;
+            EvilWizard->SoundHeal = false;
+            EvilWizard->isHit = false;
+            EvilWizard->SoundHit = false;
+            EvilWizard->isDead = false;
+            EvilWizard->printBody = false;
+            EvilWizard->readyToPlay = false;
+            EvilWizard->countAnimAtk = 0;
+            EvilWizard->countAnimHeal = 0;
+            EvilWizard->countAnimHit = 0;
+            EvilWizard->countAnimDeath = 0;
+            EvilWizard->DeathCount = 0;
 
             //boss
-            Boss_S.isAttacking = false;
-            Boss_S.isAttacking2 = false;
-            Boss_S.SoundAttack = false;
-            Boss_S.SoundAttack2 = false;
-            Boss_S.isHit = false;
-            Boss_S.SoundHit = false;
-            Boss_S.isHealing = false;
-            Boss_S.isDead = false;
-            Boss_S.printBody = false;
-            Boss_S.readyToPlay = false;
-            Boss_S.countAnimAtk = 0;
-            Boss_S.countAnimAtk2 = 0;
-            Boss_S.countAnimHit = 0;
-            Boss_S.countAnimDeath = 0;
-            Boss_S.DeathCount = 0;
+            Boss->isAttacking = false;
+            Boss->isAttacking2 = false;
+            Boss->SoundAttack = false;
+            Boss->SoundAttack2 = false;
+            Boss->isHit = false;
+            Boss->SoundHit = false;
+            Boss->isHealing = false;
+            Boss->isDead = false;
+            Boss->printBody = false;
+            Boss->readyToPlay = false;
+            Boss->countAnimAtk = 0;
+            Boss->countAnimAtk2 = 0;
+            Boss->countAnimHit = 0;
+            Boss->countAnimDeath = 0;
+            Boss->DeathCount = 0;
 
             //settings
             Settings_S.inSettings = false;
@@ -787,16 +766,16 @@ void Game::run()
 
             wizard.HealthReset(500);
             fireWorm.HealthReset(75);
-            evilWizard.HealthReset(150);
+            EvilWizard.HealthReset(150);
             boss.HealthReset(240);
 
             wizard.LifeReset();
             fireWorm.LifeReset();
-            evilWizard.LifeReset();
+            EvilWizard.LifeReset();
             boss.LifeReset();
 
             restartGame = false;
-        }*/
+        }
 
         if (gameCount == 1 && stopMusic == 0) {
             menuMusic.stop();
@@ -825,62 +804,62 @@ void Game::run()
 #pragma region animation
         //ici, on va rajouter 256px a notre image pour la faire changer et donc s'animer ;)
         // Character
-        if (!Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
-            Char_S.countAnimAtk = 0;
-            Char_S.countAnimHeal = 0;
-            Char_S.countAnimHit = 0;
-            Char_S.countAnimDeath = 0;
+        if (!Character->isAttacking && !Character->isHealing && !Character->isHit && Character->getAlive() == true) {
+            Character->countAnimAtk = 0;
+            Character->countAnimHeal = 0;
+            Character->countAnimHit = 0;
+            Character->countAnimDeath = 0;
             c_anim.x++;
-            if (c_anim.x * 256 >= perso_texture.getSize().x) // boucle qui permet de revenir a la premiere slide de l'anim
+            if (c_anim.x * 256 >= Character->texture.getSize().x) // boucle qui permet de revenir a la premiere slide de l'anim
                 c_anim.x = 0;
             // ici, ce code permet de cr�er l'animation Idle du personnage
             perso_sprite.setTextureRect(sf::IntRect(c_anim.x * 256, 0, 256, 256));
         }
         //////////////////////////////////////////////////////////////////////////////////////
         // Worm
-        if (!Worm_S.isHit && !Worm_S.isAttacking && !Worm_S.isHealing && fireWorm.getAlive() == true) {
+        if (!Worm->iHit && !Worm->isAttacking && !Worm->isHealing && Worm->getAlive() == true) {
             f_anim.x++;
             if (f_anim.x * 180 == fireWorm_texture.getSize().x) {
                 f_anim.x = 0;
             }
             fireWorm_sprite.setTextureRect(sf::IntRect(f_anim.x * 180, 0, 180, 180));
-            Worm_S.countAnimAtk = 0;
-            Worm_S.countAnimHit = 0;
-            Worm_S.countAnimDeath = 0;
+            Worm->countAnimAtk = 0;
+            Worm->countAnimHit = 0;
+            Worm->countAnimDeath = 0;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////
         // EvilWizard
-        if (!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && evilWizard.getAlive() == true) {
+        if (!EvilWizard->isAttacking && !EvilWizard->isHealing && !EvilWizard->isHit && EvilWizard.getAlive() == true) {
             e_anim.x++;
-            if (e_anim.x * 450 == evilWizard_texture.getSize().x) {
+            if (e_anim.x * 450 == EvilWizard_texture.getSize().x) {
                 e_anim.x = 0;
             }
-            evilWizard_sprite.setTextureRect(sf::IntRect(e_anim.x * 450, 0, 450, 450));
-            Evil_S.countAnimAtk = 0;
-            Evil_S.countAnimHeal = 0;
-            Evil_S.countAnimHit = 0;
-            Evil_S.countAnimDeath = 0;
+            EvilWizard_sprite.setTextureRect(sf::IntRect(e_anim.x * 450, 0, 450, 450));
+            EvilWizard->countAnimAtk = 0;
+            EvilWizard->countAnimHeal = 0;
+            EvilWizard->countAnimHit = 0;
+            EvilWizard->countAnimDeath = 0;
         }
 
 
         //////////////////////////////////////////////////////////////////////////////////////
         // Boss
-        if (!Boss_S.isAttacking && !Boss_S.isAttacking2 && !Boss_S.isHit && !Boss_S.isHealing && boss.getAlive() == true) {
+        if (!Boss->isAttacking && !Boss->isAttacking2 && !Boss->isHit && !Boss->isHealing && boss.getAlive() == true) {
             b_anim.x++;
             if (b_anim.x * 800 == boss_texture.getSize().x)
                 b_anim.x = 0;
 
             boss_sprite.setTextureRect(sf::IntRect(b_anim.x * 800, 0, 800, 800));
-            Boss_S.countAnimAtk = 0;
-            Boss_S.countAnimAtk2 = 0;
-            Boss_S.countAnimDeath = 0;
-            Boss_S.countAnimHit = 0;
+            Boss->countAnimAtk = 0;
+            Boss->countAnimAtk2 = 0;
+            Boss->countAnimDeath = 0;
+            Boss->countAnimHit = 0;
         }
 #pragma endregion animation
 #pragma region interMenu
 
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && !Char_S.AttackMode) { // pointe sur attaque
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && !Character->AttackMode) { // pointe sur attaque
             menuAtk.setOutlineColor(sf::Color::Cyan);
             menuAtk.setOutlineThickness(5.f);
         }
@@ -888,7 +867,7 @@ void Game::run()
             menuAtk.setOutlineColor(sf::Color::Transparent); // disparait
             menuAtk.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && !Char_S.AttackMode) { // pointe sur soin
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && !Character->AttackMode) { // pointe sur soin
             menuHeal.setOutlineColor(sf::Color::Cyan);
             menuHeal.setOutlineThickness(5.f);
         }
@@ -896,7 +875,7 @@ void Game::run()
             menuHeal.setOutlineColor(sf::Color::Transparent);
             menuHeal.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && !Char_S.AttackMode) { // pointe sur passe tour
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && !Character->AttackMode) { // pointe sur passe tour
             menuSkip.setOutlineColor(sf::Color::Cyan);
             menuSkip.setOutlineThickness(5.f);
         }
@@ -905,7 +884,7 @@ void Game::run()
             menuSkip.setOutlineThickness(0);
         }
 
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && Char_S.AttackMode) { // fireworm
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && Character->AttackMode) { // fireWorm
             menuWorm.setOutlineColor(sf::Color::Cyan);
             menuWorm.setOutlineThickness(5.f);
         }
@@ -913,7 +892,7 @@ void Game::run()
             menuWorm.setOutlineColor(sf::Color::Transparent);
             menuWorm.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && Char_S.AttackMode) { // evilWizard
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && Character->AttackMode) { // EvilWizard
             menuEvilWizard.setOutlineColor(sf::Color::Cyan);
             menuEvilWizard.setOutlineThickness(5.f);
         }
@@ -921,7 +900,7 @@ void Game::run()
             menuEvilWizard.setOutlineColor(sf::Color::Transparent);
             menuEvilWizard.setOutlineThickness(0);
         }
-        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && Char_S.AttackMode) { // boss
+        if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && Character->AttackMode) { // boss
             menuBoss.setOutlineColor(sf::Color::Cyan);
             menuBoss.setOutlineThickness(5.f);
         }
@@ -1015,25 +994,25 @@ void Game::run()
                 window.close();
             }
         }
-        if (gameCount == 1 && !Boss_S.isAttacking && !Boss_S.isAttacking2 && !Boss_S.isHit) {
+        if (gameCount == 1 && !Boss->isAttacking && !Boss->isAttacking2 && !Boss->isHit) {
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && Settings_S.inSettings == false) Settings_S.inSettings = true;
             // Choix attaque
-            if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !Char_S.AttackMode)
+            if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !Character->AttackMode)
             {
-                Char_S.AttackMode = true;
-                Char_S.isAttacking = false;
-                Char_S.isHealing = false;
-                Char_S.isHit = false;
+                Character->AttackMode = true;
+                Character->isAttacking = false;
+                Character->isHealing = false;
+                Character->isHit = false;
             }
             // menu d'atk
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == true && gameCount == 1)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Character->AttackMode && fireWorm.getAlive() == true && gameCount == 1)
             {
                 c_anim_Attack.x = 0;
-                Char_S.AttackMode = false;
-                Char_S.isAttacking = true;
-                Worm_S.isHit = true;
-                Char_S.isHealing = false;
+                Character->AttackMode = false;
+                Character->isAttacking = true;
+                Worm->isHit = true;
+                Character->isHealing = false;
                 wizard.attack(fireWorm);
                 //Cr�ation du rectangle de ce qui se passe
                 infoBoxB = true;
@@ -1042,33 +1021,33 @@ void Game::run()
                 countPlay = 0;
                 startTime = nowTime;
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && fireWorm.getAlive() == false) {
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 110 && sf::Mouse::getPosition().y >= 45 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Character->AttackMode && fireWorm.getAlive() == false) {
                 infoBoxB = true;
                 textInfoBox.setString("FireWorm est mort !");
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == true && gameCount == 1)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Character->AttackMode && EvilWizard.getAlive() == true && gameCount == 1)
             {
-                Char_S.isHealing = false;
-                Char_S.AttackMode = false;
-                Char_S.isAttacking = true;
-                Evil_S.isHit = true;
-                wizard.attack(evilWizard);
+                Character->isHealing = false;
+                Character->AttackMode = false;
+                Character->isAttacking = true;
+                EvilWizard->isHit = true;
+                wizard.attack(EvilWizard);
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au Evil Wizard !");
                 gameCount++;
                 countPlay = 0;
                 startTime = nowTime;
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && evilWizard.getAlive() == false) {
-                Char_S.isHealing = false;
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 185 && sf::Mouse::getPosition().y >= 120 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Character->AttackMode && EvilWizard.getAlive() == false) {
+                Character->isHealing = false;
                 infoBoxB = true;
                 textInfoBox.setString("EvilWizard est mort !");
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == true && gameCount == 1)
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Character->AttackMode && boss.getAlive() == true && gameCount == 1)
             {
-                Char_S.AttackMode = false;
-                Char_S.isAttacking = true;
-                Boss_S.isHit = true;
+                Character->AttackMode = false;
+                Character->isAttacking = true;
+                Boss->isHit = true;
                 wizard.attack(boss);
                 infoBoxB = true;
                 textInfoBox.setString("Vous infligez une attaque au ??? !");
@@ -1076,7 +1055,7 @@ void Game::run()
                 countPlay = 0;
                 startTime = nowTime;
             }
-            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Char_S.AttackMode && boss.getAlive() == false) {
+            else if (sf::Mouse::getPosition().x <= 440 && sf::Mouse::getPosition().x >= 20 && sf::Mouse::getPosition().y <= 260 && sf::Mouse::getPosition().y >= 195 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && Character->AttackMode && boss.getAlive() == false) {
                 infoBoxB = true;
                 textInfoBox.setString("??? est mort !");
             }
@@ -1085,7 +1064,7 @@ void Game::run()
             {
                 c_anim_Heal.x = 0;
                 c_anim.x = 0;
-                Char_S.isHealing = true;
+                Character->isHealing = true;
                 wizard.heal();
                 infoBoxB = true;
                 textInfoBox.setString("Vous vous soignez de 35 PV");
@@ -1123,10 +1102,10 @@ void Game::run()
         }
         // FireWorm
         if (gameCount == 2 && fireWorm.getAlive() == false) {
-            Worm_S.isAttacking = false;
-            Worm_S.isHit = false;
+            Worm->isAttacking = false;
+            Worm->isHit = false;
             gameCount++;
-            Worm_S.readyToPlay = false;
+            Worm->readyToPlay = false;
         }
         else if (gameCount == 2 && fireWorm.getAlive() == true) {
             if (nowTime >= startTime + waitTime) {
@@ -1134,101 +1113,101 @@ void Game::run()
                 startTime = nowTime;
             }
             if (countPlay == 2 && gameCount == 2) {
-                Worm_S.readyToPlay = true;
+                Worm->readyToPlay = true;
                 countPlay = 0;
             }
         }
-        else if (gameCount == 2 && fireWorm.getAlive() == false && Worm_S.readyToPlay == true) {
-            Worm_S.isAttacking = false;
-            Worm_S.isHit = false;
+        else if (gameCount == 2 && fireWorm.getAlive() == false && Worm->readyToPlay == true) {
+            Worm->isAttacking = false;
+            Worm->isHit = false;
             gameCount++;
-            Worm_S.readyToPlay = false;
+            Worm->readyToPlay = false;
             countPlay = 0;
         }
-        if (gameCount == 2 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Worm_S.isHit && fireWorm.getAlive() == true && Worm_S.readyToPlay == true) {
-            Worm_S.isHit = false;
-            Worm_S.isAttacking = true;
+        if (gameCount == 2 && !Character->isAttacking && !Character->isHealing && !Character->isHit && !Worm->isHit && fireWorm.getAlive() == true && Worm->readyToPlay == true) {
+            Worm->isHit = false;
+            Worm->isAttacking = true;
             infoBoxB = true;
             textInfoBox.setString("FireWorm vous inflige 10 points de degats !");
             gameCount++;
-            Worm_S.readyToPlay = false;
+            Worm->readyToPlay = false;
             countPlay = 0;
         }
 
         // EvilWizard
-        if (gameCount == 3 && evilWizard.getAlive() == false) {
-            Evil_S.isAttacking = false;
-            Evil_S.isHit = false;
+        if (gameCount == 3 && EvilWizard.getAlive() == false) {
+            EvilWizard->isAttacking = false;
+            EvilWizard->isHit = false;
             gameCount++;
-            Evil_S.readyToPlay = false;
+            EvilWizard->readyToPlay = false;
         }
-        else if (gameCount == 3 && evilWizard.getAlive() == true) {
+        else if (gameCount == 3 && EvilWizard.getAlive() == true) {
             if (nowTime >= startTime + waitTime) {
                 countPlay++;
                 startTime = nowTime;
             }
             if (countPlay == 2 && gameCount == 3) {
-                Evil_S.readyToPlay = true;
+                EvilWizard->readyToPlay = true;
                 countPlay = 0;
             }
         }
-        else if (gameCount == 3 && evilWizard.getAlive() == false && Evil_S.readyToPlay == true) {
-            Evil_S.isAttacking = false;
-            Evil_S.isHealing = false;
-            Evil_S.isHit = false;
+        else if (gameCount == 3 && EvilWizard.getAlive() == false && EvilWizard->readyToPlay == true) {
+            EvilWizard->isAttacking = false;
+            EvilWizard->isHealing = false;
+            EvilWizard->isHit = false;
             gameCount++;
-            Evil_S.readyToPlay = false;
+            EvilWizard->readyToPlay = false;
         }
-        if (gameCount == 3 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && evilWizard.getAlive() == true && Evil_S.readyToPlay == true) {
+        if (gameCount == 3 && !Character->isAttacking && !Character->isHealing && !Character->isHit && !EvilWizard->isHit && !Worm->isHit && !Worm->isAttacking && EvilWizard.getAlive() == true && EvilWizard->readyToPlay == true) {
             int action = rand() % 3;
             switch (action) {
             case 0:
-                Evil_S.isHit = false;
-                Evil_S.isAttacking = true;
-                evilWizard.attack(wizard);
-                Char_S.isHit = true;
+                EvilWizard->isHit = false;
+                EvilWizard->isAttacking = true;
+                EvilWizard.attack(wizard);
+                Character->isHit = true;
                 infoBoxB = true;
                 textInfoBox.setString("Evil Wizard vous inflige 20 points de degats !");
                 gameCount++;
-                Evil_S.readyToPlay = false;
+                EvilWizard->readyToPlay = false;
                 break;
 
             case 1:
                 quiSoigner = 0;
                 quiSoigner = rand() % 3;
                 if (quiSoigner == 0 && fireWorm.getAlive() == true && fireWorm.getHealth() < 75) {
-                    Evil_S.isHealing = true;
+                    EvilWizard->isHealing = true;
                     fireWorm.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne le FireWorm de 30 PV !");
-                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    cout << EvilWizard.getName() << " soigne" << endl << endl;
                     gameCount++;
-                    Evil_S.readyToPlay = false;
+                    EvilWizard->readyToPlay = false;
                 }
-                else if (quiSoigner == 1 && evilWizard.getAlive() == true && evilWizard.getHealth() < 150) {
-                    Evil_S.isHealing = true;
-                    evilWizard.heal();
+                else if (quiSoigner == 1 && EvilWizard.getAlive() == true && EvilWizard.getHealth() < 150) {
+                    EvilWizard->isHealing = true;
+                    EvilWizard.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
-                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    cout << EvilWizard.getName() << " soigne" << endl << endl;
                     gameCount++;
-                    Evil_S.readyToPlay = false;
+                    EvilWizard->readyToPlay = false;
                 }
                 else if (quiSoigner == 2 && boss.getAlive() == true && boss.getHealth() < 300) {
-                    Evil_S.isHealing = true;
+                    EvilWizard->isHealing = true;
                     boss.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne ??? de 30 PV !");
-                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    cout << EvilWizard.getName() << " soigne" << endl << endl;
                     gameCount++;
-                    Evil_S.readyToPlay = false;
+                    EvilWizard->readyToPlay = false;
                 }
                 else {
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard a rate son incantation !");
-                    cout << evilWizard.getName() << " fait caca" << endl << endl;
+                    cout << EvilWizard.getName() << " fait caca" << endl << endl;
                     gameCount++;
-                    Evil_S.readyToPlay = false;
+                    EvilWizard->readyToPlay = false;
                 }
                 break;
 
@@ -1237,38 +1216,38 @@ void Game::run()
                 quiSoigner = rand() % 3;
                 quiSoigner += 3;
                 if (quiSoigner == 3 && fireWorm.getAlive() == true && fireWorm.getHealth() < 75) {
-                    Evil_S.isHealing = true;
+                    EvilWizard->isHealing = true;
                     fireWorm.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne le FireWorm de 30 PV !");
-                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    cout << EvilWizard.getName() << " soigne" << endl << endl;
                     gameCount++;
-                    Evil_S.readyToPlay = false;
+                    EvilWizard->readyToPlay = false;
                 }
-                else if (quiSoigner == 4 && evilWizard.getAlive() == true && evilWizard.getHealth() < 150) {
-                    Evil_S.isHealing = true;
-                    evilWizard.heal();
+                else if (quiSoigner == 4 && EvilWizard.getAlive() == true && EvilWizard.getHealth() < 150) {
+                    EvilWizard->isHealing = true;
+                    EvilWizard.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard se soigne de 30 PV !");
-                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    cout << EvilWizard.getName() << " soigne" << endl << endl;
                     gameCount++;
-                    Evil_S.readyToPlay = false;
+                    EvilWizard->readyToPlay = false;
                 }
                 else if (quiSoigner == 5 && boss.getAlive() == true && boss.getHealth() < 300) {
-                    Evil_S.isHealing = true;
+                    EvilWizard->isHealing = true;
                     boss.heal();
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard soigne ??? de 30 PV !");
-                    cout << evilWizard.getName() << " soigne" << endl << endl;
+                    cout << EvilWizard.getName() << " soigne" << endl << endl;
                     gameCount++;
-                    Evil_S.readyToPlay = false;
+                    EvilWizard->readyToPlay = false;
                 }
                 else {
                     infoBoxB = true;
                     textInfoBox.setString("Evil Wizard a rate son incantation !");
-                    cout << evilWizard.getName() << " fait caca" << endl << endl;
+                    cout << EvilWizard.getName() << " fait caca" << endl << endl;
                     gameCount++;
-                    Evil_S.readyToPlay = false;
+                    EvilWizard->readyToPlay = false;
                 }
                 break;
 
@@ -1280,10 +1259,10 @@ void Game::run()
 
         // Boss
         if (gameCount == 4 && boss.getAlive() == false) {
-            Boss_S.isAttacking = false;
-            Boss_S.isHit = false;
+            Boss->isAttacking = false;
+            Boss->isHit = false;
             gameCount++;
-            Boss_S.readyToPlay = false;
+            Boss->readyToPlay = false;
             countPlay = 0;
         }
         else if (gameCount == 4 && boss.getAlive() == true) {
@@ -1292,70 +1271,70 @@ void Game::run()
                 startTime = nowTime;
             }
             if (countPlay == 2 && gameCount == 4) {
-                Boss_S.readyToPlay = true;
+                Boss->readyToPlay = true;
                 countPlay = 0;
             }
         }
-        else if (gameCount == 4 && boss.getAlive() == false && Boss_S.readyToPlay == true) {
-            Boss_S.isAttacking = false;
-            Boss_S.isAttacking2 = false;
-            Boss_S.isHit = false;
+        else if (gameCount == 4 && boss.getAlive() == false && Boss->readyToPlay == true) {
+            Boss->isAttacking = false;
+            Boss->isAttacking2 = false;
+            Boss->isHit = false;
             gameCount++;
-            Boss_S.readyToPlay = false;
+            Boss->readyToPlay = false;
             countPlay = 0;
         }
-        if (gameCount == 4 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && !Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && boss.getAlive() == true && Boss_S.readyToPlay == true) {
+        if (gameCount == 4 && !Character->isAttacking && !Character->isHealing && !Character->isHit && !Boss->isHit && !EvilWizard->isAttacking && !EvilWizard->isHealing && !EvilWizard->isHit && !Worm->isHit && !Worm->isAttacking && boss.getAlive() == true && Boss->readyToPlay == true) {
             int actionBoss = rand() % 6;
             switch (actionBoss) {
             case 0:
-                Boss_S.isHit = false;
-                Boss_S.isAttacking = true;
+                Boss->isHit = false;
+                Boss->isAttacking = true;
                 infoBoxB = true;
                 textInfoBox.setString("??? vous inflige 35 points de degats !");
-                Boss_S.readyToPlay = false;
+                Boss->readyToPlay = false;
                 countPlay = 0;
                 break;
 
             case 1:
                 cout << boss.getName() << " regarde les mouches voler" << endl << endl;
                 gameCount++;
-                Boss_S.readyToPlay = false;
+                Boss->readyToPlay = false;
                 countPlay = 0;
                 break;
 
             case 2:
-                Boss_S.isHit = false;
-                Boss_S.isAttacking = false;
-                Boss_S.isAttacking2 = true;
+                Boss->isHit = false;
+                Boss->isAttacking = false;
+                Boss->isAttacking2 = true;
                 infoBoxB = true;
                 textInfoBox.setString("??? vous inflige 35 points de degats !");
-                Boss_S.readyToPlay = false;
+                Boss->readyToPlay = false;
                 countPlay = 0;
                 break;
 
             case 3:
-                Boss_S.isHit = false;
-                Boss_S.isAttacking = true;
+                Boss->isHit = false;
+                Boss->isAttacking = true;
                 infoBoxB = true;
                 textInfoBox.setString("??? vous inflige 35 points de degats !");
-                Boss_S.readyToPlay = false;
+                Boss->readyToPlay = false;
                 countPlay = 0;
                 break;
 
             case 4:
-                Boss_S.isHit = false;
-                Boss_S.isAttacking = false;
-                Boss_S.isAttacking2 = true;
+                Boss->isHit = false;
+                Boss->isAttacking = false;
+                Boss->isAttacking2 = true;
                 infoBoxB = true;
                 textInfoBox.setString("??? vous inflige 35 points de degats !");
-                Boss_S.readyToPlay = false;
+                Boss->readyToPlay = false;
                 countPlay = 0;
                 break;
 
             case 5:
                 cout << boss.getName() << " regarde les mouches voler" << endl << endl;
                 gameCount++;
-                Boss_S.readyToPlay = false;
+                Boss->readyToPlay = false;
                 countPlay = 0;
                 break;
 
@@ -1475,65 +1454,65 @@ void Game::run()
 
 #pragma region animation qui marche 
 
-            if (!Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
+            if (!Character->isAttacking && !Character->isHealing && !Character->isHit && wizard.getAlive() == true) {
                 window.draw(perso_sprite);
             }///////////////////////////////////
 
-            else if (Char_S.isAttacking && wizard.getAlive() == true && !Boss_S.isAttacking && !Boss_S.isAttacking2) {
+            else if (Character->isAttacking && wizard.getAlive() == true && !Boss->isAttacking && !Boss->isAttacking2) {
                 c_anim_Attack.x++;
-                if (c_anim_Attack.x * 256 >= perso_texture_Attack.getSize().x)
+                if (c_anim_Attack.x * 256 >= Character->texture_Attack.getSize().x)
                     c_anim_Attack.x = 0;
                 perso_sprite_Attack.setTextureRect(sf::IntRect(c_anim_Attack.x * 256, 0, 256, 256));
-                Char_S.countAnimAtk++;
-                if (Char_S.countAnimAtk == 2) {
+                Character->countAnimAtk++;
+                if (Character->countAnimAtk == 2) {
                     soundWizardAttack.play();
                 }
-                if (Char_S.countAnimAtk == 7) {
-                    Char_S.isAttacking = false;
+                if (Character->countAnimAtk == 7) {
+                    Character->isAttacking = false;
                 }
                 // faut vraiment mettre un timeur pour permettre de faire les tours moins rapidement;
                 window.draw(perso_sprite_Attack);
             }///////////////////////////////////
-            else if (Char_S.isHealing && wizard.getAlive() == true && !Char_S.isAttacking) {
+            else if (Character->isHealing && wizard.getAlive() == true && !Character->isAttacking) {
                 c_anim_Heal.x++;
-                if (c_anim_Heal.x * 256 >= perso_texture_Heal.getSize().x)
+                if (c_anim_Heal.x * 256 >= Character->texture_Heal.getSize().x)
                     c_anim_Heal.x = 0;
                 perso_sprite_Heal.setTextureRect(sf::IntRect(c_anim_Heal.x * 256, 0, 256, 256));
                 perso_sprite_Heal.setColor(sf::Color(0, 255, 0));
-                Char_S.countAnimHeal++;
-                if (Char_S.countAnimHeal == 7) {
+                Character->countAnimHeal++;
+                if (Character->countAnimHeal == 7) {
                     soundFireWormAttack.stop();
                     soundWizardAttack.stop();
                     soundHeal.play();
                 }
-                if (Char_S.countAnimHeal == 10) {
-                    Char_S.isHealing = false;
+                if (Character->countAnimHeal == 10) {
+                    Character->isHealing = false;
                 }
                 window.draw(perso_sprite_Heal);
             }///////////////////////////////////
-            else if (Char_S.isHit && !Char_S.isAttacking && !Char_S.isHealing && wizard.getAlive() == true) {
+            else if (Character->isHit && !Character->isAttacking && !Character->isHealing && wizard.getAlive() == true) {
                 c_anim_Hit.x++;
-                if (c_anim_Hit.x * 256 >= perso_texture_Hit.getSize().x)
+                if (c_anim_Hit.x * 256 >= Character->texture_Hit.getSize().x)
                     c_anim_Hit.x = 0;
                 perso_sprite_Hit.setTextureRect(sf::IntRect(c_anim_Hit.x * 256, 0, 256, 256));
                 perso_sprite_Hit.setColor(sf::Color(255, 0, 0));
-                Char_S.countAnimHit++;
-                if (Char_S.countAnimHit == 4) {
-                    Char_S.isHit = false;
+                Character->countAnimHit++;
+                if (Character->countAnimHit == 4) {
+                    Character->isHit = false;
                 }
                 window.draw(perso_sprite_Hit);
             }///////////////////////////////////
-            else if (Char_S.DeathCount == 0) {
+            else if (Character->DeathCount == 0) {
                 if (wizard.getAlive() == false) {
                     c_anim_Death.x++;
-                    if (c_anim_Death.x * 256 >= perso_texture_Death.getSize().x)
-                        c_anim_Death.x = perso_texture_Death.getSize().x;
+                    if (c_anim_Death.x * 256 >= Character->texture_Death.getSize().x)
+                        c_anim_Death.x = Character->texture_Death.getSize().x;
                     perso_sprite_Death.setTextureRect(sf::IntRect(c_anim_Death.x * 256, 0, 256, 256));
-                    Char_S.countAnimDeath++;
-                    if (Char_S.countAnimDeath == 4) {
-                        Char_S.isDead = false;
-                        Char_S.DeathCount++;
-                        //Char_S.printBody = true;
+                    Character->countAnimDeath++;
+                    if (Character->countAnimDeath == 4) {
+                        Character->isDead = false;
+                        Character->DeathCount++;
+                        //Character->printBody = true;
                     }
                     window.draw(perso_sprite_Death);
                 }
@@ -1541,60 +1520,60 @@ void Game::run()
 
             ////////// Worm ///////////
 
-            if (!Worm_S.isHit && !Worm_S.isAttacking && !Worm_S.isHealing && fireWorm.getAlive() == true) {
+            if (!Worm->isHit && !Worm->isAttacking && !Worm->isHealing && fireWorm.getAlive() == true) {
                 window.draw(fireWorm_sprite);
             }///////////////////////////////////
 
-            else if (!Worm_S.isHit && !Worm_S.isAttacking && Worm_S.isHealing && fireWorm.getAlive() == true) {
+            else if (!Worm->isHit && !Worm->isAttacking && Worm->isHealing && fireWorm.getAlive() == true) {
                 fireWorm_sprite.setColor(sf::Color(0, 255, 0));
             }///////////////////////////////////
 
 
-            else if (Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isHit && fireWorm.getAlive() == true) {
+            else if (Worm->isAttacking && !Character->isAttacking && !Character->isHealing && !Worm->isHit && fireWorm.getAlive() == true) {
                 f_anim_Attack.x -= 180;
                 if (f_anim_Attack.x == 0) f_anim_Attack.x = 2880;
                 fireWorm_sprite_Attack.setTextureRect(sf::IntRect(f_anim_Attack.x - 180, 0, 180, 180));
-                Worm_S.countAnimAtk++;
-                if (Worm_S.countAnimAtk == 8) {
+                Worm->countAnimAtk++;
+                if (Worm->countAnimAtk == 8) {
                     soundWizardAttack.stop();
                     soundFireWormAttack.play();
                 }
-                if (Worm_S.countAnimAtk == 10) {
+                if (Worm->countAnimAtk == 10) {
                     fireWorm.attack(wizard);
-                    Char_S.isHit = true;
+                    Character->isHit = true;
                 }
-                if (Worm_S.countAnimAtk == 16) {
-                    Worm_S.isAttacking = false;
+                if (Worm->countAnimAtk == 16) {
+                    Worm->isAttacking = false;
                 }
                 window.draw(fireWorm_sprite_Attack);
             }///////////////////////////////////
 
-            else if (Worm_S.isHit && !Char_S.isHealing && fireWorm.getAlive() == true) {
+            else if (Worm->isHit && !Character->isHealing && fireWorm.getAlive() == true) {
 
                 f_anim_Hit.x -= 180;
                 if (f_anim_Hit.x == 0) f_anim_Hit.x = 540;
                 fireWorm_sprite_Hit.setTextureRect(sf::IntRect(f_anim_Hit.x - 180, 0, 180, 180));
                 fireWorm_sprite_Hit.setColor(sf::Color(255, 0, 0));
-                Worm_S.countAnimHit++;
-                if (Worm_S.countAnimHit == 4) {
-                    Worm_S.isHit = false;
+                Worm->countAnimHit++;
+                if (Worm->countAnimHit == 4) {
+                    Worm->isHit = false;
                 }
                 window.draw(fireWorm_sprite_Hit);
             }///////////////////////////////////
-            else if (Worm_S.DeathCount == 0) {
+            else if (Worm->DeathCount == 0) {
                 if (fireWorm.getAlive() == false) {
                     f_anim_Death.x -= 180;
                     fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x - 180, 0, 180, 180));
-                    Worm_S.countAnimDeath++;
-                    if (Worm_S.countAnimDeath == 8) {
-                        Worm_S.isDead = false;
-                        Worm_S.DeathCount++;
-                        Worm_S.printBody = true;
+                    Worm->countAnimDeath++;
+                    if (Worm->countAnimDeath == 8) {
+                        Worm->isDead = false;
+                        Worm->DeathCount++;
+                        Worm->printBody = true;
                     }
                     window.draw(fireWorm_sprite_Death);
                 }
             }
-            if (Worm_S.printBody == true) {
+            if (Worm->printBody == true) {
                 f_anim_Death.x = 0;
                 fireWorm_sprite_Death.setTextureRect(sf::IntRect(f_anim_Death.x * 180, 0, 180, 180));
                 window.draw(fireWorm_sprite_Death);
@@ -1603,150 +1582,150 @@ void Game::run()
 
             ////////// Evil Wizard ///////////
 
-            if (!Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && evilWizard.getAlive() == true) {
-                window.draw(evilWizard_sprite);
+            if (!EvilWizard->isAttacking && !EvilWizard->isHealing && !EvilWizard->isHit && EvilWizard.getAlive() == true) {
+                window.draw(EvilWizard_sprite);
             }
-            else if (Evil_S.isAttacking && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && evilWizard.getAlive() == true) { //&& wormisHit/atk etc pour vraiment mettre de l'ordre dans la boucle
+            else if (EvilWizard->isAttacking && !Worm->isHit && !Worm->isAttacking && !Character->isAttacking && !Character->isHealing && EvilWizard.getAlive() == true) { //&& WormisHit/atk etc pour vraiment mettre de l'ordre dans la boucle
                 e_anim_Attack.x -= 450;
                 if (e_anim_Attack.x == 0) e_anim_Attack.x = 3600;
-                evilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x - 450, 0, 450, 450));
-                Evil_S.countAnimAtk++;
-                if (Evil_S.countAnimAtk == 1) {
+                EvilWizard_sprite_Attack.setTextureRect(sf::IntRect(e_anim_Attack.x - 450, 0, 450, 450));
+                EvilWizard->countAnimAtk++;
+                if (EvilWizard->countAnimAtk == 1) {
                     soundEvilWizardAttack.setPlayingOffset(sf::seconds(14));
                     soundEvilWizardAttack.play();
                 }
-                if (Evil_S.countAnimAtk == 9) {
-                    Evil_S.isAttacking = false;
+                if (EvilWizard->countAnimAtk == 9) {
+                    EvilWizard->isAttacking = false;
                 }
-                window.draw(evilWizard_sprite_Attack);
+                window.draw(EvilWizard_sprite_Attack);
             }
-            else if (Evil_S.isHealing && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && evilWizard.getAlive() == true) {
+            else if (EvilWizard->isHealing && !Worm->isHit && !Worm->isAttacking && !Character->isAttacking && !Character->isHealing && !Character->isHit && EvilWizard.getAlive() == true) {
                 e_anim_Heal.x++;
-                if (e_anim_Heal.x * 450 >= evilWizard_texture_Heal.getSize().x)
+                if (e_anim_Heal.x * 450 >= EvilWizard_texture_Heal.getSize().x)
                     e_anim_Heal.x = 0;
-                evilWizard_sprite_Heal.setTextureRect(sf::IntRect(e_anim_Heal.x * 450, 0, 450, 450));
-                evilWizard_sprite_Heal.setColor(sf::Color(0, 255, 0));
-                Evil_S.countAnimHeal++;
-                if (Evil_S.countAnimHeal == 2) {
+                EvilWizard_sprite_Heal.setTextureRect(sf::IntRect(e_anim_Heal.x * 450, 0, 450, 450));
+                EvilWizard_sprite_Heal.setColor(sf::Color(0, 255, 0));
+                EvilWizard->countAnimHeal++;
+                if (EvilWizard->countAnimHeal == 2) {
                     soundWizardAttack.stop();
                     soundFireWormAttack.stop();
                     soundHeal.play();
                 }
-                if (Evil_S.countAnimHeal == 9) {
-                    Evil_S.isHealing = false;
+                if (EvilWizard->countAnimHeal == 9) {
+                    EvilWizard->isHealing = false;
                 }
-                window.draw(evilWizard_sprite_Heal);
+                window.draw(EvilWizard_sprite_Heal);
             }
-            else if (Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && evilWizard.getAlive() == true) {
+            else if (EvilWizard->isHit && !Worm->isHit && !Worm->isAttacking && !Character->isHealing && !Character->isHit && EvilWizard.getAlive() == true) {
                 e_anim_Hit.x -= 450;
                 if (e_anim_Hit.x == 0) e_anim_Hit.x = 1800;
-                evilWizard_sprite_Hit.setTextureRect(sf::IntRect(e_anim_Hit.x - 450, 0, 450, 450));
-                evilWizard_sprite_Hit.setColor(sf::Color(255, 0, 0));
-                Evil_S.countAnimHit++;
-                if (Evil_S.countAnimHit == 4) {
-                    Evil_S.isHit = false;
+                EvilWizard_sprite_Hit.setTextureRect(sf::IntRect(e_anim_Hit.x - 450, 0, 450, 450));
+                EvilWizard_sprite_Hit.setColor(sf::Color(255, 0, 0));
+                EvilWizard->countAnimHit++;
+                if (EvilWizard->countAnimHit == 4) {
+                    EvilWizard->isHit = false;
                 }
-                window.draw(evilWizard_sprite_Hit);
+                window.draw(EvilWizard_sprite_Hit);
             }
-            else if (Evil_S.DeathCount == 0) {
-                if (evilWizard.getAlive() == false) {
+            else if (EvilWizard->DeathCount == 0) {
+                if (EvilWizard.getAlive() == false) {
                     e_anim_Death.x -= 450;
-                    evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x - 450, 0, 450, 450));
-                    Evil_S.countAnimDeath++;
-                    if (Evil_S.countAnimDeath == 5) {
-                        Evil_S.isDead = false;
-                        Evil_S.DeathCount++;
-                        Evil_S.printBody = true;
+                    EvilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x - 450, 0, 450, 450));
+                    EvilWizard->countAnimDeath++;
+                    if (EvilWizard->countAnimDeath == 5) {
+                        EvilWizard->isDead = false;
+                        EvilWizard->DeathCount++;
+                        EvilWizard->printBody = true;
                     }
-                    window.draw(evilWizard_sprite_Death);
+                    window.draw(EvilWizard_sprite_Death);
                 }
             }
-            if (Evil_S.printBody == true) {
+            if (EvilWizard->printBody == true) {
                 e_anim_Death.x = 0;
-                evilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x * 450, 0, 450, 450));
-                window.draw(evilWizard_sprite_Death);
+                EvilWizard_sprite_Death.setTextureRect(sf::IntRect(e_anim_Death.x * 450, 0, 450, 450));
+                window.draw(EvilWizard_sprite_Death);
             }
 
             ////////// Boss ///////////
 
-            if (!Boss_S.isAttacking && !Boss_S.isHit && !Boss_S.isAttacking2 && !Boss_S.isHealing && boss.getAlive() == true) {
+            if (!Boss->isAttacking && !Boss->isHit && !Boss->isAttacking2 && !Boss->isHealing && boss.getAlive() == true) {
                 window.draw(boss_sprite);
             }
-            else if (!Boss_S.isHit && !Boss_S.isAttacking && Boss_S.isHealing && boss.getAlive() == true) {
+            else if (!Boss->isHit && !Boss->isAttacking && Boss->isHealing && boss.getAlive() == true) {
                 boss_sprite.setColor(sf::Color(0, 255, 0));
             }///////////////////////////////////
-            else if (Boss_S.isAttacking && !Boss_S.isAttacking2 && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isDead && !Evil_S.isDead && boss.getAlive() == true) {
+            else if (Boss->isAttacking && !Boss->isAttacking2 && !EvilWizard->isAttacking && !EvilWizard->isHealing && !EvilWizard->isHit && !Worm->isHit && !Worm->isAttacking && !Character->isAttacking && !Character->isHealing && !Worm->isDead && !EvilWizard->isDead && boss.getAlive() == true) {
                 b_anim_Attack.x -= 800;
                 if (b_anim_Attack.x == 0) b_anim_Attack.x = 6400;
                 boss_sprite_Attack.setTextureRect(sf::IntRect(b_anim_Attack.x - 800, 0, 800, 800));
-                Boss_S.countAnimAtk++;
-                if (Boss_S.countAnimAtk == 1) {
+                Boss->countAnimAtk++;
+                if (Boss->countAnimAtk == 1) {
                     soundBossAttack.setPlayingOffset(sf::seconds(0.5));
                     soundBossAttack.play();
                 }
-                if (Boss_S.countAnimAtk == 5) {
+                if (Boss->countAnimAtk == 5) {
                     boss.attack(wizard);
-                    Char_S.isHit = true;
+                    Character->isHit = true;
                 }
-                if (Boss_S.countAnimAtk == 8) {
-                    Boss_S.isAttacking = false;
+                if (Boss->countAnimAtk == 8) {
+                    Boss->isAttacking = false;
                     gameCount++;
                 }
                 window.draw(boss_sprite_Attack);
             }
-            else if (Boss_S.isHit && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && boss.getAlive() == true) {
+            else if (Boss->isHit && !EvilWizard->isAttacking && !EvilWizard->isHealing && !EvilWizard->isHit && !Worm->isHit && !Worm->isAttacking && !Character->isHealing && !Character->isHit && boss.getAlive() == true) {
                 b_anim_Hit.x -= 800;
                 if (b_anim_Hit.x == 0) b_anim_Hit.x = 2400;
                 boss_sprite_Hit.setTextureRect(sf::IntRect(b_anim_Hit.x - 800, 0, 800, 800));
                 boss_sprite_Hit.setColor(sf::Color(255, 0, 0));
-                Boss_S.countAnimHit++;
-                if (Boss_S.countAnimHit == 3) {
-                    Boss_S.isHit = false;
+                Boss->countAnimHit++;
+                if (Boss->countAnimHit == 3) {
+                    Boss->isHit = false;
                 }
                 window.draw(boss_sprite_Hit);
             }
-            else if (Boss_S.isAttacking2 && !Boss_S.isAttacking && !Evil_S.isAttacking && !Evil_S.isHealing && !Evil_S.isHit && !Worm_S.isHit && !Worm_S.isAttacking && !Char_S.isAttacking && !Char_S.isHealing && !Worm_S.isDead && !Evil_S.isDead && boss.getAlive() == true) {
+            else if (Boss->isAttacking2 && !Boss->isAttacking && !EvilWizard->isAttacking && !EvilWizard->isHealing && !EvilWizard->isHit && !Worm->isHit && !Worm->isAttacking && !Character->isAttacking && !Character->isHealing && !Worm->isDead && !EvilWizard->isDead && boss.getAlive() == true) {
                 b_anim_Attack2.x -= 800;
                 if (b_anim_Attack2.x == 0) b_anim_Attack2.x = 6400;
                 boss_sprite_Attack2.setTextureRect(sf::IntRect(b_anim_Attack2.x - 800, 0, 800, 800));
-                Boss_S.countAnimAtk2++;
-                if (Boss_S.countAnimAtk2 == 1) {
+                Boss->countAnimAtk2++;
+                if (Boss->countAnimAtk2 == 1) {
                     soundBossAttack.setPlayingOffset(sf::seconds(0.5));
                     soundBossAttack.play();
                 }
-                if (Boss_S.countAnimAtk2 == 5) {
+                if (Boss->countAnimAtk2 == 5) {
                     boss.attack(wizard);
-                    Char_S.isHit = true;
+                    Character->isHit = true;
                 }
-                if (Boss_S.countAnimAtk2 == 8) {
-                    Boss_S.isAttacking2 = false;
+                if (Boss->countAnimAtk2 == 8) {
+                    Boss->isAttacking2 = false;
                     gameCount++;
                 }
                 window.draw(boss_sprite_Attack2);
             }
-            else if (Boss_S.DeathCount == 0) {
+            else if (Boss->DeathCount == 0) {
                 if (boss.getAlive() == false) {
                     b_anim_Death.x -= 800;
                     boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x - 800, 0, 800, 800));
-                    Boss_S.countAnimDeath++;
-                    if (Boss_S.countAnimDeath == 6) {
-                        Boss_S.isDead = false;
-                        Boss_S.DeathCount++;
-                        Boss_S.printBody = true;
+                    Boss->countAnimDeath++;
+                    if (Boss->countAnimDeath == 6) {
+                        Boss->isDead = false;
+                        Boss->DeathCount++;
+                        Boss->printBody = true;
                         gameCount++;
                     }
                     window.draw(boss_sprite_Death);
                 }
             }
-            if (Boss_S.printBody == true) {
+            if (Boss->printBody == true) {
                 b_anim_Death.x = 0;
                 boss_sprite_Death.setTextureRect(sf::IntRect(b_anim_Death.x * 800, 0, 800, 800));
                 window.draw(boss_sprite_Death);
             }
 #pragma endregion animation qui marche
 
-            if ((fireWorm.getAlive() == true || evilWizard.getAlive() == true || boss.getAlive() == true) && wizard.getAlive() == true) {
-                if (gameCount == 1 && !Char_S.isAttacking && !Char_S.isHealing && !Char_S.isHit && wizard.getAlive() == true) {
+            if ((fireWorm.getAlive() == true || EvilWizard.getAlive() == true || boss.getAlive() == true) && wizard.getAlive() == true) {
+                if (gameCount == 1 && !Character->isAttacking && !Character->isHealing && !Character->isHit && wizard.getAlive() == true) {
                     window.draw(menuBackground);
                     window.draw(menuAtk);
                     window.draw(textAtk);
@@ -1755,7 +1734,7 @@ void Game::run()
                     window.draw(menuSkip);
                     window.draw(textSkip);
                 }
-                if (Char_S.AttackMode && gameCount == 1 && wizard.getAlive() == true) {
+                if (Character->AttackMode && gameCount == 1 && wizard.getAlive() == true) {
                     window.draw(menuWhoAtk);
                     window.draw(menuWorm);
                     window.draw(textMenuWorm);
@@ -1783,11 +1762,11 @@ void Game::run()
                 string Vie_Worm(to_string(fireWorm.getHealth()));
                 UI_Worm_PV.setString(Vie_Worm);
             }
-            if (evilWizard.getAlive() == true) {
+            if (EvilWizard.getAlive() == true) {
                 window.draw(UI_Evil);
                 window.draw(UI_Evil_PV);
                 window.draw(UI_Evil_PV2);
-                string Vie_Evil(to_string(evilWizard.getHealth()));
+                string Vie_Evil(to_string(EvilWizard.getHealth()));
                 UI_Evil_PV.setString(Vie_Evil);
             }
             if (boss.getAlive() == true) {
@@ -1899,7 +1878,7 @@ void Game::run()
         }
 
 #pragma region WinCondition
-        if (fireWorm.getAlive() == false && evilWizard.getAlive() == false && boss.getAlive() == false && gameCount >= 1) {
+        if (fireWorm.getAlive() == false && EvilWizard.getAlive() == false && boss.getAlive() == false && gameCount >= 1) {
             window.draw(textWin);
             window.draw(quit_End);
             window.draw(quit_EndText);
@@ -1985,3 +1964,4 @@ void Game::run()
 #pragma endregion atelier dessin
     }
 }
+*/
